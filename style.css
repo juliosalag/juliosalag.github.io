@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap');
+
+:root {
+    --primary-color: #eddbc4;
+    --secondary-color: #908e8b;
+
+    --highlight-color: #bd5a63;
+
+    --text-color: #333;
+}
+
+/* Basic Style */
+
+* {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--secondary-color);
+    padding-top: 53px;
+}
+
+h1, h2, h3, p, a {
+    color: var(--text-color);
+}
+
+h1, h2, h3 {
+    font-family: 'Playpen Sans';
+}
+
+p, a {
+    font-family: 'Sawarabi Mincho', serif;
+}
+
+/* Nav Bar */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    color: var(--primary-color);
+    z-index: 1000;
+}
+
+.navbar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center
+}
+
+.navbar nav ul li {
+    margin: 0 20px;
+}
+
+.navbar nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    font-weight: bold;
+}
+
+/* Home Style */
+
+.home-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.name-title {
+    font-size: 4em;
+    margin: 0;
+    font-family: 'Playpen Sans';
+}
+
+.role-badge {
+    display: inline-block;
+    background-color: var(--highlight-color);
+    padding: 5px 10px;
+    margin: 20px 0;
+    font-weight: bold;
+    font-family: 'Sawarabi Mincho', serif;
+    color: white;
+    border-radius: 5px;
+}
+
+.description {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    font-family: 'Sawarabi Mincho', serif;
+    text-align: justify;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s;
+    padding: 0 0.5em;
+}
+
+.social-icon:hover img {
+    transform: scale(1.2);
+}
