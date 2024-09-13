@@ -36,6 +36,10 @@ p, a {
     font-family: 'Sawarabi Mincho', serif;
 }
 
+h2 {
+    font-size: 2em;
+}
+
 /* Nav Bar */
 
 .navbar {
@@ -77,15 +81,18 @@ p, a {
     background-color: var(--primary-color);
     color: white;
     text-align: center;
+    padding-bottom: 2em;
+    
+    /* BACKGROUND IMAGE
+    
     padding-bottom: 10em;
-
-    /* image */
-
     background-image: url('assets/background.png');
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: 100vw;
+
+    */
 }
 
 .image-controller {
@@ -184,6 +191,80 @@ p, a {
     width: 120px;
     height: auto;
     margin-bottom: 20px;
+}
+
+/* Portfolio */
+
+#portfolio {
+    padding-bottom: 2em;
+    text-align: center;
+    background-color: var(--primary-color);
+}
+
+#portfolio h2 {
+    padding: 1em;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.project {
+    background-color: var(--text-color);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 450px;
+    text-align: left;
+    height: max-content;
+}
+
+.project p {
+    padding: 1em 0 0.5em 0;
+    text-align: justify;
+    font-weight: bold;
+}
+
+.project p, .project ul li {
+    color: var(--secondary-color)
+}
+
+.project img {
+    width: -webkit-fill-available;
+    border-radius: 8px;
+    min-width: 450px;
+}
+
+.project h3 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: white;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-block;
+    background-color: var(--highlight-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    margin-right: 5px;
+}
+
+.project ul {
+    list-style-type: none; /* Eliminar viñetas de la lista */
+    padding: 0;
+    margin-top: 10px;
+}
+
+.project ul li {
+    margin-bottom: 5px;
 }
 
 /*
