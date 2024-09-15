@@ -16,7 +16,7 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-    /* scroll-margin: 1em; */
+    scroll-margin: 53px;
 }
 
 body {
@@ -61,6 +61,7 @@ h2 {
 
 .navbar nav ul li {
     margin: 0 20px;
+    width: 100px;
 }
 
 .navbar nav ul li a {
@@ -153,6 +154,7 @@ h2 {
     background-color: var(--text-color);
     color: white;
     text-align: center;
+    padding-bottom: 1em;
 }
 
 #skills h2 {
@@ -174,7 +176,6 @@ h2 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding-bottom: 2em;
 }
 
 .skill {
@@ -196,7 +197,7 @@ h2 {
 /* Portfolio */
 
 #portfolio {
-    padding-bottom: 2em;
+    padding-bottom: 3em;
     text-align: center;
     background-color: var(--primary-color);
 }
@@ -267,10 +268,36 @@ h2 {
     margin-bottom: 5px;
 }
 
-/*
-Modelling, Shading and Lighting skills for rendering in Maya or exporting out for game engines.
-Environment building, Blueprints, full game development. Represented UE4 at EGX 2014.
-Graphic design, texture creation, and web design.
-*/
+/* Contact */
 
-/* TODO: Media Query 425px - Mobile */
+#contact {
+    background-color: var(--text-color);
+    color: white;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 2em;
+    color: white;
+    padding: 1em 0 1em 0;
+}
+
+#contact p {
+    color: var(--secondary-color);
+    padding: 0 3em 1em 3em;
+}
+
+#contact .social-icons {
+    padding: 1em 0;
+}
+
+#contact a {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.social-icons a *{
+    color: white;
+}
+
+/* TODO: Media Query: 768px - Table | 425px - Mobile */
