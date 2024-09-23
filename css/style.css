@@ -21,7 +21,7 @@
 
 body {
     background-color: var(--primary-color);
-    /*padding-top: 53px;*/
+    padding-top: 0;
 }
 
 h1, h2, h3, p, a {
@@ -56,7 +56,8 @@ h2 {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .navbar nav ul li {
@@ -306,5 +307,3 @@ h2 {
 .social-icons a *{
     color: white;
 }
-
-/* TODO: Media Query: 768px - Table | 425px - Mobile */
