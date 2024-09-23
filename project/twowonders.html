@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Wonders</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project.css">
+</head>
+<body>
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="../assets/background.png">Résumé</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="project">
+        <div class="container">
+            <h1>Two Wonders</h1>
+
+            <!-- Project Info -->
+            <div class="project-info">
+                <div class="social-icons">
+                    <a href="https://kaiwagames.itch.io/two-wonders" class="social-icon"><img src="../assets/icons/itchio.svg" alt="Itch.io Two Wonders"></a>
+                    <a href="https://www.youtube.com/@KaiwaGames" class="social-icon"><img src="../assets/icons/youtube.svg" alt="Youtube Two Wonders"></a>
+                    <a href="https://twitter.com/KaiwaGames" class="social-icon"><img src="../assets/icons/twitter.svg" alt="Twitter Two Wonders"></a>
+                    <a href="https://www.instagram.com/kaiwagames" class="social-icon"><img src="../assets/icons/instagram.svg" alt="Instagram Two Wonders"></a>
+                </div>
+                <div class="info-item">
+                    <p>Primary Role: <b>Engine Programmer</b></p>
+                </div>
+            </div>
+            <span class="tags">
+                <span class="tag">C++</span>
+                <span class="tag">OpenGL</span>
+                <span class="tag">Custom Engine</span>
+                <span class="tag">University</span>
+            </span>
+
+    
+            <!-- Project Description -->
+            <p class="project-description">
+                <b>Two Wonders</b> is a 3D action-adventure game with an isometric view, inspired by games like <b>Tunic</b> or <b>The Legend of Zelda</b>, where exploration is key element. The game combines strategic puzzle-solving with elemental combat, where players must use different elemental abilities to defeat enemies, each possessing unique elemental strengths and weaknesses.
+            </p>
+
+            <p class="project-description">
+                The game was entirely developed <b>from scratch in C++</b>, including both the game itself and the underlying technology. 
+            </p>
+    
+            <!-- YouTube Video Embed -->
+            <div class="video-wrapper">
+                <iframe width="746" height="420" src="https://www.youtube.com/embed/Q4WcGRIwN_w" title="Two Wonders Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+    
+            <!-- Contributions -->
+            <h2>My Contributions</h2>
+            <div class="contributions">
+                
+                <!-- DarkMoon Engine -->
+                <div class="contribution-item">
+                    <h3>Custom Graphic Engine</h3>
+                    <span class="tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">OpenGL</span>
+                        <span class="tag">GLFW</span>
+                    </span>
+                    <p>I developed a graphics engine <b>from scratch in C++ and OpenGL</b>, specifically tailored for Two Wonders, designed to meet the technical and graphical needs of the project. The engine was created with the goal of handling complex scenes and optimizing the game's performance.</p>
+                    <p>The scene was structured as a <b>Tree with corresponding Nodes</b>, supporting transformations and matrix management. The implementation includes a basic structure of virtual entities and components such as cameras, lights, and meshes with support for animations and materials. A <b>Resource Manager</b> was created that, using a hash-map, efficiently handled the loading and unloading of resources such as textures, fonts, shaders, materials, and meshes, with optimized OpenGL calls. Advanced techniques such as Phong shading, a custom cartoon shader, culling (backface and frustum), billboards, and a particle system were also implemented.</p>
+                    <p>Everything was integrated into a <b>facade</b> that connects the engine with the game, using support libraries like Assimp and GLFW.</p>
+                    <img src="../assets/projects/twowonders/lvl0.png" alt="Level 0"/>
+                    <img src="../assets/projects/twowonders/lvl1.png" alt="Level 1"/>
+                    <img src="../assets/projects/twowonders/lvl2.png" alt="Level 2"/>
+                </div>
+    
+                <!-- ECS -->
+                <div class="contribution-item">
+                    <h3>Entity Component System (ECS)</h3>
+                    <span class="tags">
+                        <span class="tag">C++</span>
+                    </span>
+                    <p>I worked on the implementation of the <b>Entity Component System (ECS)</b> for the game Two Wonders, which allowed for greater modularity and <b>flexibility in the management of entities and components</b>. I also collaborated on the initial gameplay development, integrating game mechanics with the ECS to ensure smooth and coherent control of the entities, optimizing their interaction within the game world.</p>
+                    <p>ECS is an architecture that separates entities into components (data) and systems (logic). Entities are just containers, components define characteristics, and systems process the logic. This allows for greater flexibility and optimization in managing game objects.</p>
+                </div>
+    
+                <!-- Game and Level Design -->
+                <div class="contribution-item">
+                    <h3>Game and Level Design</h3>
+                    <span class="tags">
+                        <span class="tag">Sketch</span>
+                        <span class="tag">Game Design</span>
+                        <span class="tag">Level Design</span>
+                    </span>
+                    <p>I worked in a team on the game and level design of the video game Two Wonders. We created gameplay mechanics inspired by <b>The Legend of Zelda and Tunic</b>, developing levels that offered a fun experience while teaching players how to engage with our game.</p>
+                    <div class="sketch-img">
+                        <img src="../assets/projects/twowonders/sketchlvl0.png" alt="Sketch Level 0"/>
+                        <img src="../assets/projects/twowonders/sketchlvl1.png" alt="Sketch Level 1"/>
+                        <img src="../assets/projects/twowonders/sketchlvl2.png" alt="Sketch Level 2"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p class="contact-text">Feel free to reach out, I'll get back to you as soon as possible: <a href="mailto:juliosalag@gmail.com">juliosalag@gmail.com</a></p>
+        <p class="contact-text">You can also find me on my other social platforms:</p>
+        <!-- Icons -->
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/julio-sala-gallardo-038867270/" class="social-icon"><img src="../assets/icons/linkedin-white.svg" alt="LinkedIn"></a>
+            <a href="https://github.com/juliosalag/" class="social-icon"><img src="../assets/icons/github-white.svg" alt="GitHub"></a>
+            <a href="https://jsala.itch.io/" class="social-icon"><img src="../assets/icons/itchio-white.svg" alt="Itch.io"></a>
+        </div>
+        <p>Copyright © 2024 by Julio Sala | All images, logos and names are used with permission</p>
+    </section>
+</body>
+</html>

@@ -1,2 +1,2 @@
-# portfolio
-🎮 Game Developer Portfolio website using HTML, CSS and JavaScript
+# Portfolio
+🎮 Game Developer Portfolio website using HTML, CSS

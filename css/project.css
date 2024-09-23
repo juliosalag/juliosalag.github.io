@@ -1,0 +1,123 @@
+:root {
+    --primary-color: #eddbc4;
+    --secondary-color: #908e8b;
+
+    --highlight-color: #bd5a63;
+
+    --text-color: #333;
+}
+
+#project {
+    margin-top: 53px;
+}
+
+#project-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 4em;
+    padding-top: 0.5em;
+}
+
+h2 {
+    padding-bottom: 1em;
+}
+
+.tags {
+    margin: 0;
+    padding-bottom: 2em;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+}
+
+.social-icons {
+    padding-bottom: 2em;
+}
+
+.info-item {
+    width: 100%;
+}
+
+.info-item p {
+    font-size: 1.3em;
+}
+
+.project-description {
+    font-size: 1.2em;
+    padding-bottom: 2em;
+    max-width: 70%;
+    text-align: center;
+}
+
+.video-wrapper {
+    text-align: center;
+    padding-bottom: 2em;
+}
+
+/* Contribution */
+
+.contributions {
+    display: flex;
+    gap: 3em;
+    padding-bottom: 3em;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contribution-item {
+    background-color: var(--text-color);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 50%;
+    text-align: left;
+    height: max-content;
+}
+
+.contribution-item p {
+    padding: 1em 0 0.5em 0;
+    text-align: justify;
+}
+
+.contribution-item p, .contribution-item ul li {
+    color: var(--secondary-color)
+}
+
+.contribution-item img, .contribution-item video {
+    width: -webkit-fill-available;
+    border-radius: 8px;
+    min-width: 450px;
+    margin: 1em 0 0 0;
+}
+
+.contribution-item h3 {
+    font-size: 1.5em;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.contribution-item video {
+    max-width: 100%;
+}
+
+.sketch-img {
+    display: flex;
+    gap: 1.5em;
+}
+
+.sketch-img img {
+    width: 33%;
+    min-width: 0px;
+}
