@@ -1,4 +1,4 @@
-/* Media Query */
+/* Media Queries */
 
 @media (max-width: 699px) { /* Tablet */
     * {
@@ -24,6 +24,10 @@
     .tag {
         margin: 10px 10px 0 0;
     }
+
+    .home-section {
+        padding-bottom: 5em;
+    }
 }
 
 @media (max-width: 418px) { /* Mobile */
@@ -38,5 +42,9 @@
     .description {
         max-width: 100%;
         margin: 30px;
+    }
+
+    .home-section {
+        padding-bottom: 3em;
     }
 }

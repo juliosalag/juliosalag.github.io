@@ -1,3 +1,60 @@
-@media (max-width:0px) {
+/* Media Queries */
+
+@media (max-width: 900px) {
+    * {
+        scroll-margin: 106px;
+    }
     
+    body {
+        padding-top: 53px;
+    }
+
+    .project-description {
+        max-width: 90%;
+        text-align: justify;
+    }
+
+    .contribution-item {
+        min-width: 90%;
+    }
+
+    .contribution-item img {
+        min-width: none;
+    }
+
+    .video-wrapper iframe {
+        width: 540px;
+        height: 302px;
+    }
+}
+
+@media (max-width: 559px) {
+
+    h1 {
+        text-align: center;
+    }
+
+    .video-wrapper iframe {
+        width: 300px;
+        height: 168px;
+    }
+
+    .contribution-item img {
+        min-width: 0px;
+    }
+
+    .info-item p {
+        text-align: center;
+    }
+
+    .tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tag {
+        margin: 5px;
+    }
 }

@@ -82,6 +82,7 @@ h2 {
     border-radius: 8px;
     padding: 20px;
     max-width: 50%;
+    min-width: 800px;
     text-align: left;
     height: max-content;
 }
@@ -96,7 +97,7 @@ h2 {
 }
 
 .contribution-item img, .contribution-item video {
-    width: -webkit-fill-available;
+    width: 100%;
     border-radius: 8px;
     min-width: 450px;
     margin: 1em 0 0 0;
