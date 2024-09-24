@@ -202,6 +202,15 @@ h2 {
     padding-bottom: 3em;
     text-align: center;
     background-color: var(--primary-color);
+
+    /* BACKGROUND IMAGE */
+    
+    padding-top: 10em;
+    background-image: url('../assets/background-inverted.png');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100vw;
 }
 
 #portfolio h2 {

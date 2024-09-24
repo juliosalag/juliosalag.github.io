@@ -57,4 +57,12 @@
     .tag {
         margin: 5px;
     }
+
+    .sketch-img {
+        flex-direction: column;
+    }
+
+    .sketch-img img {
+        width: 100%;
+    }
 }

@@ -28,6 +28,10 @@
     .home-section {
         padding-bottom: 5em;
     }
+
+    #portfolio {
+        padding-top: 5em;
+    }
 }
 
 @media (max-width: 418px) { /* Mobile */
@@ -46,5 +50,9 @@
 
     .home-section {
         padding-bottom: 3em;
+    }
+
+    #portfolio {
+        padding-top: 3em;
     }
 }
