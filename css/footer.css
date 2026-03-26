@@ -1,0 +1,31 @@
+/* Contact */
+
+#contact {
+    background-color: var(--text-color);
+    color: white;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 2em;
+    color: white;
+    padding: 1em 0 1em 0;
+}
+
+#contact p {
+    color: var(--secondary-color);
+    padding: 0 3em 1em 3em;
+}
+
+#contact .social-icons {
+    padding: 1em 0;
+}
+
+#contact a {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.social-icons a *{
+    color: white;
+}
