@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkMoon Engine | ECS</title>
+    <link rel="icon" href="../assets/icon.png" type="image/png">
+    <link rel="stylesheet" href="../css/darkmoon/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../js/lang.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <a href="./index.html">
+            <div>
+                <h1>DarkMoon <span>Engine</span></h1>
+                <span class="version-badge">version 2.0</span>
+            </div>
+        </a>
+    </div>
+ 
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_overview"></div>
+            <a href="#whatis" data-i18n="nav_whatis"></a>
+            <a href="#architecture" data-i18n="nav_architecture"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_setup"></div>
+            <a href="#typeshpp">types.hpp</a>
+            <a href="#components" data-i18n="nav_components"></a>
+            <a href="#tags" data-i18n="nav_tags"></a>
+            <a href="#systems" data-i18n="nav_systems"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">API</div>
+            <a href="#entities_api" data-i18n="nav_entities"></a>
+            <a href="#components_api" data-i18n="nav_components_api"></a>
+            <a href="#iteration_api" data-i18n="nav_iteration_api"></a>
+            <a href="#queries_api" data-i18n="nav_queries"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_internals"></div>
+            <a href="#slotmap">SlotMap</a>
+            <a href="#metaprog" data-i18n="nav_metaprog"></a>
+            <a href="#memory" data-i18n="nav_memory"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_examples"></div>
+            <a href="#example1" data-i18n="nav_example1"></a>
+        </div>
+    </nav>
+ 
+    <div class="sidebar-back">
+        <a href="../index.html" data-i18n="nav_back"></a>
+    </div>
+</aside>
+ 
+<!-- MAIN -->
+<main class="main">
+ 
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1 data-i18n="ecs_title"></h1>
+        <p data-i18n="header_ecs"></p>
+        <div class="header-meta">
+            <span class="tag">C++23</span>
+            <span class="tag">Header-only</span>
+            <span class="tag">Template</span>
+            <span class="tag">SlotMap</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/ecs.hpp&gt;</span>
+        </div>
+    </div>
+ 
+    <!-- Dropdown Language -->
+    <div class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn" id="lang-current">ES</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Lang.load('es')">ES</a>
+            <a href="javascript:void(0)" onclick="Lang.load('en')">ENG</a>
+        </div>
+    </div>
+ 
+    <!-- Overview -->
+ 
+    <section class="doc-section" id="whatis">
+        <h2 data-i18n="section_whatis"></h2>
+        <p class="section-desc" data-i18n="whatis_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="whatis_core_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="whatis_core_entity"></li>
+                <li data-i18n="whatis_core_component"></li>
+                <li data-i18n="whatis_core_tag"></li>
+                <li data-i18n="whatis_core_system"></li>
+                <li data-i18n="whatis_core_em"></li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="whatis_design_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="whatis_design_headeronly"></li>
+                <li data-i18n="whatis_design_slotmap"></li>
+                <li data-i18n="whatis_design_bitmask"></li>
+                <li data-i18n="whatis_design_limits"></li>
+                <li data-i18n="whatis_design_types"></li>
+            </ul>
+        </div>
+    </section>
+ 
+    <section class="doc-section" id="architecture">
+        <h2 data-i18n="section_architecture"></h2>
+        <p class="section-desc" data-i18n="architecture_desc"></p>
+
+        <pre><span class="lang-label">text</span><code><span class="comment">// Internal structure</span>
+<span class="highlight">include/darkmoon/ecs/
+    ├── entity_manager.hpp   ← EntityManager&lt;CMPList, TAGList&gt;
+    ├── slotmap.hpp          ← Slotmap&ltT, Capacity&gt;&lt/T&gt; (component storage)
+    └── meta_program.hpp     ← MP:: namespace (TypeList, traits, masks)</span>
+
+<span class="comment">// User structure</span>
+game/src/
+    ├── utils/
+    │   └── types.hpp        ← user defines CMPList, TAGList, using EM = ...
+    ├── components/
+    │   ├── render_component.hpp
+    │   └── physics_component.hpp
+    └── systems/
+        ├── render_system.hpp
+        └── physics_system.hpp</code></pre>
+
+        <div class="subsection">
+            <h3 data-i18n="architecture_dataflow_title"></h3>
+            <p class="section-desc" data-i18n="architecture_dataflow_desc"></p>
+        </div>
+
+        <pre><span class="lang-label">text</span><code><span class="highlight">types.hpp</span> defines CMPList, TAGList, EM = EntityManager&lt;CMPList, TAGList&gt;
+            │
+            ▼
+        <span class="highlight">user</span> owns EM m_em {}
+            │
+            ├── m_em.newEntity()        → Entity&
+            ├── m_em.addComponent<T>(e)    → T&
+            ├── m_em.getComponent<T>(e)    → T&
+            └── m_em.forEach<CMPs, TAGs>()          → lambda(Entity&, T&...)</code></pre>
+
+    </section>    
+ 
+    <!-- Setup -->
+ 
+    <section class="doc-section" id="typeshpp">
+        <h2>types.hpp</h2>
+        <p class="section-desc" data-i18n="typeshpp_desc"></p>
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">c++</span><code><span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> &lt;darkmoon/ecs.hpp&gt;
+
+<span class="comment">// Include your component headers</span>
+<span class="highlight">#include</span> "../components/render_component.hpp"
+<span class="highlight">#include</span> "../components/physics_component.hpp"
+
+<span class="comment">// List all components here (order matters for the bitmask)</span>
+<span class="highlight">using</span> GameCMPs = MP::TypeList&lt;
+    RenderComponent,
+    PhysicsComponent
+&gt;;
+
+<span class="comment">// Tags: empty structs used as boolean flags, no data, no SlotMap slot</span>
+<span class="highlight">struct</span> TagPlayer {};
+<span class="highlight">struct</span> TagEnemy  {};
+
+<span class="comment">// List all tags here</span>
+<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;
+    TagPlayer,
+    TagEnemy
+&gt;;
+
+<span class="comment">// Instantiate the EntityManager with your types</span>
+<span class="highlight">using</span> EM     = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+<span class="highlight">using</span> Entity = EM::Entity;</code></pre>
+
+        <div class="callout">
+            <span data-i18n="architecture_types_reminder"></span>
+        </div>
+    </section>
+ 
+    <section class="doc-section" id="components">
+        <h2 data-i18n="section_components"></h2>
+        <p class="section-desc" data-i18n="components_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="components_example_title"></h3>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// components/physics_component.hpp</span>
+<span class="highlight">#pragma</span> once
+
+<span class="highlight">struct</span> PhysicsComponent {
+    int positionX {}, positionY {};
+};
+
+<span class="comment">// components/render_component.hpp</span>
+<span class="highlight">#pragma</span> once
+
+<span class="highlight">struct</span> RenderComponent {
+    char character {};
+    <span class="highlight">RenderComponent</span>(const char* ch) : character(*ch) {}
+};
+
+<span class="comment">// Adding a component to an entity</span>
+auto& e = EM.newEntity();
+EM.addComponent&lt;PhysicsComponent&gt;(e);
+
+<span class="comment">// Checking a component in a system</span>
+if (e.hasComponent&lt;PhysicsComponent&gt;()) { <span class="comment">/* ... */</span> }
+
+<span class="comment">// Iterating only entities with a specific component</span>
+EM.forEach&lt;MP::TypeList&lt;PhysicsComponent&gt;, MP::TypeList&lt;&gt;&gt;([&](Entity& e){
+    <span class="comment">// only PhysicsComponent entities</span>
+});
+</code></pre>
+            <ul class="doc-list">
+                <li data-i18n="components_list_1"></li>
+                <li data-i18n="components_list_2"></li>
+                <li data-i18n="components_list_3"></li>
+            </ul>
+        </div>
+    </section>
+ 
+    <section class="doc-section" id="tags">
+        <h2 data-i18n="section_tags"></h2>
+        <p class="section-desc" data-i18n="tags_desc"></p>
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// In types.hpp</span>
+<span class="highlight">struct</span> TagPlayer {};
+<span class="highlight">struct</span> TagEnemy  {};
+
+<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;TagPlayer, TagEnemy&gt;;
+
+<span class="comment">// Adding a tag to an entity</span>
+auto& e = EM.newEntity();
+EM.addTag&lt;TagPlayer&gt;(e);
+
+<span class="comment">// Checking a tag in a system</span>
+if (e.hasTag&lt;TagPlayer&gt;()) { <span class="comment">/* ... */</span> }
+
+<span class="comment">// Iterating only entities with a specific tag</span>
+EM.forEach&lt;MP::TypeList&lt;&gt;, MP::TypeList&lt;TagPlayer&gt;&gt;([&](Entity& e){
+    <span class="comment">// only TagPlayer entities</span>
+});</code></pre>
+    </section>
+    
+    <section class="doc-section" id="systems">
+        <h2 data-i18n="section_systems"></h2>
+        <p class="section-desc" data-i18n="systems_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="systems_structure_title"></h3>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// systems/render_system.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> "../utils/types.hpp"
+
+<span class="highlight">struct</span> RenderSystem {
+    <span class="comment">// Declare which components and tags this system needs</span>
+    <span class="highlight">using</span> SYSCMPs = MP::TypeList&lt;RenderComponent&gt;;
+    <span class="highlight">using</span> SYSTAGs = MP::TypeList&lt;&gt;;
+
+    void <span class="highlight">update</span>(EM& em) {
+        em.forEach&lt;SYSCMPs, SYSTAGs&gt;([&](Entity& e, RenderComponent& r) {
+            <span class="comment">// Optionally access other components on the same entity</span>
+            if (e.hasComponent&lt;PhysicsComponent&gt;()) {
+                auto& phys = em.getComponent&lt;PhysicsComponent&gt;(e);
+                <span class="comment">// do something</span>
+            }
+            std::cout << r.character << "\n";
+        });
+    }
+};
+
+<span class="comment">// main.cpp</span>
+<span class="highlight">#include</span> "./systems/render_system.hpp"
+
+int <span class="highlight">main</span>() {
+    EM em {};
+
+    Entity& e = em.newEntity();
+    em.addComponent&lt;RenderComponent&gt;(e);
+
+    RenderSystem rm {};
+
+    <span class="highlight">while</span> (true) {
+        rm.update(em);
+    }
+}</code></pre>
+        </div>
+
+        <div class="callout">
+            <span data-i18n="systems_callout"></span>
+        </div>
+    </section>
+ 
+    <!-- API -->
+ 
+    <section class="doc-section" id="entities_api">
+    <h2 data-i18n="section_entities_api"></h2>
+    <p class="section-desc" data-i18n="entities_api_desc"></p>
+
+    <div class="subsection">
+        <h3 data-i18n="entities_api_em_title"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>newEntity()</td>
+                        <td><code>Entity&amp;</code></td>
+                        <td data-i18n="api_newEntity"></td>
+                    </tr>
+                    <tr>
+                        <td>destroyEntityByID(id)</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_destroyEntityByID"></td>
+                    </tr>
+                    <tr>
+                        <td>destroyEntities(deathSet)</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_destroyEntities"></td>
+                    </tr>
+                    <tr>
+                        <td>destroyAll()</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_destroyAll"></td>
+                    </tr>
+                    <tr>
+                        <td>getEntityByID(id)</td>
+                        <td><code>Entity*</code></td>
+                        <td data-i18n="api_getEntityByID"></td>
+                    </tr>
+                    <tr>
+                        <td>getEntities()</td>
+                        <td><code>std::span&lt;Entity&gt;</code></td>
+                        <td data-i18n="api_getEntities"></td>
+                    </tr>
+                    <tr>
+                        <td>aliveCount()</td>
+                        <td><code>std::size_t</code></td>
+                        <td data-i18n="api_aliveCount"></td>
+                    </tr>
+                    <tr>
+                        <td>freeEntities()</td>
+                        <td><code>std::size_t</code></td>
+                        <td data-i18n="api_freeEntities"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3 data-i18n="entities_api_entity_title"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>e.getID()</td>
+                        <td><code>std::size_t</code></td>
+                        <td data-i18n="api_entity_getID"></td>
+                    </tr>
+                    <tr>
+                        <td>e.hasComponent&lt;T&gt;()</td>
+                        <td><code>bool</code></td>
+                        <td data-i18n="api_entity_hasComponent"></td>
+                    </tr>
+                    <tr>
+                        <td>e.hasTag&lt;T&gt;()</td>
+                        <td><code>bool</code></td>
+                        <td data-i18n="api_entity_hasTag"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </section>
+ 
+    <section class="doc-section" id="components_api">
+        <h2 data-i18n="section_components_api"></h2>
+    </section>
+ 
+    <section class="doc-section" id="iteration_api">
+        <h2 data-i18n="section_iteration_api"></h2>
+    </section>
+ 
+    <section class="doc-section" id="queries_api">
+        <h2 data-i18n="section_queries_api"></h2>
+    </section>
+ 
+    <!-- Internals -->
+ 
+    <section class="doc-section" id="slotmap">
+        <h2>SlotMap</h2>
+    </section>
+ 
+    <section class="doc-section" id="metaprog">
+        <h2 data-i18n="section_metaprog"></h2>
+    </section>
+ 
+    <section class="doc-section" id="memory">
+        <h2 data-i18n="section_memory"></h2>
+    </section>
+ 
+    <!-- Examples -->
+ 
+    <section class="doc-section" id="example1">
+        <h2 data-i18n="section_examples"></h2>
+    </section>
+ 
+</main>
+
+<button class="mobile-menu-btn" id="menuBtn" title="Toggle menu">☰</button>   
+
+</body>
+
+<script src="../js/active.js"></script>
+</html>

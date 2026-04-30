@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         async function load(lang) {
             if (!SUPPORTED.includes(lang)) lang = DEFAULT_LANG;
-            const res = await fetch(`./translations/${lang}.json`);
+            const res = await fetch(`../translations/${lang}.json`);
             translations = await res.json();
             current = lang;
             localStorage.setItem(STORAGE_KEY, lang);
@@ -61,20 +61,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
     window.Lang = Lang;
 
-    Promise.all([
-        fetch("./components/header.html")
-        .then(res => res.text())
-        .then(data => {
-            document.getElementById("header").innerHTML = data;
-        }),
-        fetch("./components/footer.html")
-        .then(res => res.text())
-        .then(data => document.getElementById("footer").innerHTML = data)
-    ])
-    .then(() => {
-        Lang.init();
-    })
-    .catch(err => {
-        console.error("Error cargando header/footer:", err);
-    });
+    Lang.init();
 });
