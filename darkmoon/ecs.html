@@ -41,7 +41,6 @@
             <a href="#entities_api" data-i18n="nav_entities"></a>
             <a href="#components_api" data-i18n="nav_components_api"></a>
             <a href="#iteration_api" data-i18n="nav_iteration_api"></a>
-            <a href="#queries_api" data-i18n="nav_queries"></a>
         </div>
         <div class="nav-group">
             <div class="nav-group-title" data-i18n="nav_group_internals"></div>
@@ -121,7 +120,7 @@
         <pre><span class="lang-label">text</span><code><span class="comment">// Internal structure</span>
 <span class="highlight">include/darkmoon/ecs/
     ├── entity_manager.hpp   ← EntityManager&lt;CMPList, TAGList&gt;
-    ├── slotmap.hpp          ← Slotmap&ltT, Capacity&gt;&lt/T&gt; (component storage)
+    ├── slotmap.hpp          ← Slotmap&ltT, Capacity&gt;&lt;T&gt; (component storage)
     └── meta_program.hpp     ← MP:: namespace (TypeList, traits, masks)</span>
 
 <span class="comment">// User structure</span>
@@ -403,10 +402,6 @@ int <span class="highlight">main</span>() {
  
     <section class="doc-section" id="iteration_api">
         <h2 data-i18n="section_iteration_api"></h2>
-    </section>
- 
-    <section class="doc-section" id="queries_api">
-        <h2 data-i18n="section_queries_api"></h2>
     </section>
  
     <!-- Internals -->
