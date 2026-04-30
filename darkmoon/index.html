@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkMoon Engine | Docs</title>
+    <link rel="icon" href="../assets/icon.png" type="image/png">
+    <link rel="stylesheet" href="../css/darkmoon/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../js/lang.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <a href="./index.html">
+            <div>
+                <h1>DarkMoon <span>Engine</span></h1>
+                <span class="version-badge">version 2.0</span>
+            </div>
+        </a>
+    </div>
+
+    <nav></nav>
+
+    <div class="sidebar-back">
+        <a href="../index.html" data-i18n="nav_back"></a>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1>DarkMoon <span>Engine</span></h1>
+        <p data-i18n="header_desc_1"></p>
+        <p data-i18n="header_desc_2"></p>
+        <div class="header-meta">
+            <span class="tag">Open Source</span>
+            <span class="tag">C++23</span>
+            <span class="tag">OpenGL</span>
+            <span class="tag">GLFW</span>
+            <span class="tag">Entity Component System</span>
+            <span class="tag tag-gray" data-i18n="header_status"></span>
+        </div>
+    </div>
+
+    <!-- Dropdown Language -->
+    <div class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn" id="lang-current">ES</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Lang.load('es')">ES</a>
+            <a href="javascript:void(0)" onclick="Lang.load('en')">ENG</a>
+        </div>
+    </div>
+
+    <a href="ecs.html">ECS</a>
+
+</main>
+
+<!-- Mobile menu button -->
+<button class="mobile-menu-btn" id="menuBtn" title="Toggle menu">☰</button>    
+    
+</body>
+
+<script src="../js/active.js"></script>
+</html>

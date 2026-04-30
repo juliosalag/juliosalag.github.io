@@ -1,0 +1,25 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/header.css">
+
+<header class="navbar">
+    <nav>
+        <ul>
+            <li><a href="#home" data-i18n="nav_home"></a></li>
+            <li><a href="#skills" data-i18n="nav_skills"></a></li>
+            <li><a href="#portfolio" data-i18n="nav_portfolio"></a></li>
+            <li><a href="assets/resume/résumé.pdf" data-i18n="nav_resume"></a></li>
+            <li><a href="#contact" data-i18n="nav_contact"></a></li>
+
+            <!-- Dropdown Language -->
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn" id="lang-current">ES</a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0)" onclick="Lang.load('es')">ES</a>
+                    <a href="javascript:void(0)" onclick="Lang.load('cat')">CAT</a>
+                    <a href="javascript:void(0)" onclick="Lang.load('en')">ENG</a>
+                    <a href="javascript:void(0)" onclick="Lang.load('fr')">FR</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
