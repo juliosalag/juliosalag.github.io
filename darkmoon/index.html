@@ -80,8 +80,36 @@
     </div>
 
     <section class="doc-section" id="ecs">
-        <a href="ecs.html">ECS</a>
+        <h2 data-i18n="ecs_title"></h2>
+        <p class="section-desc" data-i18n="whatis_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="whatis_core_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="whatis_core_entity"></li>
+                <li data-i18n="whatis_core_component"></li>
+                <li data-i18n="whatis_core_tag"></li>
+                <li data-i18n="whatis_core_system"></li>
+                <li data-i18n="whatis_core_em"></li>
+            </ul>
+        </div>
+
+        <pre><span class="lang-label">C++</span><code><span class="highlight">using</span> GameCMPs = MP::TypeList&lt;RenderComponent, PhysicsComponent&gt;;
+<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;TagPlayer, TagEnemy&gt;;
+<span class="highlight">using</span> EM       = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+
+Entity& e = em.newEntity();
+em.addComponent&lt;RenderComponent&gt;(e);
+em.addTag&lt;TagPlayer&gt;(e);
+
+em.forEach&lt;MP::TypeList&lt;RenderComponent&gt;, MP::TypeList&lt;TagPlayer&gt;&gt;(
+    [&](Entity& e, RenderComponent& r) { <span class="comment">/* ... */</span> }
+);</code></pre>
+        <div class="callout">
+            <a href="./ecs.html" data-i18n="ecs_readmore">Leer más →</a>
+        </div>
     </section>
+
 
     <section class="doc-section" id="memory">
         <h2 data-i18n="section_memory"></h2>

@@ -80,7 +80,6 @@
         <a href="javascript:void(0)" class="dropbtn" id="theme-current">
             DARK
         </a>
-
         <div class="dropdown-content">
             <a href="javascript:void(0)" onclick="Theme.load('dark')">DARK</a>
             <a href="javascript:void(0)" onclick="Theme.load('light')">LIGHT</a>
@@ -487,7 +486,7 @@ int <span class="highlight">main</span>() {
         </div>
 
         <div class="callout">
-            <span>Do not call <code>destroyEntityByID()</code> or <code>destroyEntities()</code> from inside a <code>forEach</code> lambda. Collect IDs into a <code>deathSet</code> during iteration and destroy them after the loop.</span>
+            <span data-i18n="iteration_callout"></span>
         </div>
 
         <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// Safe pattern for destroying entities during iteration</span>
@@ -504,16 +503,11 @@ EM.destroyEntities(toDestroy); <span class="comment">// destroy after the loop</
     <!-- Internals -->
  
     <section class="doc-section" id="slotmap">
-        <h2>SlotMap</h2>
-        <p class="section-desc">
-            Each component type gets its own <code>Slotmap&lt;T, Capacity&gt;</code> instance inside the
-            <code>EntityManager</code>. The SlotMap provides O(1) insert, erase, and lookup while keeping
-            all live data packed contiguously in memory  critical for cache performance during
-            <code>forEach</code> iteration.
-        </p>
+        <h2 data-i18n="slotmap_title"></h2>
+        <p class="section-desc" data-i18n="slotmap_desc"></p>
 
         <div class="subsection">
-            <h3>Template signature</h3>
+            <h3 data-i18n="slotmap_template_title"></h3>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// include/darkmoon/ecs/slotmap.hpp</span>
 <span class="highlight">template</span> &lt;
     <span class="highlight">typename</span> T,
@@ -526,26 +520,26 @@ EM.destroyEntities(toDestroy); <span class="comment">// destroy after the loop</
                 <table class="api-table">
                     <thead>
                         <tr>
-                            <th>Parameter</th>
-                            <th>Default</th>
-                            <th>Description</th>
+                            <th data-i18n="slotmap_param"></th>
+                            <th data-i18n="slotmap_default"></th>
+                            <th data-i18n="api_desc"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>T</td>
                             <td> - </td>
-                            <td>Value type stored (a component struct).</td>
+                            <td data-i18n="slotmap_param_T"></td>
                         </tr>
                         <tr>
                             <td>Capacity</td>
                             <td><code>10</code></td>
-                            <td>Maximum number of elements. Fixed at compile-time; set via <code>MAX_ENTITIES</code> in <code>types.hpp</code>.</td>
+                            <td data-i18n="slotmap_param_capacity"></td>
                         </tr>
                         <tr>
                             <td>INDEXT</td>
                             <td><code>uint32_t</code></td>
-                            <td>Integer type used for indices and generations. Use <code>uint16_t</code> to reduce memory on small worlds.</td>
+                            <td data-i18n="slotmap_param_indext"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -553,10 +547,8 @@ EM.destroyEntities(toDestroy); <span class="comment">// destroy after the loop</
         </div>
 
         <div class="subsection">
-            <h3>Internal arrays</h3>
-            <p class="section-desc">
-                Three fixed-size arrays work together to provide stable keys over a packed data buffer.
-            </p>
+            <h3 data-i18n="slotmap_arrays_title"></h3>
+            <p class="section-desc" data-i18n="slotmap_arrays_desc"></p>
 
             <pre><span class="lang-label">text</span><code><span class="highlight">m_indices [ ]</span>  ->  indirection table. Each slot holds:
                     <span class="highlight">.id</span>  --&gt; position in m_data (when occupied)
@@ -571,12 +563,8 @@ EM.destroyEntities(toDestroy); <span class="comment">// destroy after the loop</
         </div>
 
         <div class="subsection">
-            <h3>Key type</h3>
-            <p class="section-desc">
-                A <code>key_type</code> is a small POD pair returned by <code>push_back</code>. The
-                generation field makes stale-key detection free  no extra bookkeeping required at the
-                call site.
-            </p>
+            <h3 data-i18n="slotmap_key_title"></h3>
+            <p class="section-desc" data-i18n="slotmap_key_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">using</span> key_type = <span class="highlight">struct</span> { index_type id; gen_type gen; };
 
 <span class="comment">// push_back returns a key</span>
@@ -595,71 +583,71 @@ slotmap.erase(key); <span class="comment">// returns false if key was already st
         </div>
 
         <div class="subsection">
-            <h3>SlotMap API reference</h3>
+            <h3 data-i18n="slotmap_api_title"></h3>
             <div class="table-wrapper">
                 <table class="api-table">
                     <thead>
                         <tr>
-                            <th>Method</th>
-                            <th>Return</th>
-                            <th>Complexity</th>
-                            <th>Description</th>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="slotmap_complexity"></th>
+                            <th data-i18n="api_desc"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>push_back(T&&)</td>
+                            <td>push_back(T&amp;&amp;)</td>
                             <td><code>key_type</code></td>
                             <td>O(1)</td>
-                            <td>Insert by move. Throws <code>std::runtime_error</code> if full.</td>
+                            <td data-i18n="slotmap_api_push_move"></td>
                         </tr>
                         <tr>
-                            <td>push_back(const T&)</td>
+                            <td>push_back(const T&amp;)</td>
                             <td><code>key_type</code></td>
                             <td>O(1)</td>
-                            <td>Insert by copy (delegates to move overload).</td>
+                            <td data-i18n="slotmap_api_push_copy"></td>
                         </tr>
                         <tr>
                             <td>operator[](key)</td>
-                            <td><code>T&</code></td>
+                            <td><code>T&amp;</code></td>
                             <td>O(1)</td>
-                            <td>Unchecked access. Asserts validity in debug builds.</td>
+                            <td data-i18n="slotmap_api_access"></td>
                         </tr>
                         <tr>
                             <td>erase(key)</td>
                             <td><code>bool</code></td>
                             <td>O(1)</td>
-                            <td>Remove element. Returns <code>false</code> if key is already invalid.</td>
+                            <td data-i18n="slotmap_api_erase"></td>
                         </tr>
                         <tr>
                             <td>is_valid(key)</td>
                             <td><code>bool</code></td>
                             <td>O(1)</td>
-                            <td>Check whether a key still refers to a live element.</td>
+                            <td data-i18n="slotmap_api_isvalid"></td>
                         </tr>
                         <tr>
                             <td>clear()</td>
                             <td><code>void</code></td>
                             <td>O(N)</td>
-                            <td>Reset all slots and reinitialise the freelist.</td>
+                            <td data-i18n="slotmap_api_clear"></td>
                         </tr>
                         <tr>
                             <td>begin() / end()</td>
                             <td><code>T*</code></td>
                             <td>O(1)</td>
-                            <td>Raw iterators over the packed data range <code>[0, size)</code>.</td>
+                            <td data-i18n="slotmap_api_iter"></td>
                         </tr>
                         <tr>
                             <td>size()</td>
                             <td><code>std::size_t</code></td>
                             <td>O(1)</td>
-                            <td>Number of live elements.</td>
+                            <td data-i18n="slotmap_api_size"></td>
                         </tr>
                         <tr>
                             <td>capacity()</td>
                             <td><code>std::size_t</code></td>
                             <td>O(1)</td>
-                            <td>Maximum elements (compile-time constant).</td>
+                            <td data-i18n="slotmap_api_capacity"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -667,44 +655,28 @@ slotmap.erase(key); <span class="comment">// returns false if key was already st
         </div>
 
         <div class="subsection">
-            <h3>Erase: swap-and-pop</h3>
-            <p class="section-desc">
-                When an element is erased and it is not the last one in <code>m_data</code>, the last
-                element is moved into the freed slot. Three pointer fixups keep everything consistent:
-            </p>
+            <h3 data-i18n="slotmap_swappop_title"></h3>
+            <p class="section-desc" data-i18n="slotmap_swappop_desc"></p>
             <pre><span class="lang-label">text</span><code>Before erase(key B):           After erase(key B):
 
 m_data:  [ A | B | C ]         m_data:  [ A | C ]
 m_erase: [ a | b | c ]         m_erase: [ a | c ]
                                               ↑ C moved here; m_indices[c].id updated</code></pre>
-            <p class="section-desc">
-                The slot for B is returned to the freelist and its generation is bumped. Any stored
-                <code>key_type</code> for B now fails <code>is_valid()</code> because
-                <code>m_indices[b].gen != key.gen</code>.
-            </p>
+            <p class="section-desc" data-i18n="slotmap_swappop_after"></p>
         </div>
 
         <div class="callout">
-            <span>The <code>EntityManager</code> stores one <code>Slotmap&lt;CMP, MAX_ENTITIES&gt;</code> per component type in a <code>std::tuple</code>. Access is via <code>std::get&lt;Index&gt;(m_slotmaps)</code>, where the index is resolved at compile-time through <code>MP::IndexOf</code>.</span>
+            <span data-i18n="slotmap_callout"></span>
         </div>
     </section>
  
     <section class="doc-section" id="metaprog">
-        <h2 data-i18n="section_metaprog">Metaprogramming <code>MP::</code></h2>
-        <p class="section-desc">
-            All compile-time logic lives in the <code>MP::</code> namespace inside
-            <code>meta_program.hpp</code>. It is a self-contained, zero-dependency header that
-            reimplements the type-traits machinery needed by <code>EntityManager</code> without
-            relying on <code>&lt;type_traits&gt;</code>. Every facility is <code>consteval</code>
-            or resolved at compile-time no runtime cost.
-        </p>
+        <h2 data-i18n="section_metaprog"></h2>
+        <p class="section-desc" data-i18n="metaprog_desc"></p>
 
         <div class="subsection">
-            <h3>Foundational traits</h3>
-            <p class="section-desc">
-                The header starts by defining its own Boolean and value constants, keeping the
-                namespace self-contained.
-            </p>
+            <h3 data-i18n="metaprog_foundational_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_foundational_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// Compile-time constant wrapper</span>
 <span class="highlight">template</span> &lt;<span class="highlight">typename</span> T, T VAL&gt;
 <span class="highlight">struct</span> constant { <span class="highlight">static constexpr</span> T value{ VAL }; };
@@ -724,11 +696,8 @@ m_erase: [ a | b | c ]         m_erase: [ a | c ]
         </div>
 
         <div class="subsection">
-            <h3>nth_type index into a parameter pack</h3>
-            <p class="section-desc">
-                Extracts the <em>N</em>-th type from a variadic pack via recursive specialisation.
-                Used internally by <code>TypeList</code> and <code>cmp_tag_traits</code>.
-            </p>
+            <h3 data-i18n="metaprog_nth_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_nth_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// Base case: N == 0 --&gt; the type is the first in the pack</span>
 <span class="highlight">template</span> &lt;<span class="highlight">typename</span> T, <span class="highlight">typename</span>... Ts&gt;
 <span class="highlight">struct</span> nth_type&lt;<span class="num">0</span>, T, Ts...&gt; : type_id&lt;T&gt; {};
@@ -743,11 +712,8 @@ m_erase: [ a | b | c ]         m_erase: [ a | c ]
         </div>
 
         <div class="subsection">
-            <h3>pos find a type's position</h3>
-            <p class="section-desc">
-                Walks the pack at compile-time and returns the zero-based index of <code>T</code>.
-                Triggers a static assert if <code>T</code> is not present.
-            </p>
+            <h3 data-i18n="metaprog_pos_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_pos_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// Match found at head --&gt; position 0</span>
 <span class="highlight">template</span> &lt;<span class="highlight">typename</span> T, <span class="highlight">typename</span>... Ts&gt;
 <span class="highlight">struct</span> pos&lt;T, T, Ts...&gt; : constant&lt;std::size_t, <span class="num">0</span>&gt; {};
@@ -758,12 +724,8 @@ m_erase: [ a | b | c ]         m_erase: [ a | c ]
         </div>
 
         <div class="subsection">
-            <h3>IFT compile-time if</h3>
-            <p class="section-desc">
-                Selects between two types based on a boolean condition. Equivalent to
-                <code>std::conditional</code>. Used by <code>smallest_type</code> to pick the
-                narrowest integer that fits the bitmask.
-            </p>
+            <h3 data-i18n="metaprog_ift_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_ift_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">template</span> &lt;bool Condition, <span class="highlight">typename</span> T, <span class="highlight">typename</span> F&gt; <span class="highlight">struct</span> IFT          : type_id&lt;F&gt; {};
 <span class="highlight">template</span> &lt;<span class="highlight">typename</span> T, <span class="highlight">typename</span> F&gt;                <span class="highlight">struct</span> IFT&lt;true, T, F&gt; : type_id&lt;T&gt; {};
 
@@ -774,10 +736,7 @@ m_erase: [ a | b | c ]         m_erase: [ a | c ]
 
         <div class="subsection">
             <h3>TypeList</h3>
-            <p class="section-desc">
-                The main user-facing type. A variadic struct with no data members pure compile-time
-                information. Exposes three <code>consteval</code> member functions.
-            </p>
+            <p class="section-desc" data-i18n="metaprog_typelist_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">template</span> &lt;<span class="highlight">typename</span>... Ts&gt;
 <span class="highlight">struct</span> TypeList {
     <span class="comment">// Number of types in the list</span>
@@ -804,12 +763,8 @@ constexpr bool has = GameCMPs::contains&lt;AIComponent&gt;();         <span clas
         </div>
 
         <div class="subsection">
-            <h3>smallest_type automatic mask width</h3>
-            <p class="section-desc">
-                Given a <code>TypeList</code>, selects the narrowest unsigned integer that can hold
-                one bit per type. This is the <code>mask_type</code> used by every entity to store
-                its component/tag bitmask.
-            </p>
+            <h3 data-i18n="metaprog_smallest_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_smallest_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">template</span> &lt;<span class="highlight">typename</span> LIST&gt;
 <span class="highlight">using</span> smallest_type =
     IFT_t&lt;LIST::size() &lt;=  <span class="num">8</span>, std::uint8_t,
@@ -820,18 +775,13 @@ constexpr bool has = GameCMPs::contains&lt;AIComponent&gt;();         <span clas
 <span class="comment">// Example: 3 components + 2 tags = 5 total --&gt; uint8_t (fits in 8 bits)</span>
 <span class="comment">// Example: 20 total types                  --&gt; uint32_t</span></code></pre>
             <div class="callout">
-                <span>The maximum combined total of components + tags is <strong>64</strong>, enforced by a <code>static_assert</code> inside <code>cmp_tag_traits</code>. Exceeding this limit is a compile error.</span>
+                <span data-i18n="metaprog_smallest_callout"></span>
             </div>
         </div>
 
         <div class="subsection">
-            <h3>cmp_tag_traits bitmask engine</h3>
-            <p class="section-desc">
-                The central metaprogramming type consumed by <code>EntityManager</code>. Given the
-                full merged <code>TypeList</code> of all components and tags, it exposes the
-                <code>mask_type</code> and the <code>consteval mask()</code> function used to build
-                query masks at compile-time.
-            </p>
+            <h3 data-i18n="metaprog_traits_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_traits_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">template</span> &lt;<span class="highlight">typename</span> TLIST&gt;
 <span class="highlight">struct</span> cmp_tag_traits {
     static_assert(TLIST::size() &lt;= <span class="num">64</span>, <span class="str">"Component tag list is too large"</span>);
@@ -863,16 +813,13 @@ constexpr bool has = GameCMPs::contains&lt;AIComponent&gt;();         <span clas
 <span class="highlight">if</span> ((entity.mask & queryMask) == queryMask) { <span class="comment">/* visit */</span> }</code></pre>
 
             <div class="callout">
-                <span>An empty <code>TypeList&lt;&gt;</code> specialisation of <code>cmp_tag_traits</code> is provided so that passing an empty component or tag list to <code>forEach</code> always compiles cleanly and produces a mask of <code>0</code> (matches everything).</span>
+                <span data-i18n="metaprog_traits_callout"></span>
             </div>
         </div>
 
         <div class="subsection">
-            <h3>Type-list transformers</h3>
-            <p class="section-desc">
-                Two additional helpers allow reusing a <code>TypeList</code> with different wrappers,
-                used internally to build the <code>std::tuple</code> of SlotMaps.
-            </p>
+            <h3 data-i18n="metaprog_transformers_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_transformers_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// replace_t: reuse the types in a TypeList with a different variadic template</span>
 <span class="comment">// TypeList&lt;A,B,C&gt; --&gt; std::tuple&lt;A,B,C&gt;</span>
 <span class="highlight">using</span> SlotmapTuple = replace_t&lt;std::tuple, GameCMPs&gt;;
@@ -883,13 +830,8 @@ constexpr bool has = GameCMPs::contains&lt;AIComponent&gt;();         <span clas
         </div>
 
         <div class="subsection">
-            <h3>for_each_in_tuple</h3>
-            <p class="section-desc">
-                A runtime helper that calls a lambda on every element of a <code>std::tuple</code>,
-                iterating by index via template recursion. Used by <code>EntityManager</code> to
-                reset all SlotMaps on <code>destroyAll()</code> and to build bitmask queries that
-                touch each component storage in turn.
-            </p>
+            <h3 data-i18n="metaprog_foreachtuple_title"></h3>
+            <p class="section-desc" data-i18n="metaprog_foreachtuple_desc"></p>
             <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// Both const and non-const overloads are provided</span>
 <span class="comment">// Base case (I == tuple size): do nothing</span>
 <span class="comment">// Recursive case: call f on element I, then advance</span>
@@ -900,76 +842,76 @@ MP::for_each_in_tuple(m_slotmaps, [](auto& slotmap) {
         </div>
 
         <div class="subsection">
-            <h3>MP:: reference</h3>
+            <h3 data-i18n="metaprog_ref_title"></h3>
             <div class="table-wrapper">
                 <table class="api-table">
                     <thead>
                         <tr>
-                            <th>Construct</th>
-                            <th>Kind</th>
-                            <th>Description</th>
+                            <th data-i18n="metaprog_construct"></th>
+                            <th data-i18n="metaprog_kind"></th>
+                            <th data-i18n="api_desc"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>constant&lt;T, V&gt;</td>
                             <td>struct</td>
-                            <td>Holds a single compile-time value <code>V</code> of type <code>T</code>.</td>
+                            <td data-i18n="metaprog_ref_constant"></td>
                         </tr>
                         <tr>
                             <td>true_type / false_type</td>
                             <td>struct</td>
-                            <td>Boolean compile-time constants.</td>
+                            <td data-i18n="metaprog_ref_booleans"></td>
                         </tr>
                         <tr>
                             <td>is_same&lt;T,U&gt;</td>
                             <td>trait</td>
-                            <td>Inherits <code>true_type</code> iff <code>T</code> and <code>U</code> are identical.</td>
+                            <td data-i18n="metaprog_ref_issame"></td>
                         </tr>
                         <tr>
                             <td>nth_type&lt;N, Ts...&gt;</td>
                             <td>trait</td>
-                            <td>Extracts the N-th type from a parameter pack.</td>
+                            <td data-i18n="metaprog_ref_nth"></td>
                         </tr>
                         <tr>
                             <td>pos&lt;T, Ts...&gt;</td>
                             <td>trait</td>
-                            <td>Zero-based position of <code>T</code> in pack <code>Ts</code>.</td>
+                            <td data-i18n="metaprog_ref_pos"></td>
                         </tr>
                         <tr>
                             <td>IFT&lt;Cond, T, F&gt;</td>
                             <td>trait</td>
-                            <td>Selects <code>T</code> if <code>Cond</code> is true, <code>F</code> otherwise.</td>
+                            <td data-i18n="metaprog_ref_ift"></td>
                         </tr>
                         <tr>
                             <td>TypeList&lt;Ts...&gt;</td>
                             <td>struct</td>
-                            <td>Compile-time list with <code>size()</code>, <code>contains&lt;T&gt;()</code>, <code>pos&lt;T&gt;()</code>.</td>
+                            <td data-i18n="metaprog_ref_typelist"></td>
                         </tr>
                         <tr>
                             <td>smallest_type&lt;TL&gt;</td>
                             <td>alias</td>
-                            <td>Narrowest <code>uintN_t</code> that fits one bit per type in <code>TL</code>.</td>
+                            <td data-i18n="metaprog_ref_smallest"></td>
                         </tr>
                         <tr>
                             <td>cmp_tag_traits&lt;TL&gt;</td>
                             <td>struct</td>
-                            <td>Bitmask engine: <code>mask_type</code>, <code>id&lt;T&gt;()</code>, <code>mask&lt;Ts...&gt;()</code>.</td>
+                            <td data-i18n="metaprog_ref_traits"></td>
                         </tr>
                         <tr>
                             <td>replace_t&lt;New, TL&gt;</td>
                             <td>alias</td>
-                            <td>Rewraps <code>TypeList&lt;Ts...&gt;</code> as <code>New&lt;Ts...&gt;</code>.</td>
+                            <td data-i18n="metaprog_ref_replace"></td>
                         </tr>
                         <tr>
                             <td>forall_insert_template_t&lt;W, TL&gt;</td>
                             <td>alias</td>
-                            <td>Produces <code>TypeList&lt;W&lt;A&gt;, W&lt;B&gt;, …&gt;</code> from <code>TypeList&lt;A,B,…&gt;</code>.</td>
+                            <td data-i18n="metaprog_ref_forall"></td>
                         </tr>
                         <tr>
                             <td>for_each_in_tuple(t, f)</td>
                             <td>function</td>
-                            <td>Calls <code>f(element)</code> for every element of a <code>std::tuple</code>.</td>
+                            <td data-i18n="metaprog_ref_foreachtuple"></td>
                         </tr>
                     </tbody>
                 </table>

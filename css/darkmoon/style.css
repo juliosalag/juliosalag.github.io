@@ -28,6 +28,7 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     scroll-margin: 20px;
+    text-align: justify;
 }
 
 body {
@@ -555,7 +556,6 @@ pre code {
     font-size: 1.3em;
     cursor: pointer;
     z-index: 100;
-    box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
 @media (max-width: 768px) {
