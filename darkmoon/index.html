@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DarkMoon Engine | Docs</title>
     <link rel="icon" href="../assets/icon.png" type="image/png">
-    <link rel="stylesheet" href="../css/darkmoon/style.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/darkmoon/style.css">
 
     <script src="../js/lang.js"></script>
+    <script src="../js/theme.js"></script>
 </head>
 <body>
 
@@ -23,7 +24,16 @@
         </a>
     </div>
 
-    <nav></nav>
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">ECS</div>
+            <a href="#ecs">ECS</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Utils</div>
+            <a href="#memory" data-i18n="nav_memory"></a>
+        </div>
+    </nav>
 
     <div class="sidebar-back">
         <a href="../index.html" data-i18n="nav_back"></a>
@@ -48,6 +58,18 @@
         </div>
     </div>
 
+    <!-- Dropdown Theme -->
+    <div class="dropdown theme-dropdown" style="right: 90px;">
+        <a href="javascript:void(0)" class="dropbtn" id="theme-current">
+            DARK
+        </a>
+
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Theme.load('dark')">DARK</a>
+            <a href="javascript:void(0)" onclick="Theme.load('light')">LIGHT</a>
+        </div>
+    </div>
+
     <!-- Dropdown Language -->
     <div class="dropdown">
         <a href="javascript:void(0)" class="dropbtn" id="lang-current">ES</a>
@@ -57,7 +79,13 @@
         </div>
     </div>
 
-    <a href="ecs.html">ECS</a>
+    <section class="doc-section" id="ecs">
+        <a href="ecs.html">ECS</a>
+    </section>
+
+    <section class="doc-section" id="memory">
+        <h2 data-i18n="section_memory"></h2>
+    </section>
 
 </main>
 
