@@ -51,6 +51,11 @@
         <div class="nav-group">
             <div class="nav-group-title" data-i18n="nav_group_examples"></div>
             <a href="#example1" data-i18n="nav_example1"></a>
+            <a href="#example2" data-i18n="nav_example2"></a>
+            <a href="#example3" data-i18n="nav_example3"></a>
+            <a href="#example4" data-i18n="nav_example4"></a>
+            <a href="#example5" data-i18n="nav_example5"></a>
+            <a href="#example6" data-i18n="nav_example6"></a>
         </div>
     </nav>
  
@@ -922,7 +927,744 @@ MP::for_each_in_tuple(m_slotmaps, [](auto& slotmap) {
     <!-- Examples -->
  
     <section class="doc-section" id="example1">
-        <h2 data-i18n="section_examples"></h2>
+        <h2 data-i18n="example1_title"></h2>
+        <p class="section-desc" data-i18n="example1_desc"></p>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// structure</span>
+src/
+    ├── types.hpp
+    └── main.cpp</code></pre>
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// types.hpp</span>
+<span class="highlight">#include</span> &lt;darkmoon/ecs.hpp&gt;
+
+<span class="highlight">struct</span> HealthComponent {
+    int hp { 100 };
+};
+
+<span class="highlight">using</span> GameCMPs = MP::TypeList&lt;HealthComponent&gt;;
+<span class="highlight">using</span> GameTAGs = MP::TypeList<>;
+
+<span class="highlight">using</span> EM     = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+<span class="highlight">using</span> Entity = EM::Entity;</code></pre>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// main.cpp</span>
+<span class="highlight">#include</span> &lt;iostream&gt;
+<span class="highlight">#include</span> "types.hpp"
+
+<span class="highlight">int</span> main (){
+    EM em {};
+
+    <span class="comment">// Create entity</span>
+    Entity& player = em.<span class="highlight">newEntity</span>();
+
+    <span class="comment">// Add component</span>
+    auto& health = em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(player);
+    health.hp = 80;
+
+    <span class="comment">// Save ID player</span>
+    std::size_t playerID = player.<span class="highlight">getID</span>();
+    std::cout << "Player ID: " << playerID << "\n";
+
+    <span class="comment">// Check before accessing (good practice in generic systems)</span>
+    if(player.<span class="highlight">hasComponent</span>&lt;HealthComponent&gt;()){
+        auto& h = em.<span class="highlight">getComponent</span>&lt;HealthComponent&gt;(player);
+        h.hp -= 10;
+        std::cout << "Player HP: " << h.hp << "\n";
+    }
+
+    <span class="comment">// EntityManager statistics</span>
+    std::cout << "Living Entities: " << em.<span class="highlight">aliveCount</span>() << "\n";
+
+    return 0;
+}</code></pre>
+    <pre><span class="lang-label">TEXT</span><code><span class="comment">// output.txt</span>
+Player ID: 0
+Player HP: 70
+Living Entities: 1
+</code></pre>
+
+    </section>
+
+    <section class="doc-section" id="example2">
+        <h2 data-i18n="example2_title"></h2>
+        <p class="section-desc" data-i18n="example2_desc"></p>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// structure</span>
+src/
+    ├── types.hpp
+    └── main.cpp</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// types.hpp</span>
+<span class="highlight">#include</span> &lt;darkmoon/ecs.hpp&gt;
+
+<span class="highlight">struct</span> PositionComponent {
+    float x {}, y {};
+};
+<span class="highlight">struct</span> VelocityComponent {
+    float dx {}, dy {};
+};
+<span class="highlight">struct</span> HealthComponent {
+    int hp { 100 };
+};
+
+<span class="comment">// The order in the TypeList determines the bit in the internal bitmask.
+// Do not change it once fixed without recompiling everything.</span>
+
+<span class="highlight">using</span> GameCMPs = MP::TypeList&lt;
+    PositionComponent,
+    VelocityComponent,
+    HealthComponent
+&gt;;
+<span class="highlight">using</span> GameTAGs = MP::TypeList<>;
+
+<span class="highlight">using</span> EM     = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+<span class="highlight">using</span> Entity = EM::Entity;</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// main.cpp</span>
+<span class="highlight">#include</span> &lt;iostream&gt;
+<span class="highlight">#include</span> "types.hpp"
+
+<span class="highlight">int</span> main (){
+    EM em {};
+
+    <span class="comment">// Create entity and add the 3 components</span>
+    Entity& player = em.<span class="highlight">newEntity</span>();
+    auto& pPos = em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(player);
+    pPos.x = 10.f; pPos.y = 5.f;
+    auto& pVel = em.<span class="highlight">addComponent</span>&lt;VelocityComponent&gt;(player);
+    pVel.dx = 1.f; pVel.dy = 0.5f;
+    auto& pHp = em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(player);
+    pHp.hp = 200;
+
+    <span class="comment">// Enemy without velocity (static)</span>
+    Entity& enemy = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(enemy).x = 50.f;
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(enemy);
+
+    <span class="comment">// Pickup with only position</span>
+    Entity& pickup = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(pickup) = { 30.f, 20.f };
+
+    std::cout &lt;&lt; "Living Entities: " &lt;&lt; em.<span class="highlight">aliveCount</span>() &lt;&lt; "\n";
+
+    <span class="comment">// Movement System</span>
+    std::cout &lt;&lt; "-- Movement System --\n";
+
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;PositionComponent, VelocityComponent&gt;, MP::TypeList&lt;&gt;&gt;(
+        [](Entity& e, PositionComponent& pos, VelocityComponent& vel) {
+            pos.x += vel.dx;
+            pos.y += vel.dy;
+            std::cout &lt;&lt; " - Entity " &lt;&lt; e.<span class="highlight">getID</span>()
+                      &lt;&lt; " move to (" &lt;&lt; pos.x &lt;&lt; ", " &lt;&lt; pos.y &lt;&lt; ")\n";
+        }
+    );
+
+    <span class="comment">// Health System</span>
+    std::cout &lt;&lt; "-- Health System --\n";
+
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;HealthComponent&gt;, MP::TypeList&lt;&gt;&gt;(
+        [&](Entity& e, HealthComponent& h) {
+            <span class="comment">// Optionally access other components on the same entity</span>
+            if (e.<span class="highlight">hasComponent</span>&lt;PositionComponent&gt;()) {
+                auto& pos = em.<span class="highlight">getComponent</span>&lt;PositionComponent&gt;(e);
+                std::cout << " - Entity " << e.<span class="highlight">getID</span>()
+                          << " in (" << pos.x << ", " << pos.y << ")"
+                          << " HP: " << h.hp << "\n";
+            }
+        }
+    );
+
+    return 0;
+}</code></pre>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// output.txt</span>
+Living Entities: 3
+-- Movement System --
+ - Entity 0 move to (11, 5.5)
+-- Health System --
+ - Entity 0 in (11, 5.5) HP: 200
+ - Entity 1 in (50, 0) HP: 100
+
+</code></pre>
+        
+    </section>
+
+    <section class="doc-section" id="example3">
+        <h2 data-i18n="example3_title"></h2>
+        <p class="section-desc" data-i18n="example3_desc"></p> 
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// structure</span>
+src/
+    ├── types.hpp
+    └── main.cpp</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// types.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> &lt;darkmoon/ecs.hpp&gt;
+
+<span class="highlight">struct</span> HealthComponent {
+    int hp { 100 };
+};
+
+<span class="highlight">struct</span> TagPlayer     {};
+<span class="highlight">struct</span> TagEnemy      {};
+<span class="highlight">struct</span> TagInvincible {};
+
+<span class="highlight">using</span> GameCMPs = MP::TypeList&lt;HealthComponent&gt;;
+<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;TagPlayer, TagEnemy, TagInvincible&gt;;
+
+<span class="highlight">using</span> EM     = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+<span class="highlight">using</span> Entity = EM::Entity;</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// main.cpp</span>
+<span class="highlight">#include</span> &lt;iostream&gt;
+<span class="highlight">#include</span> "types.hpp"
+
+static void <span class="highlight">applyDamage</span>(EM& em, Entity& e, int dmg){
+    if(e.<span class="highlight">hasTag</span>&lt;TagInvincible&gt;()){
+        std::cout << " - Entity " << e.<span class="highlight">getID</span>() << " is invincible, no damage\n";
+        return;
+    }
+    auto& h = em.<span class="highlight">getComponent</span>&lt;HealthComponent&gt;(e);
+    h.hp -= dmg;
+    std::cout << " - Entity " << e.getID() 
+              << " takes " << dmg << " damage -&gt; HP: " << h.hp << "\n";
+}
+
+<span class="highlight">int</span> main (){
+    EM em {};
+
+    <span class="comment">// Player</span>
+    Entity& player = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(player).hp = 200;
+    em.<span class="highlight">addTag</span>&lt;TagPlayer&gt;(player);
+
+    <span class="comment">// Enemies</span>
+    Entity& orc   = em.<span class="highlight">newEntity</span>();
+    Entity& troll = em.<span class="highlight">newEntity</span>();
+
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(orc);
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(troll).hp = 300;
+
+    em.<span class="highlight">addTag</span>&lt;TagEnemy&gt;(orc);
+    em.<span class="highlight">addTag</span>&lt;TagEnemy&gt;(troll);
+
+    <span class="comment">// Simulate player pick power-up</span>
+    std::cout &lt;&lt; "-- Player pick power-up --\n";
+    em.<span class="highlight">addTag</span>&lt;TagInvincible&gt;(player);
+
+    <span class="comment">// Damage enemies</span>
+    std::cout &lt;&lt; "-- Damage all enemies (TagEnemy + HealthComponent) --\n";
+
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;HealthComponent&gt;, MP::TypeList&lt;TagEnemy&gt;&gt;(
+        [&](Entity& e, HealthComponent&) {
+            <span class="highlight">applyDamage</span>(em, e, 25);
+        }
+    );
+
+    <span class="comment">// Damage player</span>
+    std::cout << "-- Damage player (TagPlayer + HealthComponent) --\n";
+
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;HealthComponent&gt;, MP::TypeList&lt;TagPlayer&gt;&gt;(
+        [&](Entity& e, HealthComponent&) {
+            <span class="highlight">applyDamage</span>(em, e, 50);
+        }
+    );
+
+    <span class="comment">// Expire power-up</span>
+    std::cout &lt;&lt; "-- Expire power-up --\n";
+    em.<span class="highlight">destroyTag</span>&lt;TagInvincible&gt;(player);
+
+    <span class="comment">// Damage player</span>
+    std::cout << "-- Damage player (TagPlayer + HealthComponent) --\n";
+
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;HealthComponent&gt;, MP::TypeList&lt;TagPlayer&gt;&gt;(
+        [&](Entity& e, HealthComponent&) {
+            <span class="highlight">applyDamage</span>(em, e, 50);
+        }
+    );
+
+    <span class="comment">// Final state</span>
+    std::cout &lt;&lt; "-- Final state --\n";
+
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;HealthComponent&gt;, MP::TypeList&lt;&gt;&gt;(
+        [&](Entity& e, HealthComponent& h) {
+            std::string role =
+                e.<span class="highlight">hasTag</span>&lt;TagPlayer&gt;() ? "player" :
+                e.<span class="highlight">hasTag</span>&lt;TagEnemy&gt;()  ? "enemy"  : "unknown";
+            std::cout << " - [" << role << "] entity " << e.<span class="highlight">getID</span>()
+                      << "  HP: " << h.hp << "\n";
+        }
+    );
+
+    return 0;
+}</code></pre>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// output.txt</span>
+-- Player pick power-up --
+-- Damage all enemies (TagEnemy + HealthComponent) --
+ - Entity 1 takes 25 damage -> HP: 75
+ - Entity 2 takes 25 damage -> HP: 275
+-- Damage player (TagPlayer + HealthComponent) --
+ - Entity 0 is invincible, no damage
+-- Expire power-up --
+-- Damage player (TagPlayer + HealthComponent) --
+ - Entity 0 takes 50 damage -> HP: 150
+-- Final state --
+ - [player] entity 0  HP: 150
+ - [enemy] entity 1  HP: 75
+ - [enemy] entity 2  HP: 275
+
+</code></pre>
+    </section>
+
+    <section class="doc-section" id="example4">
+        <h2 data-i18n="example4_title"></h2>
+        <p class="section-desc" data-i18n="example4_desc"></p>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// structure</span>
+src/
+    ├── types.hpp
+    └── main.cpp
+    └── systems/
+        ├── boundsSystem.hpp
+        ├── combatSystem.hpp
+        └── movementSystem.hpp</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// types.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> &lt;darkmoon/ecs.hpp&gt;
+
+<span class="highlight">struct</span> PositionComponent {
+    float x {}, y {};
+};
+
+<span class="highlight">struct</span> VelocityComponent {
+    float dx {}, dy {};
+};
+
+<span class="highlight">struct</span> HealthComponent {
+    int hp { 100 };
+};
+
+<span class="highlight">struct</span> TagPlayer {};
+<span class="highlight">struct</span> TagEnemy  {};
+
+<span class="highlight">using</span> GameCMPs = MP::TypeList&lt;
+    PositionComponent,
+    VelocityComponent,
+    HealthComponent
+&gt;;
+<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;TagPlayer, TagEnemy&gt;;
+
+<span class="highlight">using</span> EM     = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+<span class="highlight">using</span> Entity = EM::Entity;</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// boundsSystem.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> "../types.hpp"
+
+<span class="comment">// Reverses speed when leaving the playing area ("bounce" effect).</span>
+
+<span class="highlight">struct</span> BoundsSystem {
+    <span class="highlight">using</span> SYSCMPs = MP::TypeList&lt;PositionComponent, VelocityComponent&gt;;
+    <span class="highlight">using</span> SYSTAGs = MP::TypeList&lt;&gt;;
+
+    static constexpr float MIN_X {   0.f };
+    static constexpr float MAX_X { 100.f };
+    static constexpr float MIN_Y {   0.f };
+    static constexpr float MAX_Y { 100.f };
+
+    void <span class="highlight">update</span>(EM& em) {
+        em.<span class="highlight">forEach</span>&lt;SYSCMPs, SYSTAGs&gt;(
+            [](Entity&, PositionComponent& pos, VelocityComponent& vel) {
+                if (pos.x < MIN_X || pos.x > MAX_X) vel.dx = -vel.dx;
+                if (pos.y < MIN_Y || pos.y > MAX_Y) vel.dy = -vel.dy;
+            }
+        );
+    }
+};</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// combatSystem.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> "../types.hpp"
+
+<span class="comment">// Simulates an attack by the player on all enemies.</span>
+
+<span class="highlight">struct</span> CombatSystem {
+    <span class="highlight">using</span> SYSCMPs = MP::TypeList&lt;HealthComponent&gt;;
+    <span class="highlight">using</span> SYSTAGs = MP::TypeList&lt;TagEnemy&gt;;
+
+    static constexpr int ATTACK_DAMAGE { 15 };
+
+    void <span class="highlight">update</span>(EM& em) {
+        em.<span class="highlight">forEach</span>&lt;SYSCMPs, SYSTAGs&gt;(
+            [&](Entity&, HealthComponent& h) {
+                h.hp -= ATTACK_DAMAGE;
+            }
+        );
+    }
+};</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// movementSystem.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> "../types.hpp"
+
+<span class="comment">// Add speed to position.</span>
+
+<span class="highlight">struct</span> MovementeSystem {
+    <span class="highlight">using</span> SYSCMPs = MP::TypeList&lt;PositionComponent, VelocityComponent&gt;;
+    <span class="highlight">using</span> SYSTAGs = MP::TypeList&lt;&gt;;
+
+    void <span class="highlight">update</span>(EM& em) {
+        em.<span class="highlight">forEach</span>&lt;SYSCMPs, SYSTAGs&gt;(
+            [&](Entity&, PositionComponent& pos, VelocityComponent& vel) {
+                pos.x += vel.dx;
+                pos.y += vel.dy;
+            }
+        );
+    }
+};</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// main.cpp</span>
+<span class="highlight">#include</span> &lt;iostream&gt;
+<span class="highlight">#include</span> "types.hpp"
+
+<span class="highlight">#include</span> "systems/boundsSystem.hpp"
+<span class="highlight">#include</span> "systems/combatSystem.hpp"
+<span class="highlight">#include</span> "systems/movementSystem.hpp"
+
+<span class="highlight">int</span> main (){
+    <span class="comment">// EntityManager</span>
+    EM em {};
+
+    <span class="comment">// Systems</span>
+    BoundsSystem    bounds   {};
+    CombatSystem    combat   {};
+    MovementeSystem movement {};
+
+    <span class="comment">// Player</span>
+    Entity& player = em.newEntity();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(player) = { 50.f, 50.f };
+    em.<span class="highlight">addComponent</span>&lt;VelocityComponent&gt;(player) = { 3.f, 2.f };
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(player).hp = 200;
+    em.<span class="highlight">addTag</span>&lt;TagPlayer&gt;(player);
+
+    <span class="comment">// Enemies</span>
+    Entity& orc = em.newEntity();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(orc) = { 20.f, 80.f };
+    em.<span class="highlight">addComponent</span>&lt;VelocityComponent&gt;(orc) = { -1.f, 1.f };
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(orc);
+    em.<span class="highlight">addTag</span>&lt;TagEnemy&gt;(orc);
+
+    Entity& troll = em.newEntity();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(troll) = { 70.f, 30.f };
+    em.<span class="highlight">addComponent</span>&lt;VelocityComponent&gt;(troll) = { 0.5f, -1.5f };
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(troll).hp = 250;
+    em.<span class="highlight">addTag</span>&lt;TagEnemy&gt;(troll);
+
+    <span class="comment">// Loop game</span>
+    for (int frame = 1; frame &lt;= 3; frame++) {
+        movement.<span class="highlight">update</span>(em);
+        bounds.<span class="highlight">update</span>(em);
+        combat.<span class="highlight">update</span>(em);
+
+        <span class="comment">// Print state</span>
+        std::cout &lt;&lt; "Frame " &lt;&lt; frame &lt;&lt; "\n";
+
+        em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;PositionComponent, HealthComponent&gt;, MP::TypeList&lt;&gt;&gt;(
+            [&](Entity& e, PositionComponent& pos, HealthComponent& h) {
+                std::string role =
+                    e.<span class="highlight">hasTag</span>&lt;TagPlayer&gt;() ? "player" :
+                    e.<span class="highlight">hasTag</span>&lt;TagEnemy&gt;()  ? "enemy"  : "?";
+                std::cout << " - [" << role << "] id=" << e.getID()
+                          << "   pos=(" << pos.x << ", " << pos.y << ")"
+                          << "   hp=" << h.hp << "\n";
+            }
+        );
+    }
+
+    return 0;
+}</code></pre>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// output.txt</span>
+Frame 1
+ - [player] id=0   pos=(53, 52)   hp=200
+ - [enemy] id=1   pos=(19, 81)   hp=85
+ - [enemy] id=2   pos=(70.5, 28.5)   hp=235
+Frame 2
+ - [player] id=0   pos=(56, 54)   hp=200
+ - [enemy] id=1   pos=(18, 82)   hp=70
+ - [enemy] id=2   pos=(71, 27)   hp=220
+Frame 3
+ - [player] id=0   pos=(59, 56)   hp=200
+ - [enemy] id=1   pos=(17, 83)   hp=55
+ - [enemy] id=2   pos=(71.5, 25.5)   hp=205
+</code></pre>
+    </section>
+
+    <section class="doc-section" id="example5">
+        <h2 data-i18n="example5_title"></h2>
+        <p class="section-desc" data-i18n="example5_desc"></p>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// structure</span>
+src/
+    ├── types.hpp
+    └── main.cpp</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// types.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> &lt;darkmoon/ecs.hpp&gt;
+
+<span class="highlight">struct</span> PositionComponent {
+    float x {}, y {};
+};
+
+<span class="highlight">struct</span> LifetimeComponent {
+    float ttl {};
+};
+
+<span class="highlight">struct</span> HealthComponent {
+    int hp { 100 };
+};
+
+<span class="highlight">struct</span> TagBullet {};
+<span class="highlight">struct</span> TagEnemy  {};
+
+<span class="highlight">using</span> GameCMPs = MP::TypeList&lt;
+    PositionComponent,
+    LifetimeComponent,
+    HealthComponent
+&gt;;
+<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;TagBullet, TagEnemy&gt;;
+
+<span class="highlight">using</span> EM     = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+<span class="highlight">using</span> Entity = EM::Entity;</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// main.cpp</span>
+<span class="highlight">#include</span> &lt;iostream&gt;
+<span class="highlight">#include</span> "types.hpp"
+
+<span class="highlight">int</span> main (){
+    <span class="comment">// EntityManager</span>
+    EM em {};
+
+    <span class="comment">// Create bullets with time life</span>
+    for (int i = 0; i &lt; 5; i++) {
+        Entity& bullet = em.<span class="highlight">newEntity</span>();
+        em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(bullet) = { static_cast&lt;float&gt;(i * 10), 0.f };
+        em.<span class="highlight">addComponent</span>&lt;LifetimeComponent&gt;(bullet).ttl = static_cast&lt;float&gt;(i) * 0.5f;
+        em.<span class="highlight">addTag</span>&lt;TagBullet&gt;(bullet);
+    }
+
+    <span class="comment">// Create enemies</span>
+    Entity& orc   = em.<span class="highlight">newEntity</span>();
+    Entity& troll = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(orc);
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(troll).hp = 300;
+    em.<span class="highlight">addTag</span>&lt;TagEnemy&gt;(orc);
+    em.<span class="highlight">addTag</span>&lt;TagEnemy&gt;(troll);
+
+    std::cout &lt;&lt; "Initial entities: " &lt;&lt; em.<span class="highlight">aliveCount</span>() &lt;&lt; "\n";
+
+    <span class="comment">// deathSet: destroy expired bullets </span>
+    constexpr float DT { 0.5f };
+    EM::deathSet toDestroy {};
+
+    std::cout &lt;&lt; "-- Life Time System --\n";
+
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;LifetimeComponent&gt;, MP::TypeList&lt;TagBullet&gt;>(
+        [&](Entity& e, LifetimeComponent& lt) {
+            lt.ttl -= DT;
+            std::cout << " - Bullet " << e.<span class="highlight">getID</span>()
+                      << "  ttl=" << lt.ttl << "\n";
+
+            if (lt.ttl <= 0.f) {
+                toDestroy.<span class="highlight">insert</span>(e.<span class="highlight">getID</span>()); <span class="comment">// No destroy here</span>
+            }
+        }
+    );
+
+    <span class="comment">// Destroy outside the loop: safe</span>
+    em.<span class="highlight">destroyEntities</span>(toDestroy);
+    toDestroy.<span class="highlight">clear</span>();
+
+    std::cout << "Living entities: " << em.<span class="highlight">aliveCount</span>() << "\n";
+
+    <span class="comment">// destroyAll</span>
+    std::cout << "-- destroyAll --\n";
+    std::cout << " - before: " << em.<span class="highlight">aliveCount</span>() << " entities\n";
+    em.<span class="highlight">destroyAll</span>();
+    std::cout << " - after: " << em.<span class="highlight">aliveCount</span>() << " entities\n";
+
+    return 0;
+}</code></pre>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// output.txt</span>
+Initial entities: 7
+-- Life Time System --
+ - Bullet 0  ttl=-0.5
+ - Bullet 1  ttl=0
+ - Bullet 2  ttl=0.5
+ - Bullet 3  ttl=1
+ - Bullet 4  ttl=1.5
+Living entities: 5
+-- destroyAll --
+ - before: 5 entities
+ - after: 0 entities
+</code></pre>
+    </section>
+
+    <section class="doc-section" id="example6">
+        <h2 data-i18n="example6_title"></h2>
+        <p class="section-desc" data-i18n="example6_desc"></p>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// structure</span>
+src/
+    ├── types.hpp
+    └── main.cpp</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// types.hpp</span>
+<span class="highlight">#pragma</span> once
+<span class="highlight">#include</span> &lt;darkmoon/ecs.hpp&gt;
+
+<span class="highlight">struct</span> PositionComponent {
+    float x {}, y {};
+};
+
+<span class="highlight">struct</span> HealthComponent {
+    int hp { 100 };
+};
+
+<span class="highlight">struct</span> RenderComponent {
+    char glyph { '?' };
+};
+
+<span class="highlight">struct</span> TagPlayer {};
+<span class="highlight">struct</span> TagEnemy  {};
+<span class="highlight">struct</span> TagPickup {};
+
+<span class="highlight">using</span> GameCMPs = MP::TypeList&lt;
+    PositionComponent,
+    HealthComponent,
+    RenderComponent
+&gt;;
+<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;TagPlayer, TagEnemy, TagPickup&gt;;
+
+<span class="highlight">using</span> EM     = EntityManager&lt;GameCMPs, GameTAGs&gt;;
+<span class="highlight">using</span> Entity = EM::Entity;</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// main.cpp</span>
+<span class="highlight">#include</span> &lt;iostream&gt;
+<span class="highlight">#include</span> "types.hpp"
+
+<span class="comment">// forEach    -&gt; AND: for all entities that have all the CMPs and all the requested TAGs</span>
+<span class="comment">// forEachAny -&gt;  OT: for all entities that have at least one of the requested CMPs or TAGs</span>
+
+<span class="comment">// Example entities:</span>
+<span class="comment">//   player -&gt; Position + Health + Render | TagPlayer</span>
+<span class="comment">//   archer -&gt; Position + Health + Render | TagEnemy</span>
+<span class="comment">//   statue -&gt; Position + Render          | (no tags)</span>
+<span class="comment">//   pickup -&gt; Position                   | TagPickup</span>
+
+<span class="highlight">int</span> main (){
+    EM em {};
+
+    Entity& player = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(player) = { 10.f, 10.f };
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(player).hp = 200;
+    em.<span class="highlight">addComponent</span>&lt;RenderComponent&gt;(player).glyph = '@';
+    em.<span class="highlight">addTag</span>&lt;TagPlayer&gt;(player);
+
+    Entity& archer = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(archer) = { 40.f, 20.f };
+    em.<span class="highlight">addComponent</span>&lt;HealthComponent&gt;(archer);
+    em.<span class="highlight">addComponent</span>&lt;RenderComponent&gt;(archer).glyph = 'A';
+    em.<span class="highlight">addTag</span>&lt;TagEnemy&gt;(archer);
+
+    Entity& statue = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(statue) = { 60.f, 60.f };
+    em.<span class="highlight">addComponent</span>&lt;RenderComponent&gt;(statue).glyph = '&';
+
+    Entity& pickup = em.<span class="highlight">newEntity</span>();
+    em.<span class="highlight">addComponent</span>&lt;PositionComponent&gt;(pickup) = { 25.f, 25.f };
+    em.<span class="highlight">addTag</span>&lt;TagPickup&gt;(pickup);
+
+    std::cout &lt;&lt; "Entities: " &lt;&lt; em.<span class="highlight">aliveCount</span>() &lt;&lt; "\n";
+
+    std::cout &lt;&lt; "forEach&lt;Health + Render, {} &gt; -&gt; player and archer\n";
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;HealthComponent, RenderComponent&gt;, MP::TypeList&lt;&gt;&gt;(
+        [](Entity& e, HealthComponent& h, RenderComponent& r) {
+            std::cout &lt;&lt; " - id=" &lt;&lt; e.<span class="highlight">getID</span>()
+                      &lt;&lt; "  glyph='" &lt;&lt; r.glyph
+                      &lt;&lt; "'  hp=" &lt;&lt; h.hp &lt;&lt; "\n";
+        }
+    );
+
+    std::cout &lt;&lt; "forEach&lt;Health, {TagEnemy}&gt; -&gt; only archer\n";
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;HealthComponent&gt;, MP::TypeList&lt;TagEnemy&gt;&gt;(
+        [](Entity& e, HealthComponent& h) {
+            std::cout &lt;&lt; " - id=" &lt;&lt; e.<span class="highlight">getID</span>() &lt;&lt; "  hp=" &lt;&lt; h.hp &lt;&lt; "\n";
+        }
+    );
+
+    std::cout &lt;&lt; "forEach&lt;Render, {}&gt; -&gt; player, archer, statue\n";
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;RenderComponent&gt;, MP::TypeList&lt;&gt;&gt;(
+        [](Entity& e, RenderComponent& r) {
+            std::cout &lt;&lt; " - id=" &lt;&lt; e.<span class="highlight">getID</span>()
+                      &lt;&lt; "  glyph='" &lt;&lt; r.glyph &lt;&lt; "'\n";
+        }
+    );
+
+    std::cout &lt;&lt; "forEach&lt;Position, {}&gt; -&gt; all (4 entities)\n";
+    em.<span class="highlight">forEach</span>&lt;MP::TypeList&lt;PositionComponent&gt;, MP::TypeList&lt;&gt;&gt;(
+        [](Entity& e, PositionComponent& pos) {
+            std::cout &lt;&lt; " - id=" &lt;&lt; e.<span class="highlight">getID</span>()
+                      &lt;&lt; "  pos=(" &lt;&lt; pos.x &lt;&lt; ", " &lt;&lt; pos.y &lt;&lt; ")\n";
+        }
+    );
+
+    std::cout &lt;&lt; "forEachAny&lt;{}, {TagPlayer, TagEnemy}&gt; -&gt; player and archer\n";
+    em.<span class="highlight">forEachAny</span>&lt;MP::TypeList&lt;&gt;, MP::TypeList&lt;TagPlayer, TagEnemy&gt;&gt;(
+        [&](Entity& e) {
+            std::string role = e.<span class="highlight">hasTag</span>&lt;TagPlayer&gt;() ? "player" : "enemy";
+            std::cout &lt;&lt; " - id=" &lt;&lt; e.<span class="highlight">getID</span>() &lt;&lt; "  role=" &lt;&lt; role &lt;&lt; "\n";
+        }
+    );
+
+    std::cout &lt;&lt; "forEachAny&lt;{}, {TagEnemy, TagPickup}&gt; -&gt; archer and pickup\n";
+    em.<span class="highlight">forEachAny</span>&lt;MP::TypeList&lt;&gt;, MP::TypeList&lt;TagEnemy, TagPickup&gt;&gt;(
+        [&](Entity& e) {
+            std::cout &lt;&lt; " - id=" &lt;&lt; e.<span class="highlight">getID</span>()
+                      &lt;&lt; "  hasPosition=" &lt;&lt; e.<span class="highlight">hasComponent</span>&lt;PositionComponent&gt;() &lt;&lt; "\n";
+        }
+    );
+
+    return 0;
+}</code></pre>
+
+        <pre><span class="lang-label">TEXT</span><code><span class="comment">// output.txt</span>
+Entities: 4
+forEach&lt;Health + Render, {} &gt; -&gt; player and archer
+ - id=0  glyph='@'  hp=200
+ - id=1  glyph='A'  hp=100
+forEach&lt;Health, {TagEnemy}&gt; -&gt; only archer
+ - id=1  hp=100
+forEach&lt;Render, {}&gt; -&gt; player, archer, statue
+ - id=0  glyph='@'
+ - id=1  glyph='A'
+ - id=2  glyph='&'
+forEach&lt;Position, {}&gt; -&gt; all (4 entities)
+ - id=0  pos=(10, 10)
+ - id=1  pos=(40, 20)
+ - id=2  pos=(60, 60)
+ - id=3  pos=(25, 25)
+forEachAny&lt;{}, {TagPlayer, TagEnemy}&gt; -&gt; player and archer
+ - id=0  role=player
+ - id=1  role=enemy
+forEachAny&lt;{}, {TagEnemy, TagPickup}&gt; -&gt; archer and pickup
+ - id=1  hasPosition=1
+ - id=3  hasPosition=1
+</code></pre>
     </section>
  
 </main>
