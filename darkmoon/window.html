@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkMoon Engine | Window</title>
+    <link rel="icon" href="../assets/portraits/darkmoonengine.png" type="image/png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/darkmoon/style.css">
+
+    <script src="../js/lang.js"></script>
+    <script src="../js/theme.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <a href="./index.html">
+            <div>
+                <h1>DarkMoon <span>Engine</span></h1>
+                <span class="version-badge">version 2.0</span>
+            </div>
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_win_group_overview"></div>
+            <a href="#whatis" data-i18n="nav_win_whatis"></a>
+            <a href="#setup" data-i18n="nav_setup"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_core"></div>
+            <a href="#lifecycle" data-i18n="nav_lifecycle"></a>
+            <a href="#drawing" data-i18n="nav_drawing"></a>
+            <a href="#shaders" data-i18n="nav_shaders"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">API</div>
+            <a href="#input_api" data-i18n="nav_input"></a>
+            <a href="#window_api" data-i18n="nav_window_api"></a>
+            <a href="#fps_api" data-i18n="nav_fps"></a>
+            <a href="#misc_api" data-i18n="nav_misc"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_examples"></div>
+            <a href="#example1" data-i18n="nav_example_basic"></a>
+            <a href="#example2" data-i18n="nav_example_input"></a>
+            <a href="#example3" data-i18n="nav_example_multiwindow"></a>
+            <a href="#example4" data-i18n="nav_example_pathdrop"></a>
+        </div>
+    </nav>
+
+    <div class="sidebar-back">
+        <a href="../index.html" data-i18n="nav_back"></a>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1 data-i18n="window_title"></h1>
+        <p data-i18n="header_window"></p>
+        <div class="header-meta">
+            <span class="tag">C++</span>
+            <span class="tag">GLFW</span>
+            <span class="tag">OpenGL</span>
+            <span class="tag">Input</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/graphics.hpp&gt;</span>
+        </div>
+    </div>
+
+    <!-- Dropdown Theme -->
+    <div class="dropdown theme-dropdown" style="right: 90px;">
+        <a href="javascript:void(0)" class="dropbtn" id="theme-current">DARK</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Theme.load('dark')">DARK</a>
+            <a href="javascript:void(0)" onclick="Theme.load('light')">LIGHT</a>
+        </div>
+    </div>
+
+    <!-- Dropdown Language -->
+    <div class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn" id="lang-current">ES</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Lang.load('es')">ES</a>
+            <a href="javascript:void(0)" onclick="Lang.load('en')">ENG</a>
+        </div>
+    </div>
+
+    <!-- Overview -->
+
+    <section class="doc-section" id="whatis">
+        <h2 data-i18n="section_window_whatis"></h2>
+        <p class="section-desc" data-i18n="window_whatis_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="window_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="window_feat_lifecycle"></li>
+                <li data-i18n="window_feat_drawing"></li>
+                <li data-i18n="window_feat_input"></li>
+                <li data-i18n="window_feat_shaders"></li>
+                <li data-i18n="window_feat_fps"></li>
+                <li data-i18n="window_feat_modes"></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Setup -->
+
+    <section class="doc-section" id="setup">
+        <h2 data-i18n="section_window_setup"></h2>
+        <p class="section-desc" data-i18n="window_setup_desc"></p>
+
+        <pre><span class="lang-label">text</span><code><span class="comment">// Dependency: GLFW must be initialized before creating any Window</span>
+<span class="highlight">main.cpp</span>
+    │
+    ├── DarkMoonEngine dm {}                ← initialize GLFW before any Window
+    │
+    ├── Window win { 800, 600, "Title" }    ← GLFW window + GLAD + shaders
+    │       ├── glfwCreateWindow()
+    │       ├── gladLoadGLLoader()          ← only for the first window
+    │       └── LoadBasicShaders()          ← basic2D, basicTexture2D, basicFont2D, ...
+    │
+    └── ~DarkMoonEngine()                   ← its called when the program finishes
+            ├── glfwTerminate()
+            └── unloadAllResources()</code></pre>
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main() {
+    DarkMoonEngine dm{};
+
+    Window win = Window(800, 600, "Window Title");
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+
+        <div class="callout">
+            <span data-i18n="window_setup_callout"></span>
+        </div>
+    </section>
+
+    <!-- Lifecycle -->
+
+    <section class="doc-section" id="lifecycle">
+        <h2 data-i18n="section_lifecycle"></h2>
+        <p class="section-desc" data-i18n="lifecycle_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="lifecycle_methods_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Window(w, h, title, shared?)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="api_win_ctor"></td>
+                        </tr>
+                        <tr>
+                            <td>Close()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_close"></td>
+                        </tr>
+                        <tr>
+                            <td>ShouldClose()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_win_shouldclose"></td>
+                        </tr>
+                        <tr>
+                            <td>Iconify()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_iconify"></td>
+                        </tr>
+                        <tr>
+                            <td>Maximize()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_maximize"></td>
+                        </tr>
+                        <tr>
+                            <td>Restore()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_restore"></td>
+                        </tr>
+                        <tr>
+                            <td>Hide()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_hide"></td>
+                        </tr>
+                        <tr>
+                            <td>Show()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_show"></td>
+                        </tr>
+                        <tr>
+                            <td>Focus()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_focus"></td>
+                        </tr>
+                        <tr>
+                            <td>Current()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_current"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drawing -->
+
+    <section class="doc-section" id="drawing">
+        <h2 data-i18n="section_drawing"></h2>
+        <p class="section-desc" data-i18n="drawing_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="drawing_loop_title"></h3>
+            <p class="section-desc" data-i18n="drawing_loop_desc"></p>
+
+            <pre><span class="lang-label">text</span><code><span class="highlight">BeginDrawing</span>(color)   ← sets projection matrix + clears background
+        │
+        │   your render calls here
+        │
+<span class="highlight">EndDrawing</span>()          ← caps FPS + updates deltaTime + PollEvents + SwapBuffers
+        │
+        └── <span class="highlight">EndDrawingNoPoll</span>()   ← same but skips glfwPollEvents (manual control)</code></pre>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="drawing_methods_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BeginDrawing()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_begin_drawing"></td>
+                        </tr>
+                        <tr>
+                            <td>BeginDrawing(color)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_begin_drawing_color"></td>
+                        </tr>
+                        <tr>
+                            <td>EndDrawing()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_end_drawing"></td>
+                        </tr>
+                        <tr>
+                            <td>EndDrawingNoPoll()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_end_drawing_nopoll"></td>
+                        </tr>
+                        <tr>
+                            <td>ClearBackground(color)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_clear_background"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shaders -->
+
+    <section class="doc-section" id="shaders">
+        <h2 data-i18n="section_shaders"></h2>
+        <p class="section-desc" data-i18n="shaders_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="shaders_builtin_title"></h3>
+            <p class="section-desc" data-i18n="shaders_builtin_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="shaders_key"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GetBasicShader2D()</td>
+                            <td><code>"basic2D"</code></td>
+                            <td data-i18n="api_shader_basic"></td>
+                        </tr>
+                        <tr>
+                            <td>GetBasicTextureShader2D()</td>
+                            <td><code>"basicTexture2D"</code></td>
+                            <td data-i18n="api_shader_texture"></td>
+                        </tr>
+                        <tr>
+                            <td>GetBasicFontShader2D()</td>
+                            <td><code>"basicFont2D"</code></td>
+                            <td data-i18n="api_shader_font"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="shaders_custom_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CreateShader(vertPath, fragPath, geoPath?)</td>
+                            <td><code>Shader*</code></td>
+                            <td data-i18n="api_shader_create_path"></td>
+                        </tr>
+                        <tr>
+                            <td>CreateShader(vertSrc, fragSrc, geoSrc?)</td>
+                            <td><code>Shader*</code></td>
+                            <td data-i18n="api_shader_create_src"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// From file paths</span>
+Shader* myShader = win.CreateShader("shaders/custom.vert", "shaders/custom.frag");
+
+<span class="comment">// From source strings (inline GLSL)</span>
+<span class="highlight">const</span> std::string vert = R<span class="str">"(
+    #version 330 core
+    layout(location = 0) in vec3 aPos;
+    void main(){ gl_Position = vec4(aPos, 1.0); }
+)"</span>;
+
+<span class="highlight">const</span> std::string frag = R<span class="str">"(
+    #version 330 core
+    out vec4 fragColor;
+    uniform vec4 customColor;
+    void main(){ fragColor = customColor; }
+)"</span>;
+
+Shader* myShader = win.<span class="highlight">CreateShader</span>(vert, frag);</code></pre>
+        </div>
+
+        <div class="callout">
+            <span data-i18n="shaders_callout"></span>
+        </div>
+    </section>
+
+    <!-- Input API -->
+
+    <section class="doc-section" id="input_api">
+        <h2 data-i18n="section_input_api"></h2>
+        <p class="section-desc" data-i18n="input_api_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="input_keyboard_title"></h3>
+            <p class="section-desc" data-i18n="input_keyboard_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>IsKeyPressed(key)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_key_pressed"></td>
+                        </tr>
+                        <tr>
+                            <td>IsKeyReleased(key)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_key_released"></td>
+                        </tr>
+                        <tr>
+                            <td>IsKeyDown(key)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_key_down"></td>
+                        </tr>
+                        <tr>
+                            <td>IsKeyUp(key)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_key_up"></td>
+                        </tr>
+                        <tr>
+                            <td>GetLastCharPressed()</td>
+                            <td><code>char</code></td>
+                            <td data-i18n="api_key_lastchar"></td>
+                        </tr>
+                        <tr>
+                            <td>SetExitKey(key)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_key_exitkey"></td>
+                        </tr>
+                        <tr>
+                            <td>GetExitKey()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_key_getexitkey"></td>
+                        </tr>
+                        <tr>
+                            <td>PollEvents()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_poll_events"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="comment">// Pressed  → only the frame the key goes down</span>
+<span class="comment">// Down     → every frame the key is held</span>
+<span class="comment">// Released → only the frame the key goes up</span>
+<span class="comment">// Up       → every frame the key is not held</span>
+
+<span class="highlight">if</span> (win.IsKeyPressed(KEY_SPACE))  fire();
+<span class="highlight">if</span> (win.IsKeyDown(KEY_W))         moveForward();
+<span class="highlight">if</span> (win.IsKeyReleased(KEY_ENTER)) confirmMenu();
+
+<span class="comment">// Read text input (e.g., for a text box)</span>
+<span class="highlight">char</span> c = win.GetLastCharPressed();
+<span class="highlight">if</span> (c != <span class="num">0</span>) textBuffer += c;</code></pre>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="input_mouse_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>IsMouseButtonPressed(btn)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_mouse_pressed"></td>
+                        </tr>
+                        <tr>
+                            <td>IsMouseButtonReleased(btn)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_mouse_released"></td>
+                        </tr>
+                        <tr>
+                            <td>IsMouseButtonDown(btn)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_mouse_down"></td>
+                        </tr>
+                        <tr>
+                            <td>IsMouseButtonUp(btn)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_mouse_up"></td>
+                        </tr>
+                        <tr>
+                            <td>GetCursorPosition()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="api_cursor_pos"></td>
+                        </tr>
+                        <tr>
+                            <td>GetCursorPositionX()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_cursor_x"></td>
+                        </tr>
+                        <tr>
+                            <td>GetCursorPositionY()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_cursor_y"></td>
+                        </tr>
+                        <tr>
+                            <td>SetCursorPosition(pos)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_setpos"></td>
+                        </tr>
+                        <tr>
+                            <td>SetCursorPositionX(x)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_setx"></td>
+                        </tr>
+                        <tr>
+                            <td>SetCursorPositionY(y)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_sety"></td>
+                        </tr>
+                        <tr>
+                            <td>GetXoffsetScroll()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_scroll_x"></td>
+                        </tr>
+                        <tr>
+                            <td>GetYoffsetScroll()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_scroll_y"></td>
+                        </tr>
+                        <tr>
+                            <td>IsCursorHover()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_cursor_hover"></td>
+                        </tr>
+                        <tr>
+                            <td>DisableCursor()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_disable"></td>
+                        </tr>
+                        <tr>
+                            <td>HideCursor()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_hide"></td>
+                        </tr>
+                        <tr>
+                            <td>EnableCursor()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_enable"></td>
+                        </tr>
+                        <tr>
+                            <td>SetCustomCursor(path)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_custom"></td>
+                        </tr>
+                        <tr>
+                            <td>ResetCursor()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_cursor_reset"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Window API (Setters / Getters) -->
+
+    <section class="doc-section" id="window_api">
+        <h2 data-i18n="section_window_api"></h2>
+        <p class="section-desc" data-i18n="window_api_desc"></p>
+
+        <div class="subsection">
+            <h3>WindowMode</h3>
+            <p class="section-desc" data-i18n="window_mode_desc"></p>
+            <pre><span class="lang-label">C++</span><code><span class="highlight">enum struct</span> WindowMode {
+    Windowed,     <span class="comment">// Normal resizable window</span>
+    Borderless,   <span class="comment">// Borderless fullscreen (no title bar)</span>
+    Fullscreen    <span class="comment">// Exclusive fullscreen</span>
+};</code></pre>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="window_api_setters_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SetFullscreen(monitor?)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_fullscreen"></td>
+                        </tr>
+                        <tr>
+                            <td>SetBorderless(monitor?)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_borderless"></td>
+                        </tr>
+                        <tr>
+                            <td>SetWindowed()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_windowed"></td>
+                        </tr>
+                        <tr>
+                            <td>SetWindowMode(mode, monitor?)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_mode"></td>
+                        </tr>
+                        <tr>
+                            <td>SetSize(w, h)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_setsize"></td>
+                        </tr>
+                        <tr>
+                            <td>SetSize(Vector2Df)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_setsize_v"></td>
+                        </tr>
+                        <tr>
+                            <td>SetPosition(x, y)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_setpos"></td>
+                        </tr>
+                        <tr>
+                            <td>SetPosition(Vector2Df)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_setpos_v"></td>
+                        </tr>
+                        <tr>
+                            <td>SetTitle(title)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_settitle"></td>
+                        </tr>
+                        <tr>
+                            <td>SetIcon(path)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_seticon"></td>
+                        </tr>
+                        <tr>
+                            <td>SetIconDefault()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_seticondefault"></td>
+                        </tr>
+                        <tr>
+                            <td>SetOpacity(opacity)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_win_setopacity"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="window_api_getters_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GetWindowMode()</td>
+                            <td><code>WindowMode</code></td>
+                            <td data-i18n="api_win_getmode"></td>
+                        </tr>
+                        <tr>
+                            <td>GetWindow()</td>
+                            <td><code>GLFWwindow*</code></td>
+                            <td data-i18n="api_win_getwindow"></td>
+                        </tr>
+                        <tr>
+                            <td>GetWidth()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_win_getwidth"></td>
+                        </tr>
+                        <tr>
+                            <td>GetHeight()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_win_getheight"></td>
+                        </tr>
+                        <tr>
+                            <td>GetSize()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="api_win_getsize"></td>
+                        </tr>
+                        <tr>
+                            <td>GetPositionX()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_win_getposx"></td>
+                        </tr>
+                        <tr>
+                            <td>GetPositionY()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_win_getposy"></td>
+                        </tr>
+                        <tr>
+                            <td>GetPosition()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="api_win_getpos"></td>
+                        </tr>
+                        <tr>
+                            <td>GetOpacity()</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="api_win_getopacity"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="callout">
+            <span data-i18n="window_api_windowed_callout"></span>
+        </div>
+    </section>
+
+    <!-- FPS & Time -->
+
+    <section class="doc-section" id="fps_api">
+        <h2 data-i18n="section_fps_api"></h2>
+        <p class="section-desc" data-i18n="fps_api_desc"></p>
+
+        <div class="subsection">
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SetTargetFPS(fps)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_fps_settarget"></td>
+                        </tr>
+                        <tr>
+                            <td>GetTargetFPS()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_fps_gettarget"></td>
+                        </tr>
+                        <tr>
+                            <td>GetFPS()</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="api_fps_get"></td>
+                        </tr>
+                        <tr>
+                            <td>GetDeltaTime()</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="api_fps_delta"></td>
+                        </tr>
+                        <tr>
+                            <td>GetTime()</td>
+                            <td><code>double</code></td>
+                            <td data-i18n="api_fps_time"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="fps_internal_title"></h3>
+            <p class="section-desc" data-i18n="fps_internal_desc"></p>
+            <pre><span class="lang-label">text</span><code><span class="highlight">EndDrawing()</span>
+    │
+    ├── calculate deltaTime = currentTime - lastTime
+    │
+    ├── FPS cap (busy-wait)
+    │       ├── sleep(remaining - 2ms)   ← OS sleep for most of the wait
+    │       └── spin-wait for the rest   ← tight loop for precision
+    │
+    ├── update FPS counter (averaged every 100ms)
+    │
+    └── PollEvents() + glfwSwapBuffers()</code></pre>
+        </div>
+    </section>
+
+    <!-- Misc API (Clipboard, Drop) -->
+
+    <section class="doc-section" id="misc_api">
+        <h2 data-i18n="section_misc_api"></h2>
+        <p class="section-desc" data-i18n="misc_api_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="misc_clipboard_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GetClipboardString()</td>
+                            <td><code>const char*</code></td>
+                            <td data-i18n="api_clipboard_get"></td>
+                        </tr>
+                        <tr>
+                            <td>SetClipboardString(text)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_clipboard_set"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="misc_drop_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SetDropCallback(fn)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_drop_set"></td>
+                        </tr>
+                        <tr>
+                            <td>GetLastDroppedPath()</td>
+                            <td><code>const std::string&amp;</code></td>
+                            <td data-i18n="api_drop_getpath"></td>
+                        </tr>
+                        <tr>
+                            <td>IsFileDropped()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_drop_isfile"></td>
+                        </tr>
+                        <tr>
+                            <td>ClearDroppedPath()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_drop_clear"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples -->
+
+    <section class="doc-section" id="example1">
+        <h2 data-i18n="win_example1_title"></h2>
+        <p class="section-desc" data-i18n="win_example1_desc"></p>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main(){
+    DarkMoonEngine dm{};
+
+    Window win = Window(800, 600, "My First Window");
+    win.<span class="highlight">SetTargetFPS</span>(120); <span class="comment">// By default is 60</span>
+    win.<span class="highlight">SetIcon</span>("./assets/ghost.png");
+
+    while(!win.<span class="highlight">ShouldClose</span>()){
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+    <div class="callout">
+        <img src="../assets/fantasmico.png" alt="" class="callout-img callout-icon">
+        <span data-i18n="win_example1_callout"></span>
+    </div>
+    </section>
+
+    <section class="doc-section" id="example2">
+        <h2 data-i18n="win_example2_title"></h2>
+        <p class="section-desc" data-i18n="win_example2_desc"></p>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">constexpr static</span> float speed = 300.0f;
+
+<span class="highlight">int</span> main() {
+    DarkMoonEngine dm{};
+
+    Window win = Window(800, 600, "Example Delta Time");
+    win.<span class="highlight">SetTargetFPS</span>(60);
+
+    Vector2Df position { win.<span class="highlight">GetWidth</span>() / 2.0f, win.<span class="highlight">GetHeight</span>() / 2.0f };
+
+    while(!win.<span class="highlight">ShouldClose</span>()){
+        <span class="comment">// Input</span>
+        if(win.<span class="highlight">IsKeyDown</span>(KEY_UP))
+            position.y -= speed * win.<span class="highlight">GetDeltaTime</span>();
+        if(win.<span class="highlight">IsKeyDown</span>(KEY_DOWN))
+            position.y += speed * win.<span class="highlight">GetDeltaTime</span>();
+        if(win.<span class="highlight">IsKeyDown</span>(KEY_LEFT))
+            position.x -= speed * win.<span class="highlight">GetDeltaTime</span>();
+        if(win.<span class="highlight">IsKeyDown</span>(KEY_RIGHT))
+            position.x += speed * win.<span class="highlight">GetDeltaTime</span>();
+
+        <span class="comment">// Drawing</span>
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        Rectangle(position, 20, 20, GREEN, &win).<span class="highlight">Draw</span>();
+        win.<span class="highlight">EndDrawin</span>g();
+    }
+}</code></pre>
+    </section>
+
+    <section class="doc-section" id="example3">
+        <h2 data-i18n="win_example3_title"></h2>
+        <p class="section-desc" data-i18n="win_example3_desc"></p>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main() {
+    DarkMoonEngine dm {};
+
+    <span class="comment">// Primary window: loads GLAD and basic shaders</span>
+    Window main { 1280, 720, "Main View" };
+
+    <span class="comment">// Secondary window: shares context -> no extra GLAD init, inherits shaders</span>
+    Window debug { 640, 480, "Debug View", &main };
+
+    while (!main.<span class="highlight">ShouldClose</span>() && !debug.<span class="highlight">ShouldClose</span>()) {
+        main.<span class="highlight">BeginDrawing</span>(BLACK);
+        main.<span class="highlight">EndDrawing</span>();
+
+        debug.<span class="highlight">BeginDrawing</span>(GRAY);
+        debug.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+
+        <div class="callout">
+            <span data-i18n="win_example3_callout"></span>
+        </div>
+    </section>
+
+    <section class="doc-section" id="example4">
+        <h2 data-i18n="win_example4_title"></h2>
+        <p class="section-desc" data-i18n="win_example4_desc"></p>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main() {
+    DarkMoonEngine dm{};
+
+    Window win = Window(800, 600, "ClipboardTest");
+
+    std::string pathTexture {};
+
+    while(!win.<span class="highlight">ShouldClose</span>()){
+
+        <span class="comment">// Copy to cliboard</span>
+        if(win.<span class="highlight">IsKeyPressed</span>(KEY_C))
+            win.<span class="highlight">SetClipboardString</span>("Hello from DarkMoon!");
+
+        <span class="comment">// Read the cliboard</span>
+        if(win.<span class="highlight">IsKeyPressed</span>(KEY_V)){
+            const char* text = win.<span class="highlight">GetClipboardString</span>();
+            if(text)
+                std::cout << "Clipboard: " << text << "\n";
+        }
+
+        <span class="comment">// Read the path from dropped file</span>
+        if(win.<span class="highlight">IsFileDropped</span>()){
+            std::cout << win.<span class="highlight">GetLastDroppedPath</span>() << "\n";
+            if(win.<span class="highlight">GetLastDroppedPath</span>().<span class="highlight">ends_with</span>(".png")){
+                pathTexture = win.<span class="highlight">GetLastDroppedPath</span>();
+            }
+            win.<span class="highlight">ClearDroppedPath</span>();
+        }
+
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+
+        <span class="comment">// Load texture from path</span>
+        if(!pathTexture.<span class="highlight">empty</span>())
+            Texture({win.<span class="highlight">GetWidth</span>() / 2, win.<span class="highlight">GetHeight</span>() / 2}, {10, 10}, 0, pathTexture.<span class="highlight">c_str</span>(), &win).<span class="highlight">Draw</span>();
+
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+    </section>
+</main>
+
+<button class="mobile-menu-btn" id="menuBtn" title="Toggle menu">☰</button>
+
+</body>
+
+<script src="../js/active.js"></script>
+</html>
