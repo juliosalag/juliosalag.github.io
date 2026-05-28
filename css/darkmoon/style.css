@@ -329,7 +329,7 @@ pre {
     overflow-x: auto;
     margin-bottom: 1em;
     position: relative;
-    max-width: 750px;
+    max-width: 850px;
 }
 
 pre code {
@@ -480,11 +480,18 @@ pre code {
     color: var(--text);
     line-height: 1.6;
     max-width: 750px;
+    align-items: center;
 }
 
 .callout .callout-icon {
     font-size: 1.1em;
     flex-shrink: 0;
+}
+
+.callout-img {
+    width: 70px;
+    height: 70px;
+    image-rendering: pixelated;
 }
 
 /* LIST */

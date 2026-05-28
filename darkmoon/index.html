@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DarkMoon Engine | Docs</title>
-    <link rel="icon" href="../assets/icon.png" type="image/png">
+    <link rel="icon" href="../assets/portraits/darkmoonengine.png" type="image/png">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/darkmoon/style.css">
 
@@ -25,6 +25,17 @@
     </div>
 
     <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">Primeros pasos</div>
+            <a href="#requirements">Requisitos</a>
+            <a href="#installation">Instalación</a>
+            <a href="#structure">Estructura</a>
+            <a href="#helloworld">Hola Mundo</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Graphics</div>
+            <a href="#window">Window</a>
+        </div>
         <div class="nav-group">
             <div class="nav-group-title">ECS</div>
             <a href="#ecs">ECS</a>
@@ -78,6 +89,57 @@
             <a href="javascript:void(0)" onclick="Lang.load('en')">ENG</a>
         </div>
     </div>
+
+    <section class="doc-section" id="requirements">
+        <h2>Dependencias</h2>
+        <p class="section-desc">dependencias</p>
+    </section>
+
+    <section class="doc-section" id="installation">
+        <h2>Instalación</h2>
+        <p class="section-desc">instalación</p>
+    </section>
+
+    <section class="doc-section" id="structure">
+        <h2>Estructura</h2>
+        <p class="section-desc">estructura</p>
+    </section>
+
+    <section class="doc-section" id="helloworld">
+        <h2>Hola Mundo</h2>
+        <p class="section-desc">hola mundo</p>
+    </section>
+
+    <section class="doc-section" id="window">
+        <h2>Window</h2>
+        <p class="section-desc" data-i18n="window_whatis_desc"></p>
+        <div class="subsection">
+            <h3 data-i18n="window_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="window_feat_lifecycle"></li>
+                <li data-i18n="window_feat_drawing"></li>
+                <li data-i18n="window_feat_input"></li>
+                <li data-i18n="window_feat_shaders"></li>
+                <li data-i18n="window_feat_fps"></li>
+                <li data-i18n="window_feat_modes"></li>
+            </ul>
+        </div>
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main() {
+    DarkMoonEngine dm{};
+
+    Window win = Window(800, 600, "Window Title");
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+        <div class="callout">
+            <a href="./window.html" data-i18n="ecs_readmore"></a>
+        </div>
+    </section>
 
     <section class="doc-section" id="ecs">
         <h2 data-i18n="ecs_title"></h2>
