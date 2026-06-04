@@ -26,22 +26,50 @@
 
     <nav>
         <div class="nav-group">
-            <div class="nav-group-title">Primeros pasos</div>
-            <a href="#requirements">Requisitos</a>
-            <a href="#installation">Instalación</a>
-            <a href="#structure">Estructura</a>
-            <a href="#helloworld">Hola Mundo</a>
+            <div class="nav-group-title" data-i18n="nav_gettingstarted"></div>
+            <a href="#welcome"     data-i18n="nav_welcome"></a>
+            <a href="#helloworld"  data-i18n="nav_helloworld"></a>
+            <a href="#install"     data-i18n="nav_install"></a>
+            <a href="#libraries"   data-i18n="nav_libraries"></a>
         </div>
+
         <div class="nav-group">
-            <div class="nav-group-title">Graphics</div>
-            <a href="#window">Window</a>
+            <div class="nav-group-title" data-i18n="nav_graphics"></div>
+            <a href="#window"      data-i18n="nav_window"></a>
+            <a href="#monitor"     data-i18n="nav_monitor"></a>
+            <a href="#camera2d"    data-i18n="nav_camera2d"></a>
         </div>
+
         <div class="nav-group">
-            <div class="nav-group-title">ECS</div>
-            <a href="#ecs">ECS</a>
+            <div class="nav-group-title" data-i18n="nav_basicgraphics"></div>
+            <a href="#pixel"           data-i18n="nav_pixel"></a>
+            <a href="#line"            data-i18n="nav_line"></a>
+            <a href="#triangle"        data-i18n="nav_triangle"></a>
+            <a href="#rectangle"       data-i18n="nav_rectangle"></a>
+            <a href="#circle"          data-i18n="nav_circle"></a>
+            <a href="#regular_polygon" data-i18n="nav_regular_polygon"></a>
         </div>
+
         <div class="nav-group">
-            <div class="nav-group-title">Utils</div>
+            <div class="nav-group-title" data-i18n="nav_advancedgraphics"></div>
+            <a href="#resourcemanager" data-i18n="nav_resourcemanager"></a>
+            <a href="#text"            data-i18n="nav_text"></a>
+            <a href="#texture"         data-i18n="nav_texture"></a>
+            <a href="#animatedtexture" data-i18n="nav_animatedtexture"></a>
+            <a href="#tileset"         data-i18n="nav_tileset"></a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_extra"></div>
+            <a href="#ecs"  data-i18n="nav_ecs"></a>
+            <a href="#fmod" data-i18n="nav_fmod"></a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_utils"></div>
+            <a href="#colors" data-i18n="nav_colors"></a>
+            <a href="#keys"   data-i18n="nav_keys"></a>
+            <a href="#math"   data-i18n="nav_math"></a>
             <a href="#memory" data-i18n="nav_memory"></a>
         </div>
     </nav>
@@ -71,10 +99,7 @@
 
     <!-- Dropdown Theme -->
     <div class="dropdown theme-dropdown" style="right: 90px;">
-        <a href="javascript:void(0)" class="dropbtn" id="theme-current">
-            DARK
-        </a>
-
+        <a href="javascript:void(0)" class="dropbtn" id="theme-current">DARK</a>
         <div class="dropdown-content">
             <a href="javascript:void(0)" onclick="Theme.load('dark')">DARK</a>
             <a href="javascript:void(0)" onclick="Theme.load('light')">LIGHT</a>
@@ -90,25 +115,87 @@
         </div>
     </div>
 
-    <section class="doc-section" id="requirements">
-        <h2>Dependencias</h2>
-        <p class="section-desc">dependencias</p>
-    </section>
+    <!-- GETTING STARTED -->
 
-    <section class="doc-section" id="installation">
-        <h2>Instalación</h2>
-        <p class="section-desc">instalación</p>
-    </section>
-
-    <section class="doc-section" id="structure">
-        <h2>Estructura</h2>
-        <p class="section-desc">estructura</p>
+    <section class="doc-section" id="welcome">
+        <h2 data-i18n="section_welcome"></h2>
+        <p class="section-desc" data-i18n="welcome_desc"></p>
     </section>
 
     <section class="doc-section" id="helloworld">
-        <h2>Hola Mundo</h2>
-        <p class="section-desc">hola mundo</p>
+        <h2 data-i18n="section_helloworld"></h2>
+        <p class="section-desc" data-i18n="helloworld_desc"></p>
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main() {
+    DarkMoonEngine dm{};
+
+    Window win = Window(800, 600, "Hello World");
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
     </section>
+
+    <section class="doc-section" id="install">
+        <h2 data-i18n="section_install"></h2>
+        <p class="section-desc" data-i18n="install_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="supported_platforms"></h3>
+            <p data-i18n="supported_platforms_desc"></p>
+            <div class="platform-grid">
+
+                <div class="platform-item">
+                    <img class="platform-icon" src="../assets/icons/windows.svg" alt="Windows">
+                    <span class="platform-label">Windows</span>
+                </div>
+
+                <div class="platform-item">
+                    <img class="platform-icon" src="../assets/icons/linux.svg" alt="Linux">
+                    <span class="platform-label">Linux</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="doc-section" id="libraries">
+        <h2 data-i18n="section_libraries"></h2>
+        <p class="section-desc" data-i18n="libraries_desc"></p>
+        <div class="lib-grid">
+            <a href="https://www.glfw.org/" target="_blank" style="text-decoration: none;"><div class="lib-badge">
+                <span class="lib-name">GLFW</span>
+                <span class="lib-desc">Window & Input</span>
+            </div></a>
+            <a href="https://glad.dav1d.de/" target="_blank" style="text-decoration: none;"><div class="lib-badge">
+                <span class="lib-name">GLAD</span>
+                <span class="lib-desc">OpenGL Loader</span>
+            </div></a>
+            <a href="https://github.com/g-truc/glm" target="_blank" style="text-decoration: none;"><div class="lib-badge">
+                <span class="lib-name">GLM</span>
+                <span class="lib-desc">Math</span>
+            </div></a>
+            <a href="https://github.com/nothings/stb/blob/master/stb_image.h" target="_blank" style="text-decoration: none;"><div class="lib-badge">
+                <span class="lib-name">stb_image</span>
+                <span class="lib-desc">Image Loading</span>
+            </div></a>
+            <a href="https://github.com/nothings/stb/blob/master/stb_truetype.h" target="_blank" style="text-decoration: none;"><div class="lib-badge">
+                <span class="lib-name">stb_truetype</span>
+                <span class="lib-desc">Font Rendering</span>
+            </div></a>
+            <!--
+            <div class="lib-badge">
+                <span class="lib-name">FMOD</span>
+                <span class="lib-desc">Audio</span>
+            </div>
+            -->
+        </div>
+    </section>
+
+    <!-- GRAPHICS -->
 
     <section class="doc-section" id="window">
         <h2>Window</h2>
@@ -124,27 +211,124 @@
                 <li data-i18n="window_feat_modes"></li>
             </ul>
         </div>
-        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
-
-<span class="highlight">int</span> main() {
-    DarkMoonEngine dm{};
-
-    Window win = Window(800, 600, "Window Title");
-
-    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
-        win.<span class="highlight">BeginDrawing</span>(BLACK);
-        win.<span class="highlight">EndDrawing</span>();
-    }
-}</code></pre>
         <div class="callout">
-            <a href="./window.html" data-i18n="ecs_readmore"></a>
+            <a href="./window.html" data-i18n="readmore"></a>
         </div>
     </section>
+
+    <section class="doc-section" id="monitor">
+        <h2>Monitor</h2>
+        <p class="section-desc" data-i18n="monitor_desc"></p>
+        <div class="callout">
+            <a href="./monitor.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="camera2d">
+        <h2>Camera2D</h2>
+        <p class="section-desc" data-i18n="camera2d_desc"></p>
+        <div class="callout">
+            <a href="./camera2d.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <!-- BASIC GRAPHICS -->
+
+    <section class="doc-section" id="pixel">
+        <h2 data-i18n="section_pixel"></h2>
+        <p class="section-desc" data-i18n="pixel_desc"></p>
+        <div class="callout">
+            <a href="./pixel.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="line">
+        <h2 data-i18n="section_line"></h2>
+        <p class="section-desc" data-i18n="line_desc"></p>
+        <div class="callout">
+            <a href="./line.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="triangle">
+        <h2 data-i18n="section_triangle"></h2>
+        <p class="section-desc" data-i18n="triangle_desc"></p>
+        <div class="callout">
+            <a href="./triangle.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="rectangle">
+        <h2 data-i18n="section_rectangle"></h2>
+        <p class="section-desc" data-i18n="rectangle_desc"></p>
+        <div class="callout">
+            <a href="./rectangle.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="circle">
+        <h2 data-i18n="section_circle"></h2>
+        <p class="section-desc" data-i18n="circle_desc"></p>
+        <div class="callout">
+            <a href="./circle.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="regular_polygon">
+        <h2 data-i18n="section_regular_polygon"></h2>
+        <p class="section-desc" data-i18n="regular_polygon_desc"></p>
+        <div class="callout">
+            <a href="./regular_polygon.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <!-- ADVANCED GRAPHICS  -->
+
+    <section class="doc-section" id="resourcemanager">
+        <h2>ResourceManager</h2>
+        <p class="section-desc" data-i18n="resourcemanager_desc"></p>
+        <div class="callout">
+            <a href="./resourcemanager.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="text">
+        <h2 data-i18n="section_text"></h2>
+        <p class="section-desc" data-i18n="text_desc"></p>
+        <div class="callout">
+            <a href="./text.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="texture">
+        <h2 data-i18n="section_texture"></h2>
+        <p class="section-desc" data-i18n="texture_desc"></p>
+        <div class="callout">
+            <a href="./texture.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="animatedtexture">
+        <h2 data-i18n="section_animatedtexture"></h2>
+        <p class="section-desc" data-i18n="animatedtexture_desc"></p>
+        <div class="callout">
+            <a href="./animatedtexture.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="tileset">
+        <h2 data-i18n="section_tileset"></h2>
+        <p class="section-desc" data-i18n="tileset_desc"></p>
+        <div class="callout">
+            <a href="./tileset.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <!-- EXTRA -->
 
     <section class="doc-section" id="ecs">
         <h2 data-i18n="ecs_title"></h2>
         <p class="section-desc" data-i18n="whatis_desc"></p>
-
         <div class="subsection">
             <h3 data-i18n="whatis_core_title"></h3>
             <ul class="doc-list">
@@ -155,33 +339,92 @@
                 <li data-i18n="whatis_core_em"></li>
             </ul>
         </div>
-
-        <pre><span class="lang-label">C++</span><code><span class="highlight">using</span> GameCMPs = MP::TypeList&lt;RenderComponent, PhysicsComponent&gt;;
-<span class="highlight">using</span> GameTAGs = MP::TypeList&lt;TagPlayer, TagEnemy&gt;;
-<span class="highlight">using</span> EM       = EntityManager&lt;GameCMPs, GameTAGs&gt;;
-
-Entity& e = em.newEntity();
-em.addComponent&lt;RenderComponent&gt;(e);
-em.addTag&lt;TagPlayer&gt;(e);
-
-em.forEach&lt;MP::TypeList&lt;RenderComponent&gt;, MP::TypeList&lt;TagPlayer&gt;&gt;(
-    [&](Entity& e, RenderComponent& r) { <span class="comment">/* ... */</span> }
-);</code></pre>
         <div class="callout">
-            <a href="./ecs.html" data-i18n="ecs_readmore">Leer más →</a>
+            <a href="./ecs.html" data-i18n="readmore"></a>
         </div>
     </section>
 
+    <section class="doc-section" id="fmod">
+        <h2>FMOD</h2>
+        <p class="section-desc" data-i18n="fmod_desc"></p>
+        <div class="callout">
+            <a href="./fmod.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <!-- UTILS -->
+
+    <section class="doc-section" id="colors">
+        <h2 data-i18n="section_colors"></h2>
+        <p class="section-desc" data-i18n="colors_desc"></p>
+        <div class="palette-grid">
+            <div class="palette-swatch" style="--swatch:#FFFFFF;" data-name="BLACK" data-hex="#FFFFFF"></div>
+            <div class="palette-swatch" style="--swatch:#646464;" data-name="GRAY"  data-hex="#646464"></div>
+            <div class="palette-swatch" style="--swatch:#000000;" data-name="WHITE" data-hex="#000000"></div>
+
+            <div class="palette-swatch" style="--swatch:#FF0000;" data-name="RED"   data-hex="#FF0000"></div>
+            <div class="palette-swatch" style="--swatch:#00FF00;" data-name="GREEN" data-hex="#00FF00"></div>
+            <div class="palette-swatch" style="--swatch:#0000FF;" data-name="BLUE"  data-hex="#0000FF"></div>
+            <!--
+            <div class="palette-swatch" style="--swatch:#4a4a4a;" data-name="DARK_GRAY"  data-hex="#4a4a4a"></div>
+            <div class="palette-swatch" style="--swatch:#b22222;" data-name="DARK_RED"   data-hex="#b22222"></div>
+            <div class="palette-swatch" style="--swatch:#ffa500;" data-name="DARK_ORANGE" data-hex="#ffa500"></div>
+            <div class="palette-swatch" style="--swatch:#006400;" data-name="DARK_GREEN"  data-hex="#006400"></div>
+            <div class="palette-swatch" style="--swatch:#00008b;" data-name="DARK_BLUE"   data-hex="#00008b"></div>
+            <div class="palette-swatch" style="--swatch:#4b0082;" data-name="DARK_PURPLE" data-hex="#4b0082"></div>
+            <div class="palette-swatch" style="--swatch:#4b3832;" data-name="DARK_BROWN"  data-hex="#4b3832"></div>
+    
+            <div class="palette-swatch" style="--swatch:#808080;" data-name="GRAY"        data-hex="#808080"></div>
+            <div class="palette-swatch" style="--swatch:#cd5c5c;" data-name="RED"         data-hex="#cd5c5c"></div>
+            <div class="palette-swatch" style="--swatch:#ffd700;" data-name="YELLOW"      data-hex="#ffd700"></div>
+            <div class="palette-swatch" style="--swatch:#008000;" data-name="GREEN"       data-hex="#008000"></div>
+            <div class="palette-swatch" style="--swatch:#1e90ff;" data-name="BLUE"        data-hex="#1e90ff"></div>
+            <div class="palette-swatch" style="--swatch:#8b008b;" data-name="PURPLE"      data-hex="#8b008b"></div>
+            <div class="palette-swatch" style="--swatch:#8b7355;" data-name="BROWN"       data-hex="#8b7355"></div>
+    
+            <div class="palette-swatch" style="--swatch:#d3d3d3;" data-name="LIGHT_GRAY"  data-hex="#d3d3d3"></div>
+            <div class="palette-swatch" style="--swatch:#ff69b4;" data-name="PINK"        data-hex="#ff69b4"></div>
+            <div class="palette-swatch" style="--swatch:#ffff00;" data-name="LIME"        data-hex="#ffff00"></div>
+            <div class="palette-swatch" style="--swatch:#00ff00;" data-name="LIME_GREEN"  data-hex="#00ff00"></div>
+            <div class="palette-swatch" style="--swatch:#87cefa;" data-name="SKY_BLUE"    data-hex="#87cefa"></div>
+            <div class="palette-swatch" style="--swatch:#da70d6;" data-name="ORCHID"      data-hex="#da70d6"></div>
+            <div class="palette-swatch" style="--swatch:#d2b48c;" data-name="TAN"         data-hex="#d2b48c"></div>
+    
+            <div class="palette-swatch" style="--swatch:#000000;" data-name="BLACK"       data-hex="#000000"></div>
+            <div class="palette-swatch" style="--swatch:#ffffff; border-color: rgba(255,255,255,0.25);" data-name="WHITE" data-hex="#ffffff"></div>
+            -->
+        </div>
+    </section>
+
+    <section class="doc-section" id="keys">
+        <h2 data-i18n="section_keys"></h2>
+        <p class="section-desc" data-i18n="keys_desc"></p>
+        <div class="callout">
+            <a href="./keys.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
+    <section class="doc-section" id="math">
+        <h2 data-i18n="section_math"></h2>
+        <p class="section-desc" data-i18n="math_desc"></p>
+        <div class="callout">
+            <a href="./math.html" data-i18n="readmore"></a>
+        </div>
+    </section>
 
     <section class="doc-section" id="memory">
         <h2 data-i18n="section_memory"></h2>
+        <p class="section-desc" data-i18n="memory_desc"></p>
+        <div class="callout">
+            <a href="./memory.html" data-i18n="readmore"></a>
+        </div>
     </section>
 
 </main>
 
 <!-- Mobile menu button -->
-<button class="mobile-menu-btn" id="menuBtn" title="Toggle menu">☰</button>    
-    
+<button class="mobile-menu-btn" id="menuBtn" title="Toggle menu">☰</button>
+
 </body>
 
 <script src="../js/active.js"></script>
