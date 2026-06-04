@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkMoon Engine | Keys</title>
+    <link rel="icon" href="../assets/portraits/darkmoonengine.png" type="image/png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/darkmoon/style.css">
+
+    <script src="../js/lang.js"></script>
+    <script src="../js/theme.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <a href="./index.html">
+            <div>
+                <h1>DarkMoon <span>Engine</span></h1>
+                <span class="version-badge">version 2.0</span>
+            </div>
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">Keys</div>
+            <a href="#keyboard" data-i18n="nav_keyboard"></a>
+            <a href="#mouse" data-i18n="nav_mouse"></a>
+            <a href="#gamepad" data-i18n="nav_gamepad"></a>
+        </div>
+    </nav>
+
+    <div class="sidebar-back">
+        <a href="../index.html" data-i18n="nav_back"></a>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1>Keys</h1>
+        <p data-i18n="keys_desc"></p>
+        <div class="header-meta">
+            <span class="tag">Keyboard</span>
+            <span class="tag">Mouse</span>
+            <span class="tag">Gamepad</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/utils/keys.hpp&gt;</span>
+        </div>
+    </div>
+
+    <!-- Dropdown Theme -->
+    <div class="dropdown theme-dropdown" style="right: 90px;">
+        <a href="javascript:void(0)" class="dropbtn" id="theme-current">DARK</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Theme.load('dark')">DARK</a>
+            <a href="javascript:void(0)" onclick="Theme.load('light')">LIGHT</a>
+        </div>
+    </div>
+
+    <!-- Dropdown Language -->
+    <div class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn" id="lang-current">ES</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Lang.load('es')">ES</a>
+            <a href="javascript:void(0)" onclick="Lang.load('en')">ENG</a>
+        </div>
+    </div>
+
+    <!-- KEYBOARD -->
+    <div class="doc-section" id="keyboard">
+        <h2 data-i18n="keys_keyboard_title"></h2>
+
+        <h3 data-i18n="keys_group_alpha"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_0 … KEY_9</td><td><code>GLFW_KEY_0</code> … <code>GLFW_KEY_9</code></td></tr>
+                    <tr><td>KEY_A … KEY_Z</td><td><code>GLFW_KEY_A</code> … <code>GLFW_KEY_Z</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_special"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_SPACE</td><td><code>GLFW_KEY_SPACE</code></td></tr>
+                    <tr><td>KEY_ENTER</td><td><code>GLFW_KEY_ENTER</code></td></tr>
+                    <tr><td>KEY_ESCAPE</td><td><code>GLFW_KEY_ESCAPE</code></td></tr>
+                    <tr><td>KEY_LEFT</td><td><code>GLFW_KEY_LEFT</code></td></tr>
+                    <tr><td>KEY_RIGHT</td><td><code>GLFW_KEY_RIGHT</code></td></tr>
+                    <tr><td>KEY_UP</td><td><code>GLFW_KEY_UP</code></td></tr>
+                    <tr><td>KEY_DOWN</td><td><code>GLFW_KEY_DOWN</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_fn"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_F1 … KEY_F12</td><td><code>GLFW_KEY_F1</code> … <code>GLFW_KEY_F12</code></td></tr>
+                    <tr><td>KEY_F13 … KEY_F25</td><td><code>GLFW_KEY_F13</code> … <code>GLFW_KEY_F25</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_modifier"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_LEFT_SHIFT</td><td><code>GLFW_KEY_LEFT_SHIFT</code></td></tr>
+                    <tr><td>KEY_RIGHT_SHIFT</td><td><code>GLFW_KEY_RIGHT_SHIFT</code></td></tr>
+                    <tr><td>KEY_LEFT_CONTROL</td><td><code>GLFW_KEY_LEFT_CONTROL</code></td></tr>
+                    <tr><td>KEY_RIGHT_CONTROL</td><td><code>GLFW_KEY_RIGHT_CONTROL</code></td></tr>
+                    <tr><td>KEY_LEFT_ALT</td><td><code>GLFW_KEY_LEFT_ALT</code></td></tr>
+                    <tr><td>KEY_RIGHT_ALT</td><td><code>GLFW_KEY_RIGHT_ALT</code></td></tr>
+                    <tr><td>KEY_LEFT_SUPER</td><td><code>GLFW_KEY_LEFT_SUPER</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_nav"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_TAB</td><td><code>GLFW_KEY_TAB</code></td></tr>
+                    <tr><td>KEY_BACKSPACE</td><td><code>GLFW_KEY_BACKSPACE</code></td></tr>
+                    <tr><td>KEY_PAGE_UP</td><td><code>GLFW_KEY_PAGE_UP</code></td></tr>
+                    <tr><td>KEY_PAGE_DOWN</td><td><code>GLFW_KEY_PAGE_DOWN</code></td></tr>
+                    <tr><td>KEY_HOME</td><td><code>GLFW_KEY_HOME</code></td></tr>
+                    <tr><td>KEY_END</td><td><code>GLFW_KEY_END</code></td></tr>
+                    <tr><td>KEY_INSERT</td><td><code>GLFW_KEY_INSERT</code></td></tr>
+                    <tr><td>KEY_DELETE</td><td><code>GLFW_KEY_DELETE</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_numpad"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_KP_0 … KEY_KP_9</td><td><code>GLFW_KEY_KP_0</code> … <code>GLFW_KEY_KP_9</code></td></tr>
+                    <tr><td>KEY_KP_DECIMAL</td><td><code>GLFW_KEY_KP_DECIMAL</code></td></tr>
+                    <tr><td>KEY_KP_DIVIDE</td><td><code>GLFW_KEY_KP_DIVIDE</code></td></tr>
+                    <tr><td>KEY_KP_MULTIPLY</td><td><code>GLFW_KEY_KP_MULTIPLY</code></td></tr>
+                    <tr><td>KEY_KP_SUBTRACT</td><td><code>GLFW_KEY_KP_SUBTRACT</code></td></tr>
+                    <tr><td>KEY_KP_ADD</td><td><code>GLFW_KEY_KP_ADD</code></td></tr>
+                    <tr><td>KEY_KP_ENTER</td><td><code>GLFW_KEY_KP_ENTER</code></td></tr>
+                    <tr><td>KEY_KP_EQUAL</td><td><code>GLFW_KEY_KP_EQUAL</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_system"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_PRINT_SCREEN</td><td><code>GLFW_KEY_PRINT_SCREEN</code></td></tr>
+                    <tr><td>KEY_PAUSE</td><td><code>GLFW_KEY_PAUSE</code></td></tr>
+                    <tr><td>KEY_CAPS_LOCK</td><td><code>GLFW_KEY_CAPS_LOCK</code></td></tr>
+                    <tr><td>KEY_NUM_LOCK</td><td><code>GLFW_KEY_NUM_LOCK</code></td></tr>
+                    <tr><td>KEY_SCROLL_LOCK</td><td><code>GLFW_KEY_SCROLL_LOCK</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_chars"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>KEY_GRAVE_ACCENT</td><td><code>GLFW_KEY_GRAVE_ACCENT</code></td></tr>
+                    <tr><td>KEY_MINUS</td><td><code>GLFW_KEY_MINUS</code></td></tr>
+                    <tr><td>KEY_EQUAL</td><td><code>GLFW_KEY_EQUAL</code></td></tr>
+                    <tr><td>KEY_LEFT_BRACKET</td><td><code>GLFW_KEY_LEFT_BRACKET</code></td></tr>
+                    <tr><td>KEY_RIGHT_BRACKET</td><td><code>GLFW_KEY_RIGHT_BRACKET</code></td></tr>
+                    <tr><td>KEY_BACKSLASH</td><td><code>GLFW_KEY_BACKSLASH</code></td></tr>
+                    <tr><td>KEY_SEMICOLON</td><td><code>GLFW_KEY_SEMICOLON</code></td></tr>
+                    <tr><td>KEY_APOSTROPHE</td><td><code>GLFW_KEY_APOSTROPHE</code></td></tr>
+                    <tr><td>KEY_COMMA</td><td><code>GLFW_KEY_COMMA</code></td></tr>
+                    <tr><td>KEY_PERIOD</td><td><code>GLFW_KEY_PERIOD</code></td></tr>
+                    <tr><td>KEY_SLASH</td><td><code>GLFW_KEY_SLASH</code></td></tr>
+                    <tr><td>KEY_WORLD_1</td><td><code>GLFW_KEY_WORLD_1</code></td></tr>
+                    <tr><td>KEY_WORLD_2</td><td><code>GLFW_KEY_WORLD_2</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- MOUSE -->
+    <div class="doc-section" id="mouse">
+        <h2 data-i18n="keys_mouse_title"></h2>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                        <th data-i18n="keys_th_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>MOUSE_BUTTON_LEFT</td><td><code>GLFW_MOUSE_BUTTON_LEFT</code></td><td data-i18n="mouse_btn_left"></td></tr>
+                    <tr><td>MOUSE_BUTTON_RIGHT</td><td><code>GLFW_MOUSE_BUTTON_RIGHT</code></td><td data-i18n="mouse_btn_right"></td></tr>
+                    <tr><td>MOUSE_BUTTON_MIDDLE</td><td><code>GLFW_MOUSE_BUTTON_MIDDLE</code></td><td data-i18n="mouse_btn_middle"></td></tr>
+                    <tr><td>MOUSE_BUTTON_1 … MOUSE_BUTTON_5</td><td><code>GLFW_MOUSE_BUTTON_1</code> … <code>GLFW_MOUSE_BUTTON_5</code></td><td data-i18n="mouse_btn_generic"></td></tr>
+                    <tr><td>MOUSE_BUTTON_SIDE_1</td><td><code>GLFW_MOUSE_BUTTON_4</code></td><td data-i18n="mouse_btn_side1"></td></tr>
+                    <tr><td>MOUSE_BUTTON_SIDE_2</td><td><code>GLFW_MOUSE_BUTTON_5</code></td><td data-i18n="mouse_btn_side2"></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- GAMEPAD -->
+    <div class="doc-section" id="gamepad">
+        <h2 data-i18n="keys_gamepad_title"></h2>
+
+        <h3 data-i18n="keys_group_gp_buttons"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                        <th data-i18n="keys_th_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>GAMEPAD_BUTTON_A / CROSS</td><td><code>GLFW_GAMEPAD_BUTTON_A</code></td><td data-i18n="gp_btn_a"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_B / CIRCLE</td><td><code>GLFW_GAMEPAD_BUTTON_B</code></td><td data-i18n="gp_btn_b"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_X / SQUARE</td><td><code>GLFW_GAMEPAD_BUTTON_X</code></td><td data-i18n="gp_btn_x"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_Y / TRIANGLE</td><td><code>GLFW_GAMEPAD_BUTTON_Y</code></td><td data-i18n="gp_btn_y"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_LEFT_BUMPER</td><td><code>GLFW_GAMEPAD_BUTTON_LEFT_BUMPER</code></td><td data-i18n="gp_btn_lb"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_RIGHT_BUMPER</td><td><code>GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER</code></td><td data-i18n="gp_btn_rb"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_LEFT_THUMB</td><td><code>GLFW_GAMEPAD_BUTTON_LEFT_THUMB</code></td><td data-i18n="gp_btn_l3"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_RIGHT_THUMB</td><td><code>GLFW_GAMEPAD_BUTTON_RIGHT_THUMB</code></td><td data-i18n="gp_btn_r3"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_DPAD_UP</td><td><code>GLFW_GAMEPAD_BUTTON_DPAD_UP</code></td><td data-i18n="gp_btn_dup"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_DPAD_DOWN</td><td><code>GLFW_GAMEPAD_BUTTON_DPAD_DOWN</code></td><td data-i18n="gp_btn_ddown"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_DPAD_LEFT</td><td><code>GLFW_GAMEPAD_BUTTON_DPAD_LEFT</code></td><td data-i18n="gp_btn_dleft"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_DPAD_RIGHT</td><td><code>GLFW_GAMEPAD_BUTTON_DPAD_RIGHT</code></td><td data-i18n="gp_btn_dright"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_START</td><td><code>GLFW_GAMEPAD_BUTTON_START</code></td><td data-i18n="gp_btn_start"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_BACK</td><td><code>GLFW_GAMEPAD_BUTTON_BACK</code></td><td data-i18n="gp_btn_back"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_GUIDE</td><td><code>GLFW_GAMEPAD_BUTTON_GUIDE</code></td><td data-i18n="gp_btn_guide"></td></tr>
+                    <tr><td>GAMEPAD_BUTTON_LAST</td><td><code>GLFW_GAMEPAD_BUTTON_LAST</code></td><td data-i18n="gp_btn_last"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 data-i18n="keys_group_gp_axes"></h3>
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="keys_th_constant"></th>
+                        <th data-i18n="keys_th_value"></th>
+                        <th data-i18n="keys_th_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>GAMEPAD_AXIS_LEFT_X</td><td><code>GLFW_GAMEPAD_AXIS_LEFT_X</code></td><td data-i18n="gp_axis_lx"></td></tr>
+                    <tr><td>GAMEPAD_AXIS_LEFT_Y</td><td><code>GLFW_GAMEPAD_AXIS_LEFT_Y</code></td><td data-i18n="gp_axis_ly"></td></tr>
+                    <tr><td>GAMEPAD_AXIS_RIGHT_X</td><td><code>GLFW_GAMEPAD_AXIS_RIGHT_X</code></td><td data-i18n="gp_axis_rx"></td></tr>
+                    <tr><td>GAMEPAD_AXIS_RIGHT_Y</td><td><code>GLFW_GAMEPAD_AXIS_RIGHT_Y</code></td><td data-i18n="gp_axis_ry"></td></tr>
+                    <tr><td>GAMEPAD_AXIS_LEFT_TRIGGER</td><td><code>GLFW_GAMEPAD_AXIS_LEFT_TRIGGER</code></td><td data-i18n="gp_axis_lt"></td></tr>
+                    <tr><td>GAMEPAD_AXIS_RIGHT_TRIGGER</td><td><code>GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER</code></td><td data-i18n="gp_axis_rt"></td></tr>
+                    <tr><td>GAMEPAD_AXIS_LAST</td><td><code>GLFW_GAMEPAD_AXIS_LAST</code></td><td data-i18n="gp_axis_last"></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+<button class="mobile-menu-btn" id="menuBtn" title="Toggle menu">☰</button>
+
+</body>
+
+<script src="../js/active.js"></script>
+</html>

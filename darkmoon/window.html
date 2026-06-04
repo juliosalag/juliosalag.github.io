@@ -154,7 +154,7 @@
         <p class="section-desc" data-i18n="lifecycle_desc"></p>
 
         <div class="subsection">
-            <h3 data-i18n="lifecycle_methods_title"></h3>
+            <h3 data-i18n="lifecycle_methods_title_window"></h3>
             <div class="table-wrapper">
                 <table class="api-table">
                     <thead>
@@ -214,6 +214,11 @@
                             <td>Current()</td>
                             <td><code>void</code></td>
                             <td data-i18n="api_win_current"></td>
+                        </tr>
+                        <tr>
+                            <td>WasResized()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_win_wasresized"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -381,7 +386,10 @@ Shader* myShader = win.<span class="highlight">CreateShader</span>(vert, frag);<
         <p class="section-desc" data-i18n="input_api_desc"></p>
 
         <div class="subsection">
-            <h3 data-i18n="input_keyboard_title"></h3>
+            <h3>
+                <span data-i18n="input_keyboard_title"></span>
+                <a href="keys.html#keyboard" class="see-more" data-i18n="see_more_keys"></a>
+            </h3>
             <p class="section-desc" data-i18n="input_keyboard_desc"></p>
 
             <div class="table-wrapper">
@@ -453,7 +461,10 @@ Shader* myShader = win.<span class="highlight">CreateShader</span>(vert, frag);<
         </div>
 
         <div class="subsection">
-            <h3 data-i18n="input_mouse_title"></h3>
+            <h3>
+                <span data-i18n="input_mouse_title"></span>
+                <a href="keys.html#mouse" class="see-more" data-i18n="see_more_keys"></a>
+            </h3>
             <div class="table-wrapper">
                 <table class="api-table">
                     <thead>
@@ -558,6 +569,92 @@ Shader* myShader = win.<span class="highlight">CreateShader</span>(vert, frag);<
                 </table>
             </div>
         </div>
+
+        <div class="subsection">
+            <h3>
+                <span data-i18n="input_gamepad_title"></span>
+                <a href="keys.html#gamepad" class="see-more" data-i18n="see_more_keys"></a>
+            </h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>IsGamepadAvailable(id)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_gamepad_available"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadName(id)</td>
+                            <td><code>const char*</code></td>
+                            <td data-i18n="api_gamepad_name"></td>
+                        </tr>
+                        <tr>
+                            <td>IsGamepadButtonPressed(button, id)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_gamepad_pressed"></td>
+                        </tr>
+                        <tr>
+                            <td>IsGamepadButtonReleased(button, id)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_gamepad_released"></td>
+                        </tr>
+                        <tr>
+                            <td>IsGamepadButtonDown(button, id)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_gamepad_down"></td>
+                        </tr>
+                        <tr>
+                            <td>IsGamepadButtonUp(button, id)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_gamepad_up"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadAxis(axis, id)</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="api_gamepad_axis"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadAxisDelta(axis, id)</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="api_gamepad_axis_delta"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadAxisDeadzone(axis, deadzone, id)</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="api_gamepad_axis_deadzone"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadLeftStick(deadzone, id)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="api_gamepad_left_stick"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadRightStick(deadzone, id)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="api_gamepad_right_stick"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadLeftTrigger(deadzone, id)</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="api_gamepad_left_trigger"></td>
+                        </tr>
+                        <tr>
+                            <td>GetGamepadRightTrigger(deadzone, id)</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="api_gamepad_right_trigger"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
     </section>
 
     <!-- Window API (Setters / Getters) -->
