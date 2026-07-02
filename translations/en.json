@@ -504,5 +504,16 @@
     "math_v2df_toint": "Converts to the integer-based Vector2D. Truncates decimals, does not round.",
     "math_free_mul_float": "Commutative form of scalar multiplication (float * Vector2Df).",
     "math_v2df_callout": "toInt() truncates towards zero rather than rounding - Vector2Df(1.9f, -1.9f).toInt() gives (1, -1), not (2, -2).",
-    "math_example_title": "Example"
+    "math_example_title": "Example",
+    "memory_viewer_title": "MemoryViewer",
+    "memory_viewer_desc": "Prints a raw hexadecimal + ASCII dump of an object's memory to stdout, in the style of a classic hex editor. Intended purely as a debugging aid.",
+    "memory_ctor_obj": "Captures the address and size (via sizeof) of the given object. Works with any value: structs, arrays, primitives, etc.",
+    "memory_ctor_ptr": "If a pointer is passed, dumps the memory of the pointee (sizeof(*ptr) bytes at the pointed-to address), not the pointer variable itself.",
+    "memory_printmemory": "Prints the header, the object's total size, and a formatted hex/ASCII dump in rows of 16 bytes.",
+    "memory_output_title": "Output format",
+    "memory_output_desc": "Each row shows the address of the first byte, 16 space-separated hex bytes, and the printable ASCII representation of those bytes (non-printable bytes shown as '.'). Bytes past the end of the object on the last row are shown as '--'.",
+    "memory_callout_dangling": "Only pass named variables (lvalues) to MemoryViewer. Passing a literal or a temporary expression (e.g. MemoryViewer(5) or MemoryViewer(a + b)) leaves the internal pointer dangling as soon as the constructor returns, since the temporary's lifetime is not extended past the constructor call. Calling printMemory() afterwards is undefined behavior.",
+    "memory_callout_oob": "When the object's size is not a multiple of 16, the last row reads one byte past the end of the object for the ASCII column (the hex column correctly stops at the object's boundary). This is a known out-of-bounds read; it usually just shows adjacent memory but should not be relied upon.",
+    "memory_callout_size_limit": "The internal byte counter is a std::uint16_t, so objects larger than 65535 bytes will wrap the counter and produce an incorrect dump past that point.",
+    "memory_callout_ansi": "Output uses ANSI/VT100 color escape codes. It will render correctly in most Linux/macOS terminals and modern Windows terminals, but may show raw escape sequences if redirected to a file or run in a terminal without ANSI support."
 }

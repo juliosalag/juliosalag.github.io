@@ -504,5 +504,16 @@
     "math_v2df_toint": "Convierte a la versión entera Vector2D. Trunca los decimales, no redondea.",
     "math_free_mul_float": "Forma conmutativa de la multiplicación por escalar (float * Vector2Df).",
     "math_v2df_callout": "toInt() trunca hacia cero en lugar de redondear - Vector2Df(1.9f, -1.9f).toInt() da (1, -1), no (2, -2).",
-    "math_example_title": "Ejemplo"
+    "math_example_title": "Ejemplo",
+    "memory_viewer_title": "MemoryViewer",
+    "memory_viewer_desc": "Imprime en stdout un volcado hexadecimal + ASCII de la memoria de un objeto, al estilo de un editor hexadecimal clásico. Pensado únicamente como ayuda para depuración.",
+    "memory_ctor_obj": "Captura la dirección y el tamaño (mediante sizeof) del objeto dado. Funciona con cualquier valor: structs, arrays, tipos primitivos, etc.",
+    "memory_ctor_ptr": "Si se pasa un puntero, vuelca la memoria de lo apuntado (sizeof(*ptr) bytes en la dirección apuntada), no la variable del puntero en sí.",
+    "memory_printmemory": "Imprime la cabecera, el tamaño total del objeto y un volcado hex/ASCII formateado en filas de 16 bytes.",
+    "memory_output_title": "Formato de salida",
+    "memory_output_desc": "Cada fila muestra la dirección del primer byte, 16 bytes en hexadecimal separados por espacios, y la representación ASCII imprimible de esos bytes (los bytes no imprimibles se muestran como '.'). Los bytes que sobran del final del objeto en la última fila se muestran como '--'.",
+    "memory_callout_dangling": "Pasa a MemoryViewer únicamente variables con nombre (lvalues). Pasar un literal o una expresión temporal (por ejemplo MemoryViewer(5) o MemoryViewer(a + b)) deja el puntero interno colgando en cuanto termina el constructor, ya que la vida del temporal no se extiende más allá de la llamada al constructor. Llamar después a printMemory() es comportamiento indefinido.",
+    "memory_callout_oob": "Cuando el tamaño del objeto no es múltiplo de 16, la última fila lee un byte más allá del final del objeto para la columna ASCII (la columna hexadecimal sí respeta correctamente el límite del objeto). Es una lectura fuera de límites conocida; normalmente solo muestra memoria adyacente, pero no debe darse por seguro.",
+    "memory_callout_size_limit": "El contador interno de bytes es un std::uint16_t, así que objetos de más de 65535 bytes harán que el contador dé la vuelta y el volcado sea incorrecto a partir de ese punto.",
+    "memory_callout_ansi": "La salida usa códigos de color ANSI/VT100. Se verá bien en la mayoría de terminales de Linux/macOS y en terminales modernas de Windows, pero puede mostrar las secuencias de escape en crudo si se redirige a un archivo o se ejecuta en una terminal sin soporte ANSI."
 }
