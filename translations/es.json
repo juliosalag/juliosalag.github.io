@@ -286,6 +286,7 @@
     "api_win_seticon": "Carga una imagen PNG y la establece como icono de la ventana (barra de tareas y barra de título).",
     "api_win_seticondefault": "Establece el icono por defecto de la ventana (barra de tareas y barra de título).",
     "api_win_setopacity": "Establece la opacidad de la ventana. Rango 0.0 (transparente) a 1.0 (opaco).",
+    "window_api_setsize_setpos_callout": "SetSize() y SetPosition() solo tienen efecto en WindowMode::Windowed. Las llamadas hechas en modo Fullscreen o Borderless se ignoran.",
     "api_win_getmode": "Devuelve el WindowMode actual: Windowed, Borderless o Fullscreen.",
     "api_win_getwindow": "Devuelve el puntero nativo GLFWwindow* para uso directo con la API de GLFW.",
     "api_win_getwidth": "Ancho actual del framebuffer en píxeles.",
@@ -339,6 +340,8 @@
     "api_gamepad_right_stick": "Obtiene la posición del stick derecho aplicando una zona muerta.",
     "api_gamepad_left_trigger": "Obtiene el valor normalizado del gatillo izquierdo en el rango [0.0, 1.0].",
     "api_gamepad_right_trigger": "Obtiene el valor normalizado del gatillo derecho en el rango [0.0, 1.0].",
+    "api_gamepad_connected": "True solo en el frame en que el mando se conectó.",
+    "api_gamepad_disconnected": "True solo en el frame en que el mando se desconectó.",
 
     "readmore": "Ver documentación completa →",
     "nav_gettingstarted": "Primeros pasos",

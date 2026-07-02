@@ -286,6 +286,7 @@
     "api_win_seticon": "Loads a PNG image and sets it as the window icon (taskbar and title bar).",
     "api_win_seticondefault": "Sets the default icon as the window icon (taskbar and title bar).",
     "api_win_setopacity": "Sets the window opacity. Range 0.0 (transparent) to 1.0 (opaque).",
+    "window_api_setsize_setpos_callout": "SetSize() and SetPosition() only take effect in WindowMode::Windowed. Calls made in Fullscreen or Borderless mode are ignored.",
     "api_win_getmode": "Returns the current WindowMode: Windowed, Borderless or Fullscreen.",
     "api_win_getwindow": "Returns the raw GLFWwindow* pointer for direct use with the GLFW API.",
     "api_win_getwidth": "Current framebuffer width in pixels.",
@@ -339,6 +340,8 @@
     "api_gamepad_right_stick": "Retrieves the right stick position with deadzone applied.",
     "api_gamepad_left_trigger": "Retrieves the normalized value of the left trigger in the range [0.0, 1.0].",
     "api_gamepad_right_trigger": "Retrieves the normalized value of the right trigger in the range [0.0, 1.0].",
+    "api_gamepad_connected": "True only on the frame the gamepad was connected.",
+    "api_gamepad_disconnected": "True only on the frame the gamepad was disconnected.",
 
     "readmore": "Read complete documentation →",
     "nav_gettingstarted": "Getting started",
