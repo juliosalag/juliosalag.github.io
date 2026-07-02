@@ -407,8 +407,281 @@
     <section class="doc-section" id="math">
         <h2 data-i18n="section_math"></h2>
         <p class="section-desc" data-i18n="math_desc"></p>
-        <div class="callout">
-            <a href="./math.html" data-i18n="readmore"></a>
+        <div class="header-meta">
+            <span class="tag">C++</span>
+            <span class="tag">constexpr</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/utils/math.hpp&gt;</span>
+        </div>
+
+        <!-- Vector2D -->
+        <div class="subsection">
+            <h3 data-i18n="math_vector2d_title"></h3>
+            <p class="section-desc" data-i18n="math_vector2d_desc"></p>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Vector2D {
+    <span class="highlight">int</span> x, y;
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vector2D()</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2d_ctor_default"></td>
+                        </tr>
+                        <tr>
+                            <td>Vector2D(x, y)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2d_ctor"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+(other)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_add"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-(other)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_sub"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*(scalar)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_mul_scalar_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/(scalar)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_div_scalar_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-()</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_neg"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+=(other)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_addeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-=(other)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_subeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(other)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_muleq_comp"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(scalar)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_muleq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/=(scalar)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_diveq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator==(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_eq_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator!=(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_neq_int"></td>
+                        </tr>
+                        <tr>
+                            <td>magnitude()</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="math_v2d_magnitude"></td>
+                        </tr>
+                        <tr>
+                            <td>dot(other)</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="math_dot_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator[](i)</td>
+                            <td><code>int&amp;</code></td>
+                            <td data-i18n="math_index_int"></td>
+                        </tr>
+                        <tr>
+                            <td>toFloat()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_v2d_tofloat"></td>
+                        </tr>
+                        <tr>
+                            <td>scalar * Vector2D</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_free_mul_int"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="math_v2d_callout"></span>
+            </div>
+        </div>
+
+        <!-- Vector2Df -->
+        <div class="subsection">
+            <h3 data-i18n="math_vector2df_title"></h3>
+            <p class="section-desc" data-i18n="math_vector2df_desc"></p>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Vector2Df {
+    <span class="highlight">float</span> x, y;
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vector2Df()</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2df_ctor_default"></td>
+                        </tr>
+                        <tr>
+                            <td>Vector2Df(x, y)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2df_ctor"></td>
+                        </tr>
+                        <tr>
+                            <td>Vector2Df(Vector2D)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2df_ctor_from_v2d"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+(other)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_add"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-(other)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_sub"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*(scalar)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_mul_scalar_float"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/(scalar)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_div_scalar_float"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_neg"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+=(other)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_addeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-=(other)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_subeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(other)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_muleq_comp"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(scalar)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_muleq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/=(scalar)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_diveq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator==(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_eq_float"></td>
+                        </tr>
+                        <tr>
+                            <td>operator!=(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_neq_float"></td>
+                        </tr>
+                        <tr>
+                            <td>magnitude()</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="math_v2df_magnitude"></td>
+                        </tr>
+                        <tr>
+                            <td>dot(other)</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="math_dot_float"></td>
+                        </tr>
+                        <tr>
+                            <td>normalized()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_v2df_normalized"></td>
+                        </tr>
+                        <tr>
+                            <td>operator[](i)</td>
+                            <td><code>float&amp;</code></td>
+                            <td data-i18n="math_index_float"></td>
+                        </tr>
+                        <tr>
+                            <td>toInt()</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_v2df_toint"></td>
+                        </tr>
+                        <tr>
+                            <td>scalar * Vector2Df</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_free_mul_float"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="math_v2df_callout"></span>
+            </div>
+        </div>
+
+        <!-- Example -->
+        <div class="subsection">
+            <h3 data-i18n="math_example_title"></h3>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/utils/math.hpp&gt;
+
+Vector2D  gridPos  { 3, 4 };
+Vector2Df worldPos = gridPos.<span class="highlight">toFloat</span>() * 32.0f;
+
+Vector2Df dir = (target - worldPos).<span class="highlight">normalized</span>();
+worldPos += dir * speed * win.<span class="highlight">GetDeltaTime</span>();
+
+<span class="comment">// Back to integer tile coordinates (truncates)</span>
+Vector2D tile = worldPos.<span class="highlight">toInt</span>() / 32;</code></pre>
         </div>
     </section>
 
