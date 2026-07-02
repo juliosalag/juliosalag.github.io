@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkMoon Engine | Audio</title>
+    <link rel="icon" href="../assets/portraits/darkmoonengine.png" type="image/png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/darkmoon/style.css">
+
+    <script src="../js/lang.js"></script>
+    <script src="../js/theme.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <a href="./index.html">
+            <div>
+                <h1>DarkMoon <span>Engine</span></h1>
+                <span class="version-badge">version 2.0</span>
+            </div>
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_audio_group_overview"></div>
+            <a href="#whatis" data-i18n="nav_audio_whatis"></a>
+            <a href="#setup" data-i18n="nav_setup"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_core"></div>
+            <a href="#playback" data-i18n="nav_audio_playback"></a>
+            <a href="#pooling" data-i18n="nav_audio_pooling"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">API</div>
+            <a href="#audio_api" data-i18n="nav_audio_api"></a>
+            <a href="#audiomanager_api" data-i18n="nav_audiomanager_api"></a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title" data-i18n="nav_group_examples"></div>
+            <a href="#example1" data-i18n="nav_example_basic"></a>
+            <a href="#example2" data-i18n="nav_example_pool"></a>
+            <a href="#example3" data-i18n="nav_example_music"></a>
+        </div>
+    </nav>
+
+    <div class="sidebar-back">
+        <a href="../index.html" data-i18n="nav_back"></a>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1 data-i18n="audio_title"></h1>
+        <p data-i18n="header_audio"></p>
+        <div class="header-meta">
+            <span class="tag">C++</span>
+            <span class="tag">miniaudio</span>
+            <span class="tag">Audio</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/audio.hpp&gt;</span>
+        </div>
+    </div>
+
+    <!-- Dropdown Theme -->
+    <div class="dropdown theme-dropdown" style="right: 90px;">
+        <a href="javascript:void(0)" class="dropbtn" id="theme-current">DARK</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Theme.load('dark')">DARK</a>
+            <a href="javascript:void(0)" onclick="Theme.load('light')">LIGHT</a>
+        </div>
+    </div>
+
+    <!-- Dropdown Language -->
+    <div class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn" id="lang-current">ES</a>
+        <div class="dropdown-content">
+            <a href="javascript:void(0)" onclick="Lang.load('es')">ES</a>
+            <a href="javascript:void(0)" onclick="Lang.load('en')">ENG</a>
+        </div>
+    </div>
+
+    <!-- Overview -->
+
+    <section class="doc-section" id="whatis">
+        <h2 data-i18n="section_audio_whatis"></h2>
+        <p class="section-desc" data-i18n="audio_whatis_desc"></p>
+
+        <div class="subsection">
+            <h3 data-i18n="audio_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="audio_feat_pool"></li>
+                <li data-i18n="audio_feat_singleton"></li>
+                <li data-i18n="audio_feat_volume"></li>
+                <li data-i18n="audio_feat_loop"></li>
+                <li data-i18n="audio_feat_backend"></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Setup -->
+
+    <section class="doc-section" id="setup">
+        <h2 data-i18n="section_audio_setup"></h2>
+        <p class="section-desc" data-i18n="audio_setup_desc"></p>
+
+        <pre><span class="lang-label">text</span><code><span class="comment">// AudioManager is a lazy singleton: it initializes on the first Audio() ever created</span>
+<span class="highlight">main.cpp</span>
+    │
+    ├── Audio sfx { "assets/jump.wav" }       ← first Audio() lazily creates AudioManager
+    │       ├── AudioManager::getInstance()   ← inits the shared miniaudio ma_engine (once)
+    │       └── ResourceManager::loadResource&lt;ResourceAudio&gt;()
+    │               └── pool of `poolSize` ma_sound voices, each fully decoded from the file
+    │
+    └── (program exit)
+            └── ~AudioManager()               ← ma_engine_uninit(), runs at static destruction</code></pre>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/audio.hpp&gt;
+
+<span class="highlight">int</span> main() {
+    DarkMoonEngine dm{};
+    Window win = Window(800, 600, "Audio Example");
+
+    Audio music("assets/theme.ogg", <span class="num">1</span>); <span class="comment">// poolSize 1: no overlap needed for music</span>
+    music.<span class="highlight">setLooping</span>(<span class="highlight">true</span>);
+    music.<span class="highlight">setVolume</span>(<span class="num">0.6f</span>);
+    music.<span class="highlight">play</span>();
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+
+        <div class="callout">
+            <span data-i18n="audio_setup_callout"></span>
+        </div>
+    </section>
+
+    <!-- Playback lifecycle -->
+
+    <section class="doc-section" id="playback">
+        <h2 data-i18n="section_audio_playback"></h2>
+        <p class="section-desc" data-i18n="audio_playback_desc"></p>
+    </section>
+
+    <!-- Voice pooling -->
+
+    <section class="doc-section" id="pooling">
+        <h2 data-i18n="section_audio_pooling"></h2>
+        <p class="section-desc" data-i18n="audio_pooling_desc"></p>
+
+        <pre><span class="lang-label">text</span><code><span class="highlight">play()</span>
+    │
+    ├── pickVoice()  ← scans the pool for a voice NOT currently playing
+    │       ├── found free voice   → use it
+    │       └── none free          → reuse the next voice round-robin (cuts it off)
+    │
+    └── stop + seek to 0 + apply volume/looping + start</code></pre>
+
+        <div class="callout callout-warning">
+            <span data-i18n="audio_pool_memory_callout"></span>
+        </div>
+
+        <div class="callout">
+            <span data-i18n="audio_pool_fail_callout"></span>
+        </div>
+    </section>
+
+    <!-- Audio API -->
+
+    <section class="doc-section" id="audio_api">
+        <h2 data-i18n="section_audio_api"></h2>
+        <p class="section-desc" data-i18n="audio_api_desc"></p>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Audio(filePath, poolSize = 4)</td>
+                        <td><code>-</code></td>
+                        <td data-i18n="api_audio_ctor"></td>
+                    </tr>
+                    <tr>
+                        <td>play()</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_audio_play"></td>
+                    </tr>
+                    <tr>
+                        <td>stop()</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_audio_stop"></td>
+                    </tr>
+                    <tr>
+                        <td>pause()</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_audio_pause"></td>
+                    </tr>
+                    <tr>
+                        <td>resume()</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_audio_resume"></td>
+                    </tr>
+                    <tr>
+                        <td>setVolume(vol)</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_audio_setvolume"></td>
+                    </tr>
+                    <tr>
+                        <td>setLooping(loop)</td>
+                        <td><code>void</code></td>
+                        <td data-i18n="api_audio_setlooping"></td>
+                    </tr>
+                    <tr>
+                        <td>isPlaying()</td>
+                        <td><code>bool</code></td>
+                        <td data-i18n="api_audio_isplaying"></td>
+                    </tr>
+                    <tr>
+                        <td>isPaused()</td>
+                        <td><code>bool</code></td>
+                        <td data-i18n="api_audio_ispaused"></td>
+                    </tr>
+                    <tr>
+                        <td>isLoaded()</td>
+                        <td><code>bool</code></td>
+                        <td data-i18n="api_audio_isloaded"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- AudioManager API -->
+
+    <section class="doc-section" id="audiomanager_api">
+        <h2 data-i18n="section_audiomanager_api"></h2>
+        <p class="section-desc" data-i18n="audiomanager_api_desc"></p>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AudioManager::getInstance()</td>
+                        <td><code>AudioManager&amp;</code></td>
+                        <td data-i18n="api_audiomanager_getinstance"></td>
+                    </tr>
+                    <tr>
+                        <td>get()</td>
+                        <td><code>void*</code></td>
+                        <td data-i18n="api_audiomanager_get"></td>
+                    </tr>
+                    <tr>
+                        <td>isInitialized()</td>
+                        <td><code>bool</code></td>
+                        <td data-i18n="api_audiomanager_isinitialized"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout">
+            <span data-i18n="audiomanager_callout"></span>
+        </div>
+    </section>
+
+    <!-- Examples -->
+
+    <section class="doc-section" id="example1">
+        <h2 data-i18n="audio_example1_title"></h2>
+        <p class="section-desc" data-i18n="audio_example1_desc"></p>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/audio.hpp&gt;
+
+<span class="highlight">int</span> main(){
+    DarkMoonEngine dm{};
+    Window win = Window(800, 600, "SFX Example");
+
+    Audio jump("assets/jump.wav");
+
+    <span class="highlight">if</span>(!jump.<span class="highlight">isLoaded</span>())
+        std::cerr << "Failed to load jump.wav\n";
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        <span class="highlight">if</span>(win.<span class="highlight">IsKeyPressed</span>(KEY_SPACE))
+            jump.<span class="highlight">play</span>();
+
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+    </section>
+
+    <section class="doc-section" id="example2">
+        <h2 data-i18n="audio_example2_title"></h2>
+        <p class="section-desc" data-i18n="audio_example2_desc"></p>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/audio.hpp&gt;
+
+<span class="highlight">int</span> main(){
+    DarkMoonEngine dm{};
+    Window win = Window(800, 600, "Voice Pool Example");
+
+    <span class="comment">// poolSize 8: up to 8 overlapping hits before voices start getting cut off</span>
+    Audio hit("assets/hit.wav", <span class="num">8</span>);
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        <span class="comment">// Hold the key: every frame it's held triggers a new overlapping voice</span>
+        <span class="highlight">if</span>(win.<span class="highlight">IsKeyDown</span>(KEY_X))
+            hit.<span class="highlight">play</span>();
+
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+
+        <div class="callout">
+            <span data-i18n="audio_example2_callout"></span>
+        </div>
+    </section>
+
+    <section class="doc-section" id="example3">
+        <h2 data-i18n="audio_example3_title"></h2>
+        <p class="section-desc" data-i18n="audio_example3_desc"></p>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/audio.hpp&gt;
+
+<span class="highlight">int</span> main(){
+    DarkMoonEngine dm{};
+    Window win = Window(800, 600, "Music Example");
+
+    Audio music("assets/theme.ogg", <span class="num">1</span>);
+    music.<span class="highlight">setLooping</span>(<span class="highlight">true</span>);
+    music.<span class="highlight">setVolume</span>(<span class="num">0.5f</span>);
+    music.<span class="highlight">play</span>();
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        <span class="highlight">if</span>(win.<span class="highlight">IsKeyPressed</span>(KEY_UP))
+            music.<span class="highlight">setVolume</span>(<span class="num">0.8f</span>);
+        <span class="highlight">if</span>(win.<span class="highlight">IsKeyPressed</span>(KEY_DOWN))
+            music.<span class="highlight">setVolume</span>(<span class="num">0.3f</span>);
+
+        <span class="comment">// NOTE: stops the track entirely, does NOT pause/resume (see "Playback lifecycle")</span>
+        <span class="highlight">if</span>(win.<span class="highlight">IsKeyPressed</span>(KEY_P))
+            music.<span class="highlight">pause</span>();
+
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+    </section>
+</main>
+
+<button class="mobile-menu-btn" id="menuBtn" title="Toggle menu">☰</button>
+
+</body>
+
+<script src="../js/active.js"></script>
+</html>
