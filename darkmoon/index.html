@@ -48,6 +48,7 @@
             <a href="#rectangle"       data-i18n="nav_rectangle"></a>
             <a href="#circle"          data-i18n="nav_circle"></a>
             <a href="#regular_polygon" data-i18n="nav_regular_polygon"></a>
+            <a href="#particles"       data-i18n="nav_particles"></a>
         </div>
 
         <div class="nav-group">
@@ -62,7 +63,7 @@
         <div class="nav-group">
             <div class="nav-group-title" data-i18n="nav_extra"></div>
             <a href="#ecs"  data-i18n="nav_ecs"></a>
-            <a href="#fmod" data-i18n="nav_fmod"></a>
+            <a href="#audio" data-i18n="nav_audio"></a>
         </div>
 
         <div class="nav-group">
@@ -282,6 +283,14 @@
         </div>
     </section>
 
+    <section class="doc-section" id="particles">
+        <h2 data-i18n="section_particles"></h2>
+        <p class="section-desc" data-i18n="particles_desc"></p>
+        <div class="callout">
+            <a href="./particles.html" data-i18n="readmore"></a>
+        </div>
+    </section>
+
     <!-- ADVANCED GRAPHICS  -->
 
     <section class="doc-section" id="resourcemanager">
@@ -344,11 +353,21 @@
         </div>
     </section>
 
-    <section class="doc-section" id="fmod">
-        <h2>FMOD</h2>
-        <p class="section-desc" data-i18n="fmod_desc"></p>
+    <section class="doc-section" id="audio">
+        <h2 data-i18n="audio_title"></h2>
+        <p class="section-desc" data-i18n="audio_whatis_desc"></p>
+        <div class="subsection">
+            <h3 data-i18n="audio_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="audio_feat_pool"></li>
+                <li data-i18n="audio_feat_singleton"></li>
+                <li data-i18n="audio_feat_volume"></li>
+                <li data-i18n="audio_feat_loop"></li>
+                <li data-i18n="audio_feat_backend"></li>
+            </ul>
+        </div>
         <div class="callout">
-            <a href="./fmod.html" data-i18n="readmore"></a>
+            <a href="./audio.html" data-i18n="readmore"></a>
         </div>
     </section>
 
@@ -357,42 +376,64 @@
     <section class="doc-section" id="colors">
         <h2 data-i18n="section_colors"></h2>
         <p class="section-desc" data-i18n="colors_desc"></p>
-        <div class="palette-grid">
-            <div class="palette-swatch" style="--swatch:#FFFFFF;" data-name="BLACK" data-hex="#FFFFFF"></div>
-            <div class="palette-swatch" style="--swatch:#646464;" data-name="GRAY"  data-hex="#646464"></div>
-            <div class="palette-swatch" style="--swatch:#000000;" data-name="WHITE" data-hex="#000000"></div>
 
-            <div class="palette-swatch" style="--swatch:#FF0000;" data-name="RED"   data-hex="#FF0000"></div>
-            <div class="palette-swatch" style="--swatch:#00FF00;" data-name="GREEN" data-hex="#00FF00"></div>
-            <div class="palette-swatch" style="--swatch:#0000FF;" data-name="BLUE"  data-hex="#0000FF"></div>
-            <!--
-            <div class="palette-swatch" style="--swatch:#4a4a4a;" data-name="DARK_GRAY"  data-hex="#4a4a4a"></div>
-            <div class="palette-swatch" style="--swatch:#b22222;" data-name="DARK_RED"   data-hex="#b22222"></div>
-            <div class="palette-swatch" style="--swatch:#ffa500;" data-name="DARK_ORANGE" data-hex="#ffa500"></div>
-            <div class="palette-swatch" style="--swatch:#006400;" data-name="DARK_GREEN"  data-hex="#006400"></div>
-            <div class="palette-swatch" style="--swatch:#00008b;" data-name="DARK_BLUE"   data-hex="#00008b"></div>
-            <div class="palette-swatch" style="--swatch:#4b0082;" data-name="DARK_PURPLE" data-hex="#4b0082"></div>
-            <div class="palette-swatch" style="--swatch:#4b3832;" data-name="DARK_BROWN"  data-hex="#4b3832"></div>
-    
-            <div class="palette-swatch" style="--swatch:#808080;" data-name="GRAY"        data-hex="#808080"></div>
-            <div class="palette-swatch" style="--swatch:#cd5c5c;" data-name="RED"         data-hex="#cd5c5c"></div>
-            <div class="palette-swatch" style="--swatch:#ffd700;" data-name="YELLOW"      data-hex="#ffd700"></div>
-            <div class="palette-swatch" style="--swatch:#008000;" data-name="GREEN"       data-hex="#008000"></div>
-            <div class="palette-swatch" style="--swatch:#1e90ff;" data-name="BLUE"        data-hex="#1e90ff"></div>
-            <div class="palette-swatch" style="--swatch:#8b008b;" data-name="PURPLE"      data-hex="#8b008b"></div>
-            <div class="palette-swatch" style="--swatch:#8b7355;" data-name="BROWN"       data-hex="#8b7355"></div>
-    
-            <div class="palette-swatch" style="--swatch:#d3d3d3;" data-name="LIGHT_GRAY"  data-hex="#d3d3d3"></div>
-            <div class="palette-swatch" style="--swatch:#ff69b4;" data-name="PINK"        data-hex="#ff69b4"></div>
-            <div class="palette-swatch" style="--swatch:#ffff00;" data-name="LIME"        data-hex="#ffff00"></div>
-            <div class="palette-swatch" style="--swatch:#00ff00;" data-name="LIME_GREEN"  data-hex="#00ff00"></div>
-            <div class="palette-swatch" style="--swatch:#87cefa;" data-name="SKY_BLUE"    data-hex="#87cefa"></div>
-            <div class="palette-swatch" style="--swatch:#da70d6;" data-name="ORCHID"      data-hex="#da70d6"></div>
-            <div class="palette-swatch" style="--swatch:#d2b48c;" data-name="TAN"         data-hex="#d2b48c"></div>
-    
-            <div class="palette-swatch" style="--swatch:#000000;" data-name="BLACK"       data-hex="#000000"></div>
-            <div class="palette-swatch" style="--swatch:#ffffff; border-color: rgba(255,255,255,0.25);" data-name="WHITE" data-hex="#ffffff"></div>
-            -->
+        <div>
+            <h3 data-i18n="colors_basic_title"></h3>
+            <div class="palette-grid">
+                <div class="palette-swatch" style="--swatch:#FFFFFF;" data-name="WHITE"      data-hex="#FFFFFF"></div>
+                <div class="palette-swatch" style="--swatch:#a8b0c0;" data-name="LIGHT_GRAY" data-hex="#a8b0c0"></div>
+                <div class="palette-swatch" style="--swatch:#708890;" data-name="GRAY"       data-hex="#708890"></div>
+                <div class="palette-swatch" style="--swatch:#506068;" data-name="DARK_GRAY"  data-hex="#506068"></div>
+                <div class="palette-swatch" style="--swatch:#000000;" data-name="BLACK"      data-hex="#000000"></div>
+            </div>
+        </div>
+
+        <!-- Dark tier -->
+        <div>
+            <h3 data-i18n="colors_basic_title"></h3>
+            <div class="palette-grid">
+                <div class="palette-swatch" style="--swatch:#701810;" data-name="DARK_RED"     data-hex="#701810"></div>
+                <div class="palette-swatch" style="--swatch:#187818;" data-name="DARK_GREEN"   data-hex="#187818"></div>
+                <div class="palette-swatch" style="--swatch:#183090;" data-name="DARK_BLUE"    data-hex="#183090"></div>
+                <div class="palette-swatch" style="--swatch:#901860;" data-name="DARK_MAGENTA" data-hex="#901860"></div>
+                <div class="palette-swatch" style="--swatch:#30d5c8;" data-name="DARK_CYAN"    data-hex="#30d5c8"></div>
+                <div class="palette-swatch" style="--swatch:#e8b820;" data-name="DARK_YELLOW"  data-hex="#e8b820"></div>
+                <div class="palette-swatch" style="--swatch:#704810;" data-name="DARK_BROWN"   data-hex="#704810"></div>
+                <div class="palette-swatch" style="--swatch:#580870;" data-name="DARK_VIOLET"  data-hex="#580870"></div>
+                <div class="palette-swatch" style="--swatch:#a04000;" data-name="DARK_ORANGE"  data-hex="#a04000"></div>
+            </div>
+        </div>
+
+        <!-- Base tier -->
+        <div>
+            <h3 data-i18n="colors_basic_title"></h3>
+            <div class="palette-grid">
+                <div class="palette-swatch" style="--swatch:#d82828;" data-name="RED"     data-hex="#d82828"></div>
+                <div class="palette-swatch" style="--swatch:#30d018;" data-name="GREEN"   data-hex="#30d018"></div>
+                <div class="palette-swatch" style="--swatch:#28a0f0;" data-name="BLUE"    data-hex="#28a0f0"></div>
+                <div class="palette-swatch" style="--swatch:#c84890;" data-name="MAGENTA" data-hex="#c84890"></div>
+                <div class="palette-swatch" style="--swatch:#00ffff;" data-name="CYAN"    data-hex="#00ffff"></div>
+                <div class="palette-swatch" style="--swatch:#f8e828;" data-name="YELLOW"  data-hex="#f8e828"></div>
+                <div class="palette-swatch" style="--swatch:#a07840;" data-name="BROWN"   data-hex="#a07840"></div>
+                <div class="palette-swatch" style="--swatch:#a850c8;" data-name="VIOLET"  data-hex="#a850c8"></div>
+                <div class="palette-swatch" style="--swatch:#c86828;" data-name="ORANGE"  data-hex="#c86828"></div>
+            </div>
+        </div>
+
+        <!-- Light tier -->
+        <div>
+            <h3 data-i18n="colors_basic_title"></h3>
+            <div class="palette-grid">
+                <div class="palette-swatch" style="--swatch:#f84860;" data-name="LIGHT_RED"     data-hex="#f84860"></div>
+                <div class="palette-swatch" style="--swatch:#c0f890;" data-name="LIGHT_GREEN"   data-hex="#c0f890"></div>
+                <div class="palette-swatch" style="--swatch:#a8e8f8;" data-name="LIGHT_BLUE"    data-hex="#a8e8f8"></div>
+                <div class="palette-swatch" style="--swatch:#f8c0e0;" data-name="LIGHT_MAGENTA" data-hex="#f8c0e0"></div>
+                <div class="palette-swatch" style="--swatch:#87ceff;" data-name="LIGHT_CYAN"    data-hex="#87ceff"></div>
+                <div class="palette-swatch" style="--swatch:#f8f890;" data-name="LIGHT_YELLOW"  data-hex="#f8f890"></div>
+                <div class="palette-swatch" style="--swatch:#d0b088;" data-name="LIGHT_BROWN"   data-hex="#d0b088"></div>
+                <div class="palette-swatch" style="--swatch:#d088e8;" data-name="LIGHT_VIOLET"  data-hex="#d088e8"></div>
+                <div class="palette-swatch" style="--swatch:#f8c888;" data-name="LIGHT_ORANGE"  data-hex="#f8c888"></div>
+            </div>
         </div>
     </section>
 
@@ -407,16 +448,366 @@
     <section class="doc-section" id="math">
         <h2 data-i18n="section_math"></h2>
         <p class="section-desc" data-i18n="math_desc"></p>
-        <div class="callout">
-            <a href="./math.html" data-i18n="readmore"></a>
+        <div class="header-meta">
+            <span class="tag">Math</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/utils/math.hpp&gt;</span>
+        </div>
+
+        <!-- Vector2D -->
+        <div class="subsection">
+            <h3 data-i18n="math_vector2d_title"></h3>
+            <p class="section-desc" data-i18n="math_vector2d_desc"></p>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Vector2D {
+    <span class="highlight">int</span> x, y;
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vector2D()</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2d_ctor_default"></td>
+                        </tr>
+                        <tr>
+                            <td>Vector2D(x, y)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2d_ctor"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+(other)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_add"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-(other)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_sub"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*(scalar)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_mul_scalar_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/(scalar)</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_div_scalar_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-()</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_op_neg"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+=(other)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_addeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-=(other)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_subeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(other)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_muleq_comp"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(scalar)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_muleq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/=(scalar)</td>
+                            <td><code>Vector2D&amp;</code></td>
+                            <td data-i18n="math_op_diveq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator==(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_eq_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator!=(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_neq_int"></td>
+                        </tr>
+                        <tr>
+                            <td>magnitude()</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="math_v2d_magnitude"></td>
+                        </tr>
+                        <tr>
+                            <td>dot(other)</td>
+                            <td><code>int</code></td>
+                            <td data-i18n="math_dot_int"></td>
+                        </tr>
+                        <tr>
+                            <td>operator[](i)</td>
+                            <td><code>int&amp;</code></td>
+                            <td data-i18n="math_index_int"></td>
+                        </tr>
+                        <tr>
+                            <td>toFloat()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_v2d_tofloat"></td>
+                        </tr>
+                        <tr>
+                            <td>scalar * Vector2D</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_free_mul_int"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="math_v2d_callout"></span>
+            </div>
+        </div>
+
+        <!-- Vector2Df -->
+        <div class="subsection">
+            <h3 data-i18n="math_vector2df_title"></h3>
+            <p class="section-desc" data-i18n="math_vector2df_desc"></p>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Vector2Df {
+    <span class="highlight">float</span> x, y;
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vector2Df()</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2df_ctor_default"></td>
+                        </tr>
+                        <tr>
+                            <td>Vector2Df(x, y)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2df_ctor"></td>
+                        </tr>
+                        <tr>
+                            <td>Vector2Df(Vector2D)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="math_v2df_ctor_from_v2d"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+(other)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_add"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-(other)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_sub"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*(scalar)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_mul_scalar_float"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/(scalar)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_div_scalar_float"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_op_neg"></td>
+                        </tr>
+                        <tr>
+                            <td>operator+=(other)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_addeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator-=(other)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_subeq"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(other)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_muleq_comp"></td>
+                        </tr>
+                        <tr>
+                            <td>operator*=(scalar)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_muleq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator/=(scalar)</td>
+                            <td><code>Vector2Df&amp;</code></td>
+                            <td data-i18n="math_op_diveq_scalar"></td>
+                        </tr>
+                        <tr>
+                            <td>operator==(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_eq_float"></td>
+                        </tr>
+                        <tr>
+                            <td>operator!=(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="math_op_neq_float"></td>
+                        </tr>
+                        <tr>
+                            <td>magnitude()</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="math_v2df_magnitude"></td>
+                        </tr>
+                        <tr>
+                            <td>dot(other)</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="math_dot_float"></td>
+                        </tr>
+                        <tr>
+                            <td>normalized()</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_v2df_normalized"></td>
+                        </tr>
+                        <tr>
+                            <td>operator[](i)</td>
+                            <td><code>float&amp;</code></td>
+                            <td data-i18n="math_index_float"></td>
+                        </tr>
+                        <tr>
+                            <td>toInt()</td>
+                            <td><code>Vector2D</code></td>
+                            <td data-i18n="math_v2df_toint"></td>
+                        </tr>
+                        <tr>
+                            <td>scalar * Vector2Df</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="math_free_mul_float"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="math_v2df_callout"></span>
+            </div>
+        </div>
+
+        <!-- Example -->
+        <div class="subsection">
+            <h3 data-i18n="math_example_title"></h3>
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/utils/math.hpp&gt;
+
+Vector2D  gridPos  { 3, 4 };
+Vector2Df worldPos = gridPos.<span class="highlight">toFloat</span>() * 32.0f;
+
+Vector2Df dir = (target - worldPos).<span class="highlight">normalized</span>();
+worldPos += dir * speed * win.<span class="highlight">GetDeltaTime</span>();
+
+<span class="comment">// Back to integer tile coordinates (truncates)</span>
+Vector2D tile = worldPos.<span class="highlight">toInt</span>() / 32;</code></pre>
         </div>
     </section>
 
     <section class="doc-section" id="memory">
         <h2 data-i18n="section_memory"></h2>
         <p class="section-desc" data-i18n="memory_desc"></p>
-        <div class="callout">
-            <a href="./memory.html" data-i18n="readmore"></a>
+        <div class="header-meta">
+            <span class="tag">Debug</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/utils/memviewer.hpp&gt;</span>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="memory_viewer_title"></h3>
+            <p class="section-desc" data-i18n="memory_viewer_desc"></p>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> MemoryViewer {
+    <span class="highlight">template</span> &lt;<span class="highlight">typename</span> T&gt;
+    MemoryViewer(T <span class="highlight">const</span>&amp; obj_or_ptr);
+
+    <span class="highlight">void</span> printMemory();
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MemoryViewer(obj)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="memory_ctor_obj"></td>
+                        </tr>
+                        <tr>
+                            <td>MemoryViewer(ptr)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="memory_ctor_ptr"></td>
+                        </tr>
+                        <tr>
+                            <td>printMemory()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="memory_printmemory"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subsection">
+                <h3 data-i18n="memory_output_title"></h3>
+                <p class="section-desc" data-i18n="memory_output_desc"></p>
+                <pre><span class="lang-label">text</span><code>##### MOSTRANDO OBJETO. Size: 8 bytes #####
+||   DIRECCIONES   || 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F ||    CARACTERES    ||
+============================================================================================
+||  0x7ffe1a2b3c40 || 40 E2 01 00 00 00 00 00 -- -- -- -- -- -- -- -- ||    @........     ||
+============================================================================================</code></pre>
+            </div>
+
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/utils/memory.hpp&gt;
+
+<span class="comment">// Inspecting a value directly</span>
+Vector2Df pos { 3.5f, 7.2f };
+MemoryViewer(pos).<span class="highlight">printMemory</span>();
+
+<span class="comment">// Inspecting through a pointer: dumps the pointee, not the pointer itself</span>
+Vector2Df* posPtr = &pos;
+MemoryViewer(posPtr).<span class="highlight">printMemory</span>();</code></pre>
+
+            <div class="callout callout-warning">
+                <span data-i18n="memory_callout_dangling"></span>
+            </div>
+
+            <div class="callout callout-warning">
+                <span data-i18n="memory_callout_oob"></span>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="memory_callout_size_limit"></span>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="memory_callout_ansi"></span>
+            </div>
         </div>
     </section>
 
