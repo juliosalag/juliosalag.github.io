@@ -769,10 +769,151 @@
     <!-- ADVANCED GRAPHICS  -->
 
     <section class="doc-section" id="resourcemanager">
-        <h2>ResourceManager</h2>
-        <p class="section-desc" data-i18n="resourcemanager_desc"></p>
-        <div class="callout">
-            <a href="./resourcemanager.html" data-i18n="readmore"></a>
+        <h2 data-i18n="resourcemanager_title"></h2>
+        <p class="section-desc" data-i18n="resourcemanager_whatis_desc"></p>
+        <div class="header-meta">
+            <span class="tag">C++</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/managers/resource_manager.hpp&gt;</span>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="resourcemanager_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="resourcemanager_feat_singleton"></li>
+                <li data-i18n="resourcemanager_feat_dedup"></li>
+                <li data-i18n="resourcemanager_feat_ownership"></li>
+                <li data-i18n="resourcemanager_feat_generic"></li>
+            </ul>
+        </div>
+
+        <!-- Resource base class -->
+        <div class="subsection">
+            <h3 data-i18n="resourcemanager_resource_title"></h3>
+            <p class="section-desc" data-i18n="resourcemanager_resource_desc"></p>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Resource {
+<span class="highlight">protected</span>:
+    std::size_t m_idResource { <span class="num">0</span> };
+    std::size_t m_fileType   {};
+    std::string m_filePath   {};
+    <span class="highlight">bool</span>        m_isLoaded  { <span class="highlight">false</span> };
+
+    Resource(std::size_t idResource, std::size_t fileType, <span class="highlight">const</span> <span class="highlight">char</span>* filePath);
+    <span class="highlight">virtual</span> <span class="highlight">void</span> setup() {};
+
+<span class="highlight">public</span>:
+    <span class="highlight">virtual</span> ~Resource() {};
+    <span class="highlight">virtual</span> <span class="highlight">void</span> unload() {};
+    <span class="highlight">bool</span>        isLoaded();
+    std::size_t getIDResource();
+    std::string getFilePath();
+    std::size_t getFileType();
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>isLoaded()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_resource_isloaded"></td>
+                        </tr>
+                        <tr>
+                            <td>getIDResource()</td>
+                            <td><code>std::size_t</code></td>
+                            <td data-i18n="api_resource_getid"></td>
+                        </tr>
+                        <tr>
+                            <td>getFilePath()</td>
+                            <td><code>std::string</code></td>
+                            <td data-i18n="api_resource_getfilepath"></td>
+                        </tr>
+                        <tr>
+                            <td>getFileType()</td>
+                            <td><code>std::size_t</code></td>
+                            <td data-i18n="api_resource_getfiletype"></td>
+                        </tr>
+                        <tr>
+                            <td>unload()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_resource_unload"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="resourcemanager_resource_ctor_callout"></span>
+            </div>
+        </div>
+
+        <!-- ResourceManager API -->
+        <div class="subsection">
+            <h3 data-i18n="section_resourcemanager_api"></h3>
+            <p class="section-desc" data-i18n="resourcemanager_api_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ResourceManager::getInstance()</td>
+                            <td><code>ResourceManager&amp;</code></td>
+                            <td data-i18n="api_rm_getinstance"></td>
+                        </tr>
+                        <tr>
+                            <td>loadResource&lt;T&gt;(filePath, args...)</td>
+                            <td><code>T*</code></td>
+                            <td data-i18n="api_rm_loadresource"></td>
+                        </tr>
+                        <tr>
+                            <td>getResource&lt;T&gt;(id)</td>
+                            <td><code>T*</code></td>
+                            <td data-i18n="api_rm_getresource"></td>
+                        </tr>
+                        <tr>
+                            <td>unloadResource(id)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_rm_unloadresource"></td>
+                        </tr>
+                        <tr>
+                            <td>unloadAllResources()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_rm_unloadall"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Deduplication / caching -->
+        <div class="subsection">
+            <h3 data-i18n="resourcemanager_dedup_title"></h3>
+            <p class="section-desc" data-i18n="resourcemanager_dedup_desc"></p>
+
+            <pre><span class="lang-label">text</span><code>loadResource&lt;T&gt;(filePath, args...)
+    │
+    ├── scans every loaded resource for a MATCH:
+    │       filePath equal   AND   stored type == typeid(T)
+    │
+    ├── match found   → returns the EXISTING T*  (args... are ignored!)
+    │
+    └── no match       → constructs a new T(nextID, typeid(T), filePath, args...)
+            ├── isLoaded() == true  → stores it, returns the new T*
+            └── isLoaded() == false → discards it, returns nullptr</code></pre>
         </div>
     </section>
 
