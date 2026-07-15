@@ -48,7 +48,6 @@
             <a href="#rectangle"       data-i18n="nav_rectangle"></a>
             <a href="#circle"          data-i18n="nav_circle"></a>
             <a href="#regular_polygon" data-i18n="nav_regular_polygon"></a>
-            <a href="#particles"       data-i18n="nav_particles"></a>
         </div>
 
         <div class="nav-group">
@@ -597,10 +596,123 @@
     </section>
 
     <section class="doc-section" id="camera2d">
-        <h2>Camera2D</h2>
-        <p class="section-desc" data-i18n="camera2d_desc"></p>
-        <div class="callout">
-            <a href="./camera2d.html" data-i18n="readmore"></a>
+        <h2 data-i18n="camera2d_title"></h2>
+        <p class="section-desc" data-i18n="camera2d_whatis_desc"></p>
+        <div class="header-meta">
+            <span class="tag">C++</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/managers/camera.hpp&gt;</span>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="camera2d_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="camera2d_feat_transform"></li>
+                <li data-i18n="camera2d_feat_zoom_rotation"></li>
+                <li data-i18n="camera2d_feat_inverse"></li>
+                <li data-i18n="camera2d_feat_pure"></li>
+            </ul>
+        </div>
+
+        <!-- Fields -->
+        <div class="subsection">
+            <h3 data-i18n="camera2d_fields_title"></h3>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Camera2D {
+    Vector2Df target   {};        <span class="comment">// World point the camera is looking at</span>
+    Vector2Df offset   {};        <span class="comment">// Where target appears on screen (px)</span>
+    <span class="highlight">float</span>     zoom     { <span class="num">1.0f</span> };
+    <span class="highlight">float</span>     rotation { <span class="num">0.0f</span> }; <span class="comment">// In degrees</span>
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>target</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_field_target"></td>
+                        </tr>
+                        <tr>
+                            <td>offset</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_field_offset"></td>
+                        </tr>
+                        <tr>
+                            <td>zoom</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="camera2d_field_zoom"></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="camera2d_field_rotation"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="camera2d_offset_callout"></span>
+            </div>
+        </div>
+
+        <!-- API -->
+        <div class="subsection">
+            <h3 data-i18n="section_camera2d_api"></h3>
+            <p class="section-desc" data-i18n="camera2d_api_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>WorldToScreen(worldPos)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_worldtoscreen"></td>
+                        </tr>
+                        <tr>
+                            <td>ScreenToWorld(screenPos)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_screentoworld"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="camera2d_pure_callout"></span>
+            </div>
+        </div>
+
+        <!-- How drawables use it -->
+        <div class="subsection">
+            <h3 data-i18n="camera2d_drawables_title"></h3>
+            <p class="section-desc" data-i18n="camera2d_drawables_desc"></p>
+
+            <pre><span class="lang-label">text</span><code><span class="highlight">Draw()</span>
+    │
+    └── vertices are treated as already being in screen/pixel space
+        (e.g. UI elements, HUD) the camera is never consulted
+
+<span class="highlight">Draw(camera)</span>
+    │
+    ├── for each vertex: screenPos = camera.<span class="highlight">WorldToScreen</span>(worldPos)
+    ├── converts each screenPos to NDC
+    └── uploads a temporary VAO/VBO/EBO for this single draw call,
+        then deletes it immediately afterwards</code></pre>
         </div>
     </section>
 
@@ -651,14 +763,6 @@
         <p class="section-desc" data-i18n="regular_polygon_desc"></p>
         <div class="callout">
             <a href="./regular_polygon.html" data-i18n="readmore"></a>
-        </div>
-    </section>
-
-    <section class="doc-section" id="particles">
-        <h2 data-i18n="section_particles"></h2>
-        <p class="section-desc" data-i18n="particles_desc"></p>
-        <div class="callout">
-            <a href="./particles.html" data-i18n="readmore"></a>
         </div>
     </section>
 
