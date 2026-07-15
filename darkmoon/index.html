@@ -1161,33 +1161,143 @@ hex.<span class="highlight">Draw</span>();</code></pre>
     <section class="doc-section" id="text">
         <h2 data-i18n="section_text"></h2>
         <p class="section-desc" data-i18n="text_desc"></p>
-        <div class="callout">
-            <a href="./text.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Text(position, text, fontPath, window, pixelHeight = 32.f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="text_ctor"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetText(text)</td><td><code>void</code></td><td data-i18n="text_settext"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="text_setscale"></td></tr>
+                    <tr><td>GetPosition() / GetColor() / GetText() / GetScale()</td><td><code>...</code></td><td data-i18n="text_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Unload()</td><td><code>void</code></td><td data-i18n="text_unload"></td></tr>
+                    <tr><td>MeasureText() / MeasureText(camera)</td><td><code>float</code></td><td data-i18n="text_measuretext"></td></tr>
+                    <tr><td>GetTextHeight() / GetTextHeight(camera)</td><td><code>float</code></td><td data-i18n="text_gettextheight"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Text label({ <span class="num">50</span>, <span class="num">50</span> }, <span class="str">"Hello DarkMoon"</span>, <span class="str">"assets/fonts/arial.ttf"</span>, &win, <span class="num">24.f</span>);
+label.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="texture">
         <h2 data-i18n="section_texture"></h2>
         <p class="section-desc" data-i18n="texture_desc"></p>
-        <div class="callout">
-            <a href="./texture.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Texture(position, scale, rotation, texturePath, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="texture_ctor"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="texture_setscale"></td></tr>
+                    <tr><td>SetRotation(rotation)</td><td><code>void</code></td><td data-i18n="texture_setrotation"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetTexture(texturePath)</td><td><code>void</code></td><td data-i18n="texture_settexture"></td></tr>
+                    <tr><td>SetOpacity(opacity)</td><td><code>void</code></td><td data-i18n="texture_setopacity"></td></tr>
+                    <tr><td>GetPosition() / GetScale() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="texture_getters"></td></tr>
+                    <tr><td>GetWidth() / GetHeight() / GetSize()</td><td><code>...</code></td><td data-i18n="texture_getsize"></td></tr>
+                    <tr><td>GetTextureWidth() / GetTextureHeight()</td><td><code>int</code></td><td data-i18n="texture_getrawsize"></td></tr>
+                    <tr><td>GetOpacity()</td><td><code>float</code></td><td data-i18n="texture_getopacity"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Texture sprite({ <span class="num">100</span>, <span class="num">100</span> }, { <span class="num">1.f</span>, <span class="num">1.f</span> }, <span class="num">0.f</span>, <span class="str">"assets/sprite.png"</span>, &win);
+sprite.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="animatedtexture">
         <h2 data-i18n="section_animatedtexture"></h2>
         <p class="section-desc" data-i18n="animatedtexture_desc"></p>
-        <div class="callout">
-            <a href="./animatedtexture.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>AnimatedTexture(position, scale, rotation, texturePath, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="animatedtexture_ctor"></td></tr>
+                    <tr><td>Update(dt)</td><td><code>void</code></td><td data-i18n="animatedtexture_update"></td></tr>
+                    <tr><td>Play() / Pause() / Reset()</td><td><code>void</code></td><td data-i18n="animatedtexture_playback"></td></tr>
+                    <tr><td>SetFrame(index)</td><td><code>void</code></td><td data-i18n="animatedtexture_setframe"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="texture_setscale"></td></tr>
+                    <tr><td>SetRotation(rotation)</td><td><code>void</code></td><td data-i18n="texture_setrotation"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetLooping(loop)</td><td><code>void</code></td><td data-i18n="animatedtexture_setlooping"></td></tr>
+                    <tr><td>SetSpeed(speed)</td><td><code>void</code></td><td data-i18n="animatedtexture_setspeed"></td></tr>
+                    <tr><td>SetTexture(texturePath)</td><td><code>void</code></td><td data-i18n="texture_settexture"></td></tr>
+                    <tr><td>GetPosition() / GetScale() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="texture_getters"></td></tr>
+                    <tr><td>GetWidth() / GetHeight() / GetSize()</td><td><code>...</code></td><td data-i18n="texture_getsize"></td></tr>
+                    <tr><td>GetTextureWidth() / GetTextureHeight()</td><td><code>int</code></td><td data-i18n="texture_getrawsize"></td></tr>
+                    <tr><td>GetFrameCount() / GetCurrentFrame() / IsPlaying() / IsLooping() / GetSpeed()</td><td><code>...</code></td><td data-i18n="animatedtexture_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>AnimatedTexture anim({ <span class="num">200</span>, <span class="num">200</span> }, { <span class="num">2.f</span>, <span class="num">2.f</span> }, <span class="num">0.f</span>, <span class="str">"assets/walk.gif"</span>, &win);
+
+<span class="comment">// En el bucle principal:</span>
+anim.<span class="highlight">Update</span>(deltaTime);
+anim.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="tileset">
         <h2 data-i18n="section_tileset"></h2>
         <p class="section-desc" data-i18n="tileset_desc"></p>
-        <div class="callout">
-            <a href="./tileset.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>TileSet(tileW, tileH, cols, rows, texturePath, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="tileset_ctor"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="texture_setscale"></td></tr>
+                    <tr><td>SetRotation(rotation)</td><td><code>void</code></td><td data-i18n="texture_setrotation"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetTexture(texturePath)</td><td><code>void</code></td><td data-i18n="texture_settexture"></td></tr>
+                    <tr><td>GetTileW() / GetTileH() / GetCols() / GetRows() / GetCount()</td><td><code>int</code></td><td data-i18n="tileset_getdims"></td></tr>
+                    <tr><td>GetScale() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="tileset_gettransform"></td></tr>
+                    <tr><td>GetTileWidth() / GetTileHeight()</td><td><code>float</code></td><td data-i18n="tileset_getscaledsize"></td></tr>
+                    <tr><td>Draw(col, row, pos) / Draw(index, pos)</td><td><code>void</code></td><td data-i18n="tileset_draw"></td></tr>
+                    <tr><td>Draw(col, row, pos, camera) / Draw(index, pos, camera)</td><td><code>void</code></td><td data-i18n="tileset_draw_camera"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>TileSet tileset(<span class="num">32</span>, <span class="num">32</span>, <span class="num">8</span>, <span class="num">8</span>, <span class="str">"assets/tileset.png"</span>, &win);
+tileset.<span class="highlight">Draw</span>(<span class="num">3</span>, <span class="num">2</span>, { <span class="num">64</span>, <span class="num">64</span> }); <span class="comment">// por columna/fila</span>
+tileset.<span class="highlight">Draw</span>(<span class="num">19</span>, { <span class="num">96</span>, <span class="num">64</span> });   <span class="comment">// por índice lineal</span></code></pre>
     </section>
 
     <!-- EXTRA -->
