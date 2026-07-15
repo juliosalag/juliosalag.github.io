@@ -721,49 +721,290 @@
     <section class="doc-section" id="pixel">
         <h2 data-i18n="section_pixel"></h2>
         <p class="section-desc" data-i18n="pixel_desc"></p>
-        <div class="callout">
-            <a href="./pixel.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Pixel(position, color, size, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="pixel_ctor"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetSize(size)</td><td><code>void</code></td><td data-i18n="pixel_setsize"></td></tr>
+                    <tr><td>SetShader(shader)</td><td><code>void</code></td><td data-i18n="shape_setshader"></td></tr>
+                    <tr><td>GetPosition() / GetColor() / GetSize() / GetShader()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <div class="callout">
+            <span data-i18n="pixel_size_callout"></span>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Pixel dot({ <span class="num">100</span>, <span class="num">100</span> }, RED, <span class="num">4</span>, &win);
+dot.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="line">
         <h2 data-i18n="section_line"></h2>
         <p class="section-desc" data-i18n="line_desc"></p>
-        <div class="callout">
-            <a href="./line.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Line(startPosition, endPosition, color, width, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="line_ctor"></td></tr>
+                    <tr><td>SetPosition(start, end)</td><td><code>void</code></td><td data-i18n="line_setposition"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetWidth(width)</td><td><code>void</code></td><td data-i18n="line_setwidth"></td></tr>
+                    <tr><td>SetShader(shader)</td><td><code>void</code></td><td data-i18n="shape_setshader"></td></tr>
+                    <tr><td>GetStartPosition() / GetEndPosition() / GetColor() / GetWidth() / GetShader()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <div class="callout">
+            <span data-i18n="line_width_callout"></span>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Line edge({ <span class="num">0</span>, <span class="num">0</span> }, { <span class="num">200</span>, <span class="num">100</span> }, WHITE, <span class="num">2</span>, &win);
+edge.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="triangle">
         <h2 data-i18n="section_triangle"></h2>
         <p class="section-desc" data-i18n="triangle_desc"></p>
-        <div class="callout">
-            <a href="./triangle.html" data-i18n="readmore"></a>
+
+        <div class="subsection">
+            <h3>Triangle</h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Triangle(vertexA, vertexB, vertexC, color, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="triangle_ctor"></td></tr>
+                        <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="triangle_setposition"></td></tr>
+                        <tr><td>SetVertexA(v) / SetVertexB(v) / SetVertexC(v)</td><td><code>void</code></td><td data-i18n="shape_setvertex"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetVertexA() / GetVertexB() / GetVertexC() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>TriangleLines</h3>
+            <p class="section-desc" data-i18n="triangle_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>TriangleLines(vertexA, vertexB, vertexC, color, width, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="triangle_lines_ctor"></td></tr>
+                        <tr><td>GetEdgeAB() / GetEdgeBC() / GetEdgeCA()</td><td><code>Line*</code></td><td data-i18n="triangle_lines_getedge"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Triangle tri({ <span class="num">100</span>,<span class="num">200</span> }, { <span class="num">150</span>,<span class="num">100</span> }, { <span class="num">200</span>,<span class="num">200</span> }, YELLOW, &win);
+tri.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="rectangle">
         <h2 data-i18n="section_rectangle"></h2>
         <p class="section-desc" data-i18n="rectangle_desc"></p>
-        <div class="callout">
-            <a href="./rectangle.html" data-i18n="readmore"></a>
+
+        <div class="subsection">
+            <h3>Rectangle</h3>
+            <pre><span class="lang-label">text</span><code>A --- B
+|     |
+C --- D</code></pre>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Rectangle(position, width, height, color, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="rectangle_ctor_size"></td></tr>
+                        <tr><td>Rectangle(vertexA, vertexB, vertexC, vertexD, color, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="rectangle_ctor_verts"></td></tr>
+                        <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="rectangle_setposition"></td></tr>
+                        <tr><td>SetVertexA(v) / B(v) / C(v) / D(v)</td><td><code>void</code></td><td data-i18n="shape_setvertex"></td></tr>
+                        <tr><td>SetWidth(w) / SetHeight(h) / SetSize(w,h)</td><td><code>void</code></td><td data-i18n="rectangle_setsize"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetVertexA..D() / GetPosition() / GetWidth() / GetHeight() / GetSize() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>RectangleLines</h3>
+            <p class="section-desc" data-i18n="rectangle_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>RectangleLines(position, width, height, color, lineWidth, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="rectangle_lines_ctor"></td></tr>
+                        <tr><td>GetEdgeAB() / GetEdgeBD() / GetEdgeCD() / GetEdgeCA()</td><td><code>Line*</code></td><td data-i18n="rectangle_lines_getedge"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Rectangle box({ <span class="num">50</span>, <span class="num">50</span> }, <span class="num">120</span>, <span class="num">80</span>, BLUE, &win);
+box.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="circle">
         <h2 data-i18n="section_circle"></h2>
         <p class="section-desc" data-i18n="circle_desc"></p>
-        <div class="callout">
-            <a href="./circle.html" data-i18n="readmore"></a>
+
+        <div class="subsection">
+            <h3>Circle</h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Circle(center, radius, color, window, segments = 64, shader = nullptr)</td><td><code>-</code></td><td data-i18n="circle_ctor"></td></tr>
+                        <tr><td>SetCenter(center) / SetRadius(radius) / SetSegments(segments)</td><td><code>void</code></td><td data-i18n="circle_setters"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetCenter() / GetRadius() / GetSegments() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>CircleLines</h3>
+            <p class="section-desc" data-i18n="circle_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>CircleLines(center, radius, color, window, segments = 64, lineWidth = 1.0f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="circle_lines_ctor"></td></tr>
+                        <tr><td>SetCenter / SetRadius / SetSegments / SetLineWidth</td><td><code>void</code></td><td data-i18n="circle_lines_setters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Circle sun({ <span class="num">400</span>, <span class="num">300</span> }, <span class="num">50.0f</span>, ORANGE, &win);
+sun.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="regular_polygon">
         <h2 data-i18n="section_regular_polygon"></h2>
         <p class="section-desc" data-i18n="regular_polygon_desc"></p>
-        <div class="callout">
-            <a href="./regular_polygon.html" data-i18n="readmore"></a>
+
+        <div class="subsection">
+            <h3>RegularPolygon</h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>RegularPolygon(center, radius, sides, color, window, rotation = -1000.0f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="regularpolygon_ctor"></td></tr>
+                        <tr><td>SetCenter / SetRadius / SetSides / SetRotation</td><td><code>void</code></td><td data-i18n="regularpolygon_setters"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetCenter() / GetRadius() / GetSides() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>RegularPolygonLines</h3>
+            <p class="section-desc" data-i18n="regularpolygon_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>RegularPolygonLines(center, radius, sides, color, window, rotation = -1000.0f, lineWidth = 1.0f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="regularpolygon_lines_ctor"></td></tr>
+                        <tr><td>SetCenter / SetRadius / SetSides / SetRotation / SetLineWidth</td><td><code>void</code></td><td data-i18n="regularpolygon_lines_setters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>RegularPolygon hex({ <span class="num">300</span>, <span class="num">300</span> }, <span class="num">60.0f</span>, <span class="num">6</span>, GREEN, &win, <span class="num">0.0f</span>); <span class="comment">// explicit rotation, avoids the -1000 sentinel</span>
+hex.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <!-- ADVANCED GRAPHICS  -->
