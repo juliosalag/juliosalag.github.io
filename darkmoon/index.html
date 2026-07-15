@@ -48,7 +48,6 @@
             <a href="#rectangle"       data-i18n="nav_rectangle"></a>
             <a href="#circle"          data-i18n="nav_circle"></a>
             <a href="#regular_polygon" data-i18n="nav_regular_polygon"></a>
-            <a href="#particles"       data-i18n="nav_particles"></a>
         </div>
 
         <div class="nav-group">
@@ -144,6 +143,21 @@
         <h2 data-i18n="section_install"></h2>
         <p class="section-desc" data-i18n="install_desc"></p>
 
+        <div class="lib-grid">
+            <a href="https://github.com/juliosalag/darkmoon-engine/tree/1.0" target="_blank" style="text-decoration: none;">
+                <div class="lib-badge">
+                    <span class="lib-name">Version 1.0</span>
+                    <span class="lib-desc">Github</span>
+                </div>
+            </a>
+            <a href="https://github.com/juliosalag/darkmoon-engine/tree/2.0" target="_blank" style="text-decoration: none;">
+                <div class="lib-badge">
+                    <span class="lib-name">Version 2.0</span>
+                    <span class="lib-desc">Github</span>
+                </div>
+            </a>
+        </div>
+
         <div class="subsection">
             <h3 data-i18n="supported_platforms"></h3>
             <p data-i18n="supported_platforms_desc"></p>
@@ -187,12 +201,10 @@
                 <span class="lib-name">stb_truetype</span>
                 <span class="lib-desc">Font Rendering</span>
             </div></a>
-            <!--
-            <div class="lib-badge">
-                <span class="lib-name">FMOD</span>
-                <span class="lib-desc">Audio</span>
-            </div>
-            -->
+            <a href="https://miniaud.io/" target="_blank" style="text-decoration: none;"><div class="lib-badge">
+                <span class="lib-name">miniaudio</span>
+                <span class="lib-desc">Audio Playback</span>
+            </div></a>
         </div>
     </section>
 
@@ -218,18 +230,504 @@
     </section>
 
     <section class="doc-section" id="monitor">
-        <h2>Monitor</h2>
-        <p class="section-desc" data-i18n="monitor_desc"></p>
-        <div class="callout">
-            <a href="./monitor.html" data-i18n="readmore"></a>
+        <h2 data-i18n="monitor_title"></h2>
+        <p class="section-desc" data-i18n="monitor_whatis_desc"></p>
+        <div class="header-meta">
+            <span class="tag">GLFW</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/managers/monitor.hpp&gt;</span>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="monitor_feat_enumerate"></li>
+                <li data-i18n="monitor_feat_videomodes"></li>
+                <li data-i18n="monitor_feat_physical"></li>
+                <li data-i18n="monitor_feat_workarea"></li>
+                <li data-i18n="monitor_feat_gamma"></li>
+                <li data-i18n="monitor_feat_events"></li>
+            </ul>
+        </div>
+
+        <!-- Setup -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_setup"></h3>
+            <p class="section-desc" data-i18n="monitor_setup_desc"></p>
+
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main(){
+    DarkMoonEngine dm{};
+
+    Monitor primary = dm.<span class="highlight">GetPrimaryMonitor</span>();
+    std::cout << "Primary monitor: " << primary.<span class="highlight">getName</span>() << "\n";
+
+    Window win = Window(<span class="num">800</span>, <span class="num">600</span>, "Monitor Example");
+    win.<span class="highlight">SetFullscreen</span>(primary); <span class="comment">// Monitor::getPrimary() is also the default</span>
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Connect/disconnect events -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_events"></h3>
+            <p class="section-desc" data-i18n="monitor_events_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monitor::initCallback()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_initcallback"></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor::wasConnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_wasconnected"></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor::wasDisconnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_wasdisconnected"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Gamma -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_gamma"></h3>
+            <p class="section-desc" data-i18n="monitor_gamma_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getGammaRamp()</td>
+                            <td><code>GammaRamp</code></td>
+                            <td data-i18n="api_monitor_getgammaramp"></td>
+                        </tr>
+                        <tr>
+                            <td>setGammaRamp(ramp)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_setgammaramp"></td>
+                        </tr>
+                        <tr>
+                            <td>setGamma(gamma)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_setgamma"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="monitor_gamma_callout"></span>
+            </div>
+        </div>
+
+        <!-- Monitor API -->
+        <div class="subsection">
+            <h3 data-i18n="monitor_validity_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monitor(handle = nullptr)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="api_monitor_ctor"></td>
+                        </tr>
+                        <tr>
+                            <td>isValid()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_isvalid"></td>
+                        </tr>
+                        <tr>
+                            <td>operator bool()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_operatorbool"></td>
+                        </tr>
+                        <tr>
+                            <td>handle()</td>
+                            <td><code>GLFWmonitor*</code></td>
+                            <td data-i18n="api_monitor_handle"></td>
+                        </tr>
+                        <tr>
+                            <td>operator==(other) / operator!=(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_compare"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_retrieval_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monitor::getAll()</td>
+                            <td><code>std::vector&lt;Monitor&gt;</code></td>
+                            <td data-i18n="api_monitor_getall"></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor::getPrimary()</td>
+                            <td><code>Monitor</code></td>
+                            <td data-i18n="api_monitor_getprimary"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_videomodes_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getVideoModes()</td>
+                            <td><code>std::vector&lt;VideoMode&gt;</code></td>
+                            <td data-i18n="api_monitor_getvideomodes"></td>
+                        </tr>
+                        <tr>
+                            <td>getCurrentVideoMode()</td>
+                            <td><code>VideoMode</code></td>
+                            <td data-i18n="api_monitor_getcurrentvideomode"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_geometry_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getPhysicalSize()</td>
+                            <td><code>PhysicalSize</code></td>
+                            <td data-i18n="api_monitor_getphysicalsize"></td>
+                        </tr>
+                        <tr>
+                            <td>getContentScale()</td>
+                            <td><code>ContentScale</code></td>
+                            <td data-i18n="api_monitor_getcontentscale"></td>
+                        </tr>
+                        <tr>
+                            <td>getPosition()</td>
+                            <td><code>VirtualPosition</code></td>
+                            <td data-i18n="api_monitor_getposition"></td>
+                        </tr>
+                        <tr>
+                            <td>getWorkArea()</td>
+                            <td><code>WorkArea</code></td>
+                            <td data-i18n="api_monitor_getworkarea"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_misc_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getName()</td>
+                            <td><code>std::string</code></td>
+                            <td data-i18n="api_monitor_getname"></td>
+                        </tr>
+                        <tr>
+                            <td>setUserPointer(ptr)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_setuserpointer"></td>
+                        </tr>
+                        <tr>
+                            <td>getUserPointer()</td>
+                            <td><code>void*</code></td>
+                            <td data-i18n="api_monitor_getuserpointer"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_darkmoonengine_title"></h3>
+            <p class="section-desc" data-i18n="monitor_darkmoonengine_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GetPrimaryMonitor()</td>
+                            <td><code>Monitor</code></td>
+                            <td data-i18n="api_engine_getprimarymonitor"></td>
+                        </tr>
+                        <tr>
+                            <td>GetMonitors()</td>
+                            <td><code>std::vector&lt;Monitor&gt;</code></td>
+                            <td data-i18n="api_engine_getmonitors"></td>
+                        </tr>
+                        <tr>
+                            <td>MonitorConnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_engine_monitorconnected"></td>
+                        </tr>
+                        <tr>
+                            <td>MonitorDisconnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_engine_monitordisconnected"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Supporting types -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_types_api"></h3>
+            <p class="section-desc" data-i18n="monitor_types_api_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VideoMode</td>
+                            <td data-i18n="type_videomode_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>PhysicalSize</td>
+                            <td data-i18n="type_physicalsize_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>ContentScale</td>
+                            <td data-i18n="type_contentscale_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>VirtualPosition</td>
+                            <td data-i18n="type_virtualposition_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>WorkArea</td>
+                            <td data-i18n="type_workarea_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>GammaRamp</td>
+                            <td data-i18n="type_gammaramp_desc"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> VideoMode {
+    <span class="highlight">int</span> width, height;
+    <span class="highlight">int</span> redBits, greenBits, blueBits;
+    <span class="highlight">int</span> refreshRate;
+};
+
+<span class="highlight">struct</span> PhysicalSize    { <span class="highlight">int</span> widthMM, heightMM; };
+<span class="highlight">struct</span> ContentScale   { <span class="highlight">float</span> x, y; };
+<span class="highlight">struct</span> VirtualPosition{ <span class="highlight">int</span> x, y; };
+<span class="highlight">struct</span> WorkArea       { <span class="highlight">int</span> x, y, width, height; };
+
+<span class="highlight">struct</span> GammaRamp {
+    std::vector&lt;<span class="highlight">unsigned short</span>&gt; red, green, blue;
+    <span class="highlight">unsigned int</span> size() <span class="highlight">const</span>;
+};</code></pre>
         </div>
     </section>
 
     <section class="doc-section" id="camera2d">
-        <h2>Camera2D</h2>
-        <p class="section-desc" data-i18n="camera2d_desc"></p>
-        <div class="callout">
-            <a href="./camera2d.html" data-i18n="readmore"></a>
+        <h2 data-i18n="camera2d_title"></h2>
+        <p class="section-desc" data-i18n="camera2d_whatis_desc"></p>
+        <div class="header-meta">
+            <span class="tag">C++</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/managers/camera.hpp&gt;</span>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="camera2d_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="camera2d_feat_transform"></li>
+                <li data-i18n="camera2d_feat_zoom_rotation"></li>
+                <li data-i18n="camera2d_feat_inverse"></li>
+                <li data-i18n="camera2d_feat_pure"></li>
+            </ul>
+        </div>
+
+        <!-- Fields -->
+        <div class="subsection">
+            <h3 data-i18n="camera2d_fields_title"></h3>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Camera2D {
+    Vector2Df target   {};        <span class="comment">// World point the camera is looking at</span>
+    Vector2Df offset   {};        <span class="comment">// Where target appears on screen (px)</span>
+    <span class="highlight">float</span>     zoom     { <span class="num">1.0f</span> };
+    <span class="highlight">float</span>     rotation { <span class="num">0.0f</span> }; <span class="comment">// In degrees</span>
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>target</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_field_target"></td>
+                        </tr>
+                        <tr>
+                            <td>offset</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_field_offset"></td>
+                        </tr>
+                        <tr>
+                            <td>zoom</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="camera2d_field_zoom"></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><code>float</code></td>
+                            <td data-i18n="camera2d_field_rotation"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="camera2d_offset_callout"></span>
+            </div>
+        </div>
+
+        <!-- API -->
+        <div class="subsection">
+            <h3 data-i18n="section_camera2d_api"></h3>
+            <p class="section-desc" data-i18n="camera2d_api_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>WorldToScreen(worldPos)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_worldtoscreen"></td>
+                        </tr>
+                        <tr>
+                            <td>ScreenToWorld(screenPos)</td>
+                            <td><code>Vector2Df</code></td>
+                            <td data-i18n="camera2d_screentoworld"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="camera2d_pure_callout"></span>
+            </div>
+        </div>
+
+        <!-- How drawables use it -->
+        <div class="subsection">
+            <h3 data-i18n="camera2d_drawables_title"></h3>
+            <p class="section-desc" data-i18n="camera2d_drawables_desc"></p>
+
+            <pre><span class="lang-label">text</span><code><span class="highlight">Draw()</span>
+    │
+    └── vertices are treated as already being in screen/pixel space
+        (e.g. UI elements, HUD) the camera is never consulted
+
+<span class="highlight">Draw(camera)</span>
+    │
+    ├── for each vertex: screenPos = camera.<span class="highlight">WorldToScreen</span>(worldPos)
+    ├── converts each screenPos to NDC
+    └── uploads a temporary VAO/VBO/EBO for this single draw call,
+        then deletes it immediately afterwards</code></pre>
         </div>
     </section>
 
@@ -238,99 +736,583 @@
     <section class="doc-section" id="pixel">
         <h2 data-i18n="section_pixel"></h2>
         <p class="section-desc" data-i18n="pixel_desc"></p>
-        <div class="callout">
-            <a href="./pixel.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Pixel(position, color, size, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="pixel_ctor"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetSize(size)</td><td><code>void</code></td><td data-i18n="pixel_setsize"></td></tr>
+                    <tr><td>SetShader(shader)</td><td><code>void</code></td><td data-i18n="shape_setshader"></td></tr>
+                    <tr><td>GetPosition() / GetColor() / GetSize() / GetShader()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <div class="callout">
+            <span data-i18n="pixel_size_callout"></span>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Pixel dot({ <span class="num">100</span>, <span class="num">100</span> }, RED, <span class="num">4</span>, &win);
+dot.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="line">
         <h2 data-i18n="section_line"></h2>
         <p class="section-desc" data-i18n="line_desc"></p>
-        <div class="callout">
-            <a href="./line.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Line(startPosition, endPosition, color, width, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="line_ctor"></td></tr>
+                    <tr><td>SetPosition(start, end)</td><td><code>void</code></td><td data-i18n="line_setposition"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetWidth(width)</td><td><code>void</code></td><td data-i18n="line_setwidth"></td></tr>
+                    <tr><td>SetShader(shader)</td><td><code>void</code></td><td data-i18n="shape_setshader"></td></tr>
+                    <tr><td>GetStartPosition() / GetEndPosition() / GetColor() / GetWidth() / GetShader()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <div class="callout">
+            <span data-i18n="line_width_callout"></span>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Line edge({ <span class="num">0</span>, <span class="num">0</span> }, { <span class="num">200</span>, <span class="num">100</span> }, WHITE, <span class="num">2</span>, &win);
+edge.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="triangle">
         <h2 data-i18n="section_triangle"></h2>
         <p class="section-desc" data-i18n="triangle_desc"></p>
-        <div class="callout">
-            <a href="./triangle.html" data-i18n="readmore"></a>
+
+        <div class="subsection">
+            <h3>Triangle</h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Triangle(vertexA, vertexB, vertexC, color, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="triangle_ctor"></td></tr>
+                        <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="triangle_setposition"></td></tr>
+                        <tr><td>SetVertexA(v) / SetVertexB(v) / SetVertexC(v)</td><td><code>void</code></td><td data-i18n="shape_setvertex"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetVertexA() / GetVertexB() / GetVertexC() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>TriangleLines</h3>
+            <p class="section-desc" data-i18n="triangle_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>TriangleLines(vertexA, vertexB, vertexC, color, width, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="triangle_lines_ctor"></td></tr>
+                        <tr><td>GetEdgeAB() / GetEdgeBC() / GetEdgeCA()</td><td><code>Line*</code></td><td data-i18n="triangle_lines_getedge"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Triangle tri({ <span class="num">100</span>,<span class="num">200</span> }, { <span class="num">150</span>,<span class="num">100</span> }, { <span class="num">200</span>,<span class="num">200</span> }, YELLOW, &win);
+tri.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="rectangle">
         <h2 data-i18n="section_rectangle"></h2>
         <p class="section-desc" data-i18n="rectangle_desc"></p>
-        <div class="callout">
-            <a href="./rectangle.html" data-i18n="readmore"></a>
+
+        <div class="subsection">
+            <h3>Rectangle</h3>
+            <pre><span class="lang-label">text</span><code>A --- B
+|     |
+C --- D</code></pre>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Rectangle(position, width, height, color, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="rectangle_ctor_size"></td></tr>
+                        <tr><td>Rectangle(vertexA, vertexB, vertexC, vertexD, color, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="rectangle_ctor_verts"></td></tr>
+                        <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="rectangle_setposition"></td></tr>
+                        <tr><td>SetVertexA(v) / B(v) / C(v) / D(v)</td><td><code>void</code></td><td data-i18n="shape_setvertex"></td></tr>
+                        <tr><td>SetWidth(w) / SetHeight(h) / SetSize(w,h)</td><td><code>void</code></td><td data-i18n="rectangle_setsize"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetVertexA..D() / GetPosition() / GetWidth() / GetHeight() / GetSize() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>RectangleLines</h3>
+            <p class="section-desc" data-i18n="rectangle_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>RectangleLines(position, width, height, color, lineWidth, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="rectangle_lines_ctor"></td></tr>
+                        <tr><td>GetEdgeAB() / GetEdgeBD() / GetEdgeCD() / GetEdgeCA()</td><td><code>Line*</code></td><td data-i18n="rectangle_lines_getedge"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Rectangle box({ <span class="num">50</span>, <span class="num">50</span> }, <span class="num">120</span>, <span class="num">80</span>, BLUE, &win);
+box.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="circle">
         <h2 data-i18n="section_circle"></h2>
         <p class="section-desc" data-i18n="circle_desc"></p>
-        <div class="callout">
-            <a href="./circle.html" data-i18n="readmore"></a>
+
+        <div class="subsection">
+            <h3>Circle</h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Circle(center, radius, color, window, segments = 64, shader = nullptr)</td><td><code>-</code></td><td data-i18n="circle_ctor"></td></tr>
+                        <tr><td>SetCenter(center) / SetRadius(radius) / SetSegments(segments)</td><td><code>void</code></td><td data-i18n="circle_setters"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetCenter() / GetRadius() / GetSegments() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>CircleLines</h3>
+            <p class="section-desc" data-i18n="circle_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>CircleLines(center, radius, color, window, segments = 64, lineWidth = 1.0f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="circle_lines_ctor"></td></tr>
+                        <tr><td>SetCenter / SetRadius / SetSegments / SetLineWidth</td><td><code>void</code></td><td data-i18n="circle_lines_setters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Circle sun({ <span class="num">400</span>, <span class="num">300</span> }, <span class="num">50.0f</span>, ORANGE, &win);
+sun.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="regular_polygon">
         <h2 data-i18n="section_regular_polygon"></h2>
         <p class="section-desc" data-i18n="regular_polygon_desc"></p>
-        <div class="callout">
-            <a href="./regular_polygon.html" data-i18n="readmore"></a>
-        </div>
-    </section>
 
-    <section class="doc-section" id="particles">
-        <h2 data-i18n="section_particles"></h2>
-        <p class="section-desc" data-i18n="particles_desc"></p>
-        <div class="callout">
-            <a href="./particles.html" data-i18n="readmore"></a>
+        <div class="subsection">
+            <h3>RegularPolygon</h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>RegularPolygon(center, radius, sides, color, window, rotation = -1000.0f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="regularpolygon_ctor"></td></tr>
+                        <tr><td>SetCenter / SetRadius / SetSides / SetRotation</td><td><code>void</code></td><td data-i18n="regularpolygon_setters"></td></tr>
+                        <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                        <tr><td>GetCenter() / GetRadius() / GetSides() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="shape_getters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div class="subsection">
+            <h3>RegularPolygonLines</h3>
+            <p class="section-desc" data-i18n="regularpolygon_lines_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>RegularPolygonLines(center, radius, sides, color, window, rotation = -1000.0f, lineWidth = 1.0f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="regularpolygon_lines_ctor"></td></tr>
+                        <tr><td>SetCenter / SetRadius / SetSides / SetRotation / SetLineWidth</td><td><code>void</code></td><td data-i18n="regularpolygon_lines_setters"></td></tr>
+                        <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                        <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>RegularPolygon hex({ <span class="num">300</span>, <span class="num">300</span> }, <span class="num">60.0f</span>, <span class="num">6</span>, GREEN, &win, <span class="num">0.0f</span>); <span class="comment">// explicit rotation, avoids the -1000 sentinel</span>
+hex.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <!-- ADVANCED GRAPHICS  -->
 
     <section class="doc-section" id="resourcemanager">
-        <h2>ResourceManager</h2>
-        <p class="section-desc" data-i18n="resourcemanager_desc"></p>
-        <div class="callout">
-            <a href="./resourcemanager.html" data-i18n="readmore"></a>
+        <h2 data-i18n="resourcemanager_title"></h2>
+        <p class="section-desc" data-i18n="resourcemanager_whatis_desc"></p>
+        <div class="header-meta">
+            <span class="tag">C++</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/managers/resource_manager.hpp&gt;</span>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="resourcemanager_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="resourcemanager_feat_singleton"></li>
+                <li data-i18n="resourcemanager_feat_dedup"></li>
+                <li data-i18n="resourcemanager_feat_ownership"></li>
+                <li data-i18n="resourcemanager_feat_generic"></li>
+            </ul>
+        </div>
+
+        <!-- Resource base class -->
+        <div class="subsection">
+            <h3 data-i18n="resourcemanager_resource_title"></h3>
+            <p class="section-desc" data-i18n="resourcemanager_resource_desc"></p>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> Resource {
+<span class="highlight">protected</span>:
+    std::size_t m_idResource { <span class="num">0</span> };
+    std::size_t m_fileType   {};
+    std::string m_filePath   {};
+    <span class="highlight">bool</span>        m_isLoaded  { <span class="highlight">false</span> };
+
+    Resource(std::size_t idResource, std::size_t fileType, <span class="highlight">const</span> <span class="highlight">char</span>* filePath);
+    <span class="highlight">virtual</span> <span class="highlight">void</span> setup() {};
+
+<span class="highlight">public</span>:
+    <span class="highlight">virtual</span> ~Resource() {};
+    <span class="highlight">virtual</span> <span class="highlight">void</span> unload() {};
+    <span class="highlight">bool</span>        isLoaded();
+    std::size_t getIDResource();
+    std::string getFilePath();
+    std::size_t getFileType();
+};</code></pre>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>isLoaded()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_resource_isloaded"></td>
+                        </tr>
+                        <tr>
+                            <td>getIDResource()</td>
+                            <td><code>std::size_t</code></td>
+                            <td data-i18n="api_resource_getid"></td>
+                        </tr>
+                        <tr>
+                            <td>getFilePath()</td>
+                            <td><code>std::string</code></td>
+                            <td data-i18n="api_resource_getfilepath"></td>
+                        </tr>
+                        <tr>
+                            <td>getFileType()</td>
+                            <td><code>std::size_t</code></td>
+                            <td data-i18n="api_resource_getfiletype"></td>
+                        </tr>
+                        <tr>
+                            <td>unload()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_resource_unload"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="resourcemanager_resource_ctor_callout"></span>
+            </div>
+        </div>
+
+        <!-- ResourceManager API -->
+        <div class="subsection">
+            <h3 data-i18n="section_resourcemanager_api"></h3>
+            <p class="section-desc" data-i18n="resourcemanager_api_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ResourceManager::getInstance()</td>
+                            <td><code>ResourceManager&amp;</code></td>
+                            <td data-i18n="api_rm_getinstance"></td>
+                        </tr>
+                        <tr>
+                            <td>loadResource&lt;T&gt;(filePath, args...)</td>
+                            <td><code>T*</code></td>
+                            <td data-i18n="api_rm_loadresource"></td>
+                        </tr>
+                        <tr>
+                            <td>getResource&lt;T&gt;(id)</td>
+                            <td><code>T*</code></td>
+                            <td data-i18n="api_rm_getresource"></td>
+                        </tr>
+                        <tr>
+                            <td>unloadResource(id)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_rm_unloadresource"></td>
+                        </tr>
+                        <tr>
+                            <td>unloadAllResources()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_rm_unloadall"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Deduplication / caching -->
+        <div class="subsection">
+            <h3 data-i18n="resourcemanager_dedup_title"></h3>
+            <p class="section-desc" data-i18n="resourcemanager_dedup_desc"></p>
+
+            <pre><span class="lang-label">text</span><code>loadResource&lt;T&gt;(filePath, args...)
+    │
+    ├── scans every loaded resource for a MATCH:
+    │       filePath equal   AND   stored type == typeid(T)
+    │
+    ├── match found   → returns the EXISTING T*  (args... are ignored!)
+    │
+    └── no match       → constructs a new T(nextID, typeid(T), filePath, args...)
+            ├── isLoaded() == true  → stores it, returns the new T*
+            └── isLoaded() == false → discards it, returns nullptr</code></pre>
         </div>
     </section>
 
     <section class="doc-section" id="text">
         <h2 data-i18n="section_text"></h2>
         <p class="section-desc" data-i18n="text_desc"></p>
-        <div class="callout">
-            <a href="./text.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Text(position, text, fontPath, window, pixelHeight = 32.f, shader = nullptr)</td><td><code>-</code></td><td data-i18n="text_ctor"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetText(text)</td><td><code>void</code></td><td data-i18n="text_settext"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="text_setscale"></td></tr>
+                    <tr><td>GetPosition() / GetColor() / GetText() / GetScale()</td><td><code>...</code></td><td data-i18n="text_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Unload()</td><td><code>void</code></td><td data-i18n="text_unload"></td></tr>
+                    <tr><td>MeasureText() / MeasureText(camera)</td><td><code>float</code></td><td data-i18n="text_measuretext"></td></tr>
+                    <tr><td>GetTextHeight() / GetTextHeight(camera)</td><td><code>float</code></td><td data-i18n="text_gettextheight"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Text label({ <span class="num">50</span>, <span class="num">50</span> }, <span class="str">"Hello DarkMoon"</span>, <span class="str">"assets/fonts/arial.ttf"</span>, &win, <span class="num">24.f</span>);
+label.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="texture">
         <h2 data-i18n="section_texture"></h2>
         <p class="section-desc" data-i18n="texture_desc"></p>
-        <div class="callout">
-            <a href="./texture.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Texture(position, scale, rotation, texturePath, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="texture_ctor"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="texture_setscale"></td></tr>
+                    <tr><td>SetRotation(rotation)</td><td><code>void</code></td><td data-i18n="texture_setrotation"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetTexture(texturePath)</td><td><code>void</code></td><td data-i18n="texture_settexture"></td></tr>
+                    <tr><td>SetOpacity(opacity)</td><td><code>void</code></td><td data-i18n="texture_setopacity"></td></tr>
+                    <tr><td>GetPosition() / GetScale() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="texture_getters"></td></tr>
+                    <tr><td>GetWidth() / GetHeight() / GetSize()</td><td><code>...</code></td><td data-i18n="texture_getsize"></td></tr>
+                    <tr><td>GetTextureWidth() / GetTextureHeight()</td><td><code>int</code></td><td data-i18n="texture_getrawsize"></td></tr>
+                    <tr><td>GetOpacity()</td><td><code>float</code></td><td data-i18n="texture_getopacity"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>Texture sprite({ <span class="num">100</span>, <span class="num">100</span> }, { <span class="num">1.f</span>, <span class="num">1.f</span> }, <span class="num">0.f</span>, <span class="str">"assets/sprite.png"</span>, &win);
+sprite.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="animatedtexture">
         <h2 data-i18n="section_animatedtexture"></h2>
         <p class="section-desc" data-i18n="animatedtexture_desc"></p>
-        <div class="callout">
-            <a href="./animatedtexture.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>AnimatedTexture(position, scale, rotation, texturePath, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="animatedtexture_ctor"></td></tr>
+                    <tr><td>Update(dt)</td><td><code>void</code></td><td data-i18n="animatedtexture_update"></td></tr>
+                    <tr><td>Play() / Pause() / Reset()</td><td><code>void</code></td><td data-i18n="animatedtexture_playback"></td></tr>
+                    <tr><td>SetFrame(index)</td><td><code>void</code></td><td data-i18n="animatedtexture_setframe"></td></tr>
+                    <tr><td>SetPosition(position)</td><td><code>void</code></td><td data-i18n="shape_setposition"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="texture_setscale"></td></tr>
+                    <tr><td>SetRotation(rotation)</td><td><code>void</code></td><td data-i18n="texture_setrotation"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetLooping(loop)</td><td><code>void</code></td><td data-i18n="animatedtexture_setlooping"></td></tr>
+                    <tr><td>SetSpeed(speed)</td><td><code>void</code></td><td data-i18n="animatedtexture_setspeed"></td></tr>
+                    <tr><td>SetTexture(texturePath)</td><td><code>void</code></td><td data-i18n="texture_settexture"></td></tr>
+                    <tr><td>GetPosition() / GetScale() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="texture_getters"></td></tr>
+                    <tr><td>GetWidth() / GetHeight() / GetSize()</td><td><code>...</code></td><td data-i18n="texture_getsize"></td></tr>
+                    <tr><td>GetTextureWidth() / GetTextureHeight()</td><td><code>int</code></td><td data-i18n="texture_getrawsize"></td></tr>
+                    <tr><td>GetFrameCount() / GetCurrentFrame() / IsPlaying() / IsLooping() / GetSpeed()</td><td><code>...</code></td><td data-i18n="animatedtexture_getters"></td></tr>
+                    <tr><td>Draw() / Draw(camera)</td><td><code>void</code></td><td data-i18n="shape_draw"></td></tr>
+                    <tr><td>Delete()</td><td><code>void</code></td><td data-i18n="shape_delete"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>AnimatedTexture anim({ <span class="num">200</span>, <span class="num">200</span> }, { <span class="num">2.f</span>, <span class="num">2.f</span> }, <span class="num">0.f</span>, <span class="str">"assets/walk.gif"</span>, &win);
+
+<span class="comment">// En el bucle principal:</span>
+anim.<span class="highlight">Update</span>(deltaTime);
+anim.<span class="highlight">Draw</span>();</code></pre>
     </section>
 
     <section class="doc-section" id="tileset">
         <h2 data-i18n="section_tileset"></h2>
         <p class="section-desc" data-i18n="tileset_desc"></p>
-        <div class="callout">
-            <a href="./tileset.html" data-i18n="readmore"></a>
+
+        <div class="table-wrapper">
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="api_method"></th>
+                        <th data-i18n="api_return"></th>
+                        <th data-i18n="api_desc"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>TileSet(tileW, tileH, cols, rows, texturePath, window, shader = nullptr)</td><td><code>-</code></td><td data-i18n="tileset_ctor"></td></tr>
+                    <tr><td>SetScale(scale)</td><td><code>void</code></td><td data-i18n="texture_setscale"></td></tr>
+                    <tr><td>SetRotation(rotation)</td><td><code>void</code></td><td data-i18n="texture_setrotation"></td></tr>
+                    <tr><td>SetColor(color)</td><td><code>void</code></td><td data-i18n="shape_setcolor"></td></tr>
+                    <tr><td>SetTexture(texturePath)</td><td><code>void</code></td><td data-i18n="texture_settexture"></td></tr>
+                    <tr><td>GetTileW() / GetTileH() / GetCols() / GetRows() / GetCount()</td><td><code>int</code></td><td data-i18n="tileset_getdims"></td></tr>
+                    <tr><td>GetScale() / GetRotation() / GetColor()</td><td><code>...</code></td><td data-i18n="tileset_gettransform"></td></tr>
+                    <tr><td>GetTileWidth() / GetTileHeight()</td><td><code>float</code></td><td data-i18n="tileset_getscaledsize"></td></tr>
+                    <tr><td>Draw(col, row, pos) / Draw(index, pos)</td><td><code>void</code></td><td data-i18n="tileset_draw"></td></tr>
+                    <tr><td>Draw(col, row, pos, camera) / Draw(index, pos, camera)</td><td><code>void</code></td><td data-i18n="tileset_draw_camera"></td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code>TileSet tileset(<span class="num">32</span>, <span class="num">32</span>, <span class="num">8</span>, <span class="num">8</span>, <span class="str">"assets/tileset.png"</span>, &win);
+tileset.<span class="highlight">Draw</span>(<span class="num">3</span>, <span class="num">2</span>, { <span class="num">64</span>, <span class="num">64</span> }); <span class="comment">// por columna/fila</span>
+tileset.<span class="highlight">Draw</span>(<span class="num">19</span>, { <span class="num">96</span>, <span class="num">64</span> });   <span class="comment">// por índice lineal</span></code></pre>
     </section>
 
     <!-- EXTRA -->
