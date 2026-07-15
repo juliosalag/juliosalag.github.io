@@ -187,12 +187,10 @@
                 <span class="lib-name">stb_truetype</span>
                 <span class="lib-desc">Font Rendering</span>
             </div></a>
-            <!--
-            <div class="lib-badge">
-                <span class="lib-name">FMOD</span>
-                <span class="lib-desc">Audio</span>
-            </div>
-            -->
+            <a href="https://miniaud.io/" target="_blank" style="text-decoration: none;"><div class="lib-badge">
+                <span class="lib-name">miniaudio</span>
+                <span class="lib-desc">Audio Playback</span>
+            </div></a>
         </div>
     </section>
 
@@ -218,10 +216,383 @@
     </section>
 
     <section class="doc-section" id="monitor">
-        <h2>Monitor</h2>
-        <p class="section-desc" data-i18n="monitor_desc"></p>
-        <div class="callout">
-            <a href="./monitor.html" data-i18n="readmore"></a>
+        <h2 data-i18n="monitor_title"></h2>
+        <p class="section-desc" data-i18n="monitor_whatis_desc"></p>
+        <div class="header-meta">
+            <span class="tag">GLFW</span>
+            <span class="tag tag-gray">#include &lt;darkmoon/managers/monitor.hpp&gt;</span>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_features_title"></h3>
+            <ul class="doc-list">
+                <li data-i18n="monitor_feat_enumerate"></li>
+                <li data-i18n="monitor_feat_videomodes"></li>
+                <li data-i18n="monitor_feat_physical"></li>
+                <li data-i18n="monitor_feat_workarea"></li>
+                <li data-i18n="monitor_feat_gamma"></li>
+                <li data-i18n="monitor_feat_events"></li>
+            </ul>
+        </div>
+
+        <!-- Setup -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_setup"></h3>
+            <p class="section-desc" data-i18n="monitor_setup_desc"></p>
+
+            <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><span class="lang-label">C++</span><code><span class="highlight">#include</span> &lt;darkmoon/graphics.hpp&gt;
+
+<span class="highlight">int</span> main(){
+    DarkMoonEngine dm{};
+
+    Monitor primary = dm.<span class="highlight">GetPrimaryMonitor</span>();
+    std::cout << "Primary monitor: " << primary.<span class="highlight">getName</span>() << "\n";
+
+    Window win = Window(<span class="num">800</span>, <span class="num">600</span>, "Monitor Example");
+    win.<span class="highlight">SetFullscreen</span>(primary); <span class="comment">// Monitor::getPrimary() is also the default</span>
+
+    <span class="highlight">while</span>(!win.<span class="highlight">ShouldClose</span>()){
+        win.<span class="highlight">BeginDrawing</span>(BLACK);
+        win.<span class="highlight">EndDrawing</span>();
+    }
+}</code></pre>
+        </div>
+
+        <!-- Connect/disconnect events -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_events"></h3>
+            <p class="section-desc" data-i18n="monitor_events_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monitor::initCallback()</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_initcallback"></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor::wasConnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_wasconnected"></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor::wasDisconnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_wasdisconnected"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Gamma -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_gamma"></h3>
+            <p class="section-desc" data-i18n="monitor_gamma_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getGammaRamp()</td>
+                            <td><code>GammaRamp</code></td>
+                            <td data-i18n="api_monitor_getgammaramp"></td>
+                        </tr>
+                        <tr>
+                            <td>setGammaRamp(ramp)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_setgammaramp"></td>
+                        </tr>
+                        <tr>
+                            <td>setGamma(gamma)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_setgamma"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <span data-i18n="monitor_gamma_callout"></span>
+            </div>
+        </div>
+
+        <!-- Monitor API -->
+        <div class="subsection">
+            <h3 data-i18n="monitor_validity_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monitor(handle = nullptr)</td>
+                            <td><code>-</code></td>
+                            <td data-i18n="api_monitor_ctor"></td>
+                        </tr>
+                        <tr>
+                            <td>isValid()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_isvalid"></td>
+                        </tr>
+                        <tr>
+                            <td>operator bool()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_operatorbool"></td>
+                        </tr>
+                        <tr>
+                            <td>handle()</td>
+                            <td><code>GLFWmonitor*</code></td>
+                            <td data-i18n="api_monitor_handle"></td>
+                        </tr>
+                        <tr>
+                            <td>operator==(other) / operator!=(other)</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_monitor_compare"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_retrieval_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monitor::getAll()</td>
+                            <td><code>std::vector&lt;Monitor&gt;</code></td>
+                            <td data-i18n="api_monitor_getall"></td>
+                        </tr>
+                        <tr>
+                            <td>Monitor::getPrimary()</td>
+                            <td><code>Monitor</code></td>
+                            <td data-i18n="api_monitor_getprimary"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_videomodes_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getVideoModes()</td>
+                            <td><code>std::vector&lt;VideoMode&gt;</code></td>
+                            <td data-i18n="api_monitor_getvideomodes"></td>
+                        </tr>
+                        <tr>
+                            <td>getCurrentVideoMode()</td>
+                            <td><code>VideoMode</code></td>
+                            <td data-i18n="api_monitor_getcurrentvideomode"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_geometry_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getPhysicalSize()</td>
+                            <td><code>PhysicalSize</code></td>
+                            <td data-i18n="api_monitor_getphysicalsize"></td>
+                        </tr>
+                        <tr>
+                            <td>getContentScale()</td>
+                            <td><code>ContentScale</code></td>
+                            <td data-i18n="api_monitor_getcontentscale"></td>
+                        </tr>
+                        <tr>
+                            <td>getPosition()</td>
+                            <td><code>VirtualPosition</code></td>
+                            <td data-i18n="api_monitor_getposition"></td>
+                        </tr>
+                        <tr>
+                            <td>getWorkArea()</td>
+                            <td><code>WorkArea</code></td>
+                            <td data-i18n="api_monitor_getworkarea"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_misc_title"></h3>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>getName()</td>
+                            <td><code>std::string</code></td>
+                            <td data-i18n="api_monitor_getname"></td>
+                        </tr>
+                        <tr>
+                            <td>setUserPointer(ptr)</td>
+                            <td><code>void</code></td>
+                            <td data-i18n="api_monitor_setuserpointer"></td>
+                        </tr>
+                        <tr>
+                            <td>getUserPointer()</td>
+                            <td><code>void*</code></td>
+                            <td data-i18n="api_monitor_getuserpointer"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 data-i18n="monitor_darkmoonengine_title"></h3>
+            <p class="section-desc" data-i18n="monitor_darkmoonengine_desc"></p>
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_return"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GetPrimaryMonitor()</td>
+                            <td><code>Monitor</code></td>
+                            <td data-i18n="api_engine_getprimarymonitor"></td>
+                        </tr>
+                        <tr>
+                            <td>GetMonitors()</td>
+                            <td><code>std::vector&lt;Monitor&gt;</code></td>
+                            <td data-i18n="api_engine_getmonitors"></td>
+                        </tr>
+                        <tr>
+                            <td>MonitorConnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_engine_monitorconnected"></td>
+                        </tr>
+                        <tr>
+                            <td>MonitorDisconnected()</td>
+                            <td><code>bool</code></td>
+                            <td data-i18n="api_engine_monitordisconnected"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Supporting types -->
+        <div class="subsection">
+            <h3 data-i18n="section_monitor_types_api"></h3>
+            <p class="section-desc" data-i18n="monitor_types_api_desc"></p>
+
+            <div class="table-wrapper">
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="api_method"></th>
+                            <th data-i18n="api_desc"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VideoMode</td>
+                            <td data-i18n="type_videomode_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>PhysicalSize</td>
+                            <td data-i18n="type_physicalsize_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>ContentScale</td>
+                            <td data-i18n="type_contentscale_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>VirtualPosition</td>
+                            <td data-i18n="type_virtualposition_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>WorkArea</td>
+                            <td data-i18n="type_workarea_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>GammaRamp</td>
+                            <td data-i18n="type_gammaramp_desc"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <pre><span class="lang-label">C++</span><code><span class="highlight">struct</span> VideoMode {
+    <span class="highlight">int</span> width, height;
+    <span class="highlight">int</span> redBits, greenBits, blueBits;
+    <span class="highlight">int</span> refreshRate;
+};
+
+<span class="highlight">struct</span> PhysicalSize    { <span class="highlight">int</span> widthMM, heightMM; };
+<span class="highlight">struct</span> ContentScale   { <span class="highlight">float</span> x, y; };
+<span class="highlight">struct</span> VirtualPosition{ <span class="highlight">int</span> x, y; };
+<span class="highlight">struct</span> WorkArea       { <span class="highlight">int</span> x, y, width, height; };
+
+<span class="highlight">struct</span> GammaRamp {
+    std::vector&lt;<span class="highlight">unsigned short</span>&gt; red, green, blue;
+    <span class="highlight">unsigned int</span> size() <span class="highlight">const</span>;
+};</code></pre>
         </div>
     </section>
 
