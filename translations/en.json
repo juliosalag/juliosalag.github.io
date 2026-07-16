@@ -789,5 +789,16 @@
     "tileset_draw": "Draws the given tile (by column/row or by linear index) at the given screen position.",
     "tileset_draw_camera": "Same as Draw(), but applying the Camera2D transform before rendering.",
     "tileset_index_callout": "index and (col, row) are equivalent ways of referring to the same tile: index is computed internally as row * cols + col. Use whichever is more convenient for the context.",
-    "tileset_const_callout": "All Draw() overloads are const: drawing tiles does not modify the TileSet's internal state."
+    "tileset_const_callout": "All Draw() overloads are const: drawing tiles does not modify the TileSet's internal state.",
+
+    "nav_showcase": "SHOWCASE",
+    "nav_prototype": "Example Prototype",
+    "prototype_title": "Example Prototype",
+    "prototype_desc": "A gameplay prototype built with DarkMoon Engine, inspired by the original The Legend of Zelda on the NES. It's used to validate and demonstrate the engine's core systems while recreating the feel of a classic retro top-down adventure.",
+    "prototype_feat_ecs": "Custom Entity Component System (ECS)",
+    "prototype_feat_audio": "Custom Audio Engine",
+    "prototype_feat_physics": "Custom Physics Engine",
+    "prototype_feat_topdown": "Top-down gameplay inspired by classic NES adventure games",
+    "prototype_feat_debug": "Debug menu for control in entities and systems",
+    "prototype_repo_link": "View the repository on GitHub →"
 }
